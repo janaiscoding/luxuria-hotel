@@ -6,14 +6,14 @@ import room2 from "../../../public/gallery/michel-stockman-sMh8FU25ZkE-unsplash.
 import room3 from "../../../public/gallery/point3d-commercial-imaging-ltd-oxeCZrodz78-unsplash.jpg";
 import room4 from "../../../public/gallery/visualsofdana-T5pL6ciEn-I-unsplash.jpg";
 
-const Rooms = () => {
+const RoomsIntro = () => {
   const handleRooms = () => {
     console.log("Click on see rooms");
   };
   return (
-    <div className="py-10 px-4 md:py-20 md:px-60 flex flex-col md:flex-row">
+    <div className="flex flex-col md:flex-row gap-20 items-center">
       <article className="flex flex-col gap-6 items-start basis-full">
-        <h1 className="text-2xl font-medium text-zinc-950">
+        <h1 className="text-3xl font-medium text-zinc-950">
           Perfect place for relaxation
         </h1>
         <p className="text-neutral-700">
@@ -41,7 +41,7 @@ const RoomsGallery = () => {
   return (
     <div className="grid grid-cols-2 grid-rows-2 gap-4 basis-full">
       <Image src={room1} alt="hotel room" width={400} />
-      <Image src={room2} alt="hotel room" width={400}/>
+      <Image src={room2} alt="hotel room" width={400} />
       <Image src={room3} alt="hotel room" />
       <Image src={room4} alt="hotel room" />
     </div>
@@ -66,4 +66,4 @@ const Stats = () => {
   );
 };
 
-export default Rooms;
+export default RoomsIntro;

@@ -1,11 +1,9 @@
 import WhyChoose from "./WhyChoose";
-import Rooms from "./Rooms";
 
 const AboutMain = () => {
   return (
-    <section id="about">
+    <section id="about" className="py-10 xl:py-28 px-4 md:px-28 lg:px-44 xl:px-60 bg-neutral-900">
       <WhyChoose />
-      <Rooms />
     </section>
   );
 };

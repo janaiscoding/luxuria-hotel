@@ -5,10 +5,10 @@ import HeroContent from "./HeroContent";
 
 const HeroMain = () => {
   return (
-    <section className="flex gap-20" id="hero">
+    <section className="flex gap-28" id="hero">
       <Image
         src={hotel_room}
-        height={600}
+        height={700}
         alt="Luxurious and relaxing hotel room with a double bed"
         className="z-[1]"
       />

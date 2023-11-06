@@ -17,8 +17,8 @@ const WhyChoose = () => {
     },
   ];
   return (
-    <div className="bg-neutral-900 py-10 px-4 xl:py-20 md:px-28 lg:px-44 xl:px-60">
-      <h1 className="text-2xl font-medium text-neutral-50 mb-10">Why choose our boutique hotel?</h1>
+    <div>
+      <h1 className="text-3xl font-medium text-neutral-50 mb-10">Why choose our boutique hotel?</h1>
       <ul className="flex gap-10 flex-col md:flex-row">
         {motiveList.map((el, i) => (
           <MotiveCard key={i} title={el.title} description={el.description} />
