@@ -1,9 +1,11 @@
+"use client";
+import Button from "../Button";
+
 const Header = () => {
   const list = [
     { name: "Home", active: true },
     { name: "About Us", active: false },
-    { name: "Room", active: false },
-    { name: "Features", active: false },
+    { name: "Rooms", active: false },
     { name: "Contact us", active: false },
   ];
   return (
@@ -21,9 +23,14 @@ const Header = () => {
           </li>
         ))}
       </ul>
-      <button className="border border-solid py-2 px-4 bg-neutral-900 text-slate-50 hover:bg-neutral-800">
-        Book room
-      </button>
+      <Button
+        content="Book room"
+        ariaLabel="Book room button"
+        onClick={() => {
+          console.log("click book room");
+        }}
+        darkTheme={true}
+      />
     </nav>
   );
 };
