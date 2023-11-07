@@ -15,7 +15,14 @@ const RoomsBooking = () => {
       </h1>
       <div className="flex flex-col md:flex-row gap-10 items-center">
         <div className="basis-full flex flex-col gap-6 items-start">
-          <Image src={room1} alt={"Hotel room"} height={600} />
+          <div className="overflow-hidden">
+            <Image
+              src={room1}
+              alt={"Hotel room"}
+              width={800}
+              className="card hover:scale-105"
+            />
+          </div>
           <p className="text-neutral-900 text-sm">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam, nemo
             distinctio velit alias nulla voluptates dolores harum repudiandae
@@ -29,13 +36,15 @@ const RoomsBooking = () => {
             darkTheme={true}
           />
         </div>
-        <div className=" flex flex-col-reverse gap-6 items-start mt-10">
-          <Image
-            src={room2}
-            alt={"Hotel room"}
-            width={800}
-            className="shadow-xl"
-          />
+        <div className="basis-full flex flex-col-reverse gap-6 items-start mt-10">
+          <div className="overflow-hidden">
+            <Image
+              src={room2}
+              alt={"Hotel room"}
+              width={800}
+              className="card hover:scale-105"
+            />
+          </div>
           <p className="text-neutral-900 text-sm">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam, nemo
             distinctio velit alias nulla voluptates dolores harum repudiandae

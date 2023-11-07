@@ -11,8 +11,13 @@ const RoomsIntro = () => {
     console.log("Click on see rooms");
   };
   return (
-    <div className="flex flex-col md:flex-row gap-20 items-center">
+    <div className="flex flex-col md:flex-row gap-20">
       <article className="flex flex-col gap-6 items-start basis-full">
+        <div>
+          ⭐⭐⭐⭐⭐
+          <p className="text-neutral-500">Luxuria Hotels</p>
+        </div>
+
         <h1 className="text-3xl font-medium text-zinc-950">
           Perfect place for relaxation
         </h1>
@@ -39,11 +44,15 @@ const RoomsIntro = () => {
 };
 const RoomsGallery = () => {
   return (
-    <div className="grid grid-cols-2 grid-rows-2 gap-4 basis-full">
-      <Image src={room1} alt="hotel room" width={400} />
-      <Image src={room2} alt="hotel room" width={400} />
-      <Image src={room3} alt="hotel room" />
-      <Image src={room4} alt="hotel room" />
+    <div className="basis-full flex gap-4">
+      <div className="flex flex-col gap-4 space-between">
+        <Image src={room1} alt="hotel room" height={400} width={200} />
+        <Image src={room3} alt="hotel room" height={400} width={200} />
+      </div>
+      <div className="flex flex-col gap-4 space-between ">
+        <Image src={room3} alt="hotel room" height={400} width={200} />
+        <Image src={room1} alt="hotel room" height={400} width={200} />
+      </div>
     </div>
   );
 };
