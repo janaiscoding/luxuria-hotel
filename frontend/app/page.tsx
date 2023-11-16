@@ -3,6 +3,8 @@ import AboutMain from "./components/about-main";
 import Header from "./components/header";
 import Hero from "./components/hero-main";
 import Motive from "./components/motive-main";
+import Rooms from "./components/rooms-main";
+import Testimonials from "./components/testimonials-main";
 
 export default function Home() {
   return (
@@ -11,6 +13,8 @@ export default function Home() {
       <Hero />
       <Motive />
       <About />
+      <Rooms />
+      <Testimonials />
     </main>
   );
 }

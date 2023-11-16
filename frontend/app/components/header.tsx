@@ -9,7 +9,7 @@ const Header = () => {
     { name: "Contact us", active: false },
   ];
   return (
-    <nav className="flex justify-between items-center py-4 sticky top-0 z-50 bg-slate-50 px-20">
+    <nav className="flex justify-between items-center py-4 sticky top-0 z-50 bg-slate-50 px-20 shadow-md">
       <a href="/" className="text-xl font-semibold">
         Luxuria
       </a>

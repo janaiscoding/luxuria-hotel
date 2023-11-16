@@ -1,8 +1,11 @@
 "use client";
 import Image from "next/image";
 import Button from "../ui/button";
-import room1 from "@/public/gallery/jonas-allert-ZApUkahPK7c-unsplash.jpg";
-import room3 from "@/public/gallery/point3d-commercial-imaging-ltd-oxeCZrodz78-unsplash.jpg";
+import verticalRoom1 from "@/public/gallery/vertical_room_1.jpg";
+import verticalRoom2 from "@/public/gallery/vertical_room_2.jpg";
+import horizontalRoom1 from "@/public/gallery/horizontal_room_1.jpg";
+import horizontalRoom2 from "@/public/gallery/horizontal_room_2.jpg";
+
 
 const PerfectPlace = () => {
   const handleRooms = () => {
@@ -44,18 +47,19 @@ const PerfectPlace = () => {
 };
 const RoomsGallery = () => {
   return (
-    <div className="basis-full flex gap-4">
-      <div className="flex flex-col gap-4 space-between w-1/2 h-full">
-        <Image src={room1} alt="hotel room" />
-        <Image src={room3} alt="hotel room" />
+    <div className="basis-full flex gap-2 h-full">
+      <div className="flex flex-col gap-2 space-between w-1/2 h-full">
+        <Image src={verticalRoom2} alt="hotel room" />
+        <Image src={horizontalRoom1} alt="hotel room"/>
       </div>
-      <div className="flex flex-col gap-4 space-between w-1/2  h-full">
-        <Image src={room3} alt="hotel room" />
-        <Image src={room1} alt="hotel room" />
+      <div className="flex flex-col gap-2 space-between w-1/2 h-full">
+        <Image src={horizontalRoom2} alt="hotel room" />
+        <Image src={verticalRoom2} alt="hotel room" />
       </div>
     </div>
   );
 };
+
 const Stats = () => {
   return (
     <div className="flex justify-between gap-6">

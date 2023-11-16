@@ -1,4 +1,4 @@
-import PerfectPlace from "./rooms_section/perfect-place";
+import PerfectPlace from "./about_section/perfect-place";
 
 const About = () => {
   return (

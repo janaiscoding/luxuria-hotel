@@ -19,7 +19,7 @@ const Hero = () => {
           Rooms & Suites
         </a>
       </div>
-      <div className="absolute z-20 bottom-0 w-1/2 -translate-y-1/2 bg-orange-300/90 hover:bg-orange-300 flex items-center justify-between gap-3 p-10 rounded-md text-start text-neutral-950 text-lg">
+      <div className="absolute z-20 bottom-0 w-1/2 -translate-y-1/2 bg-orange-300/90 hover:bg-orange-300 hidden md:flex flex-wrap items-center justify-between gap-3 p-10 rounded-md text-start text-neutral-950 text-lg">
         <div className="">
           <h1>Arrival date</h1>
           <input type="date" />
