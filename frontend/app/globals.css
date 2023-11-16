@@ -2,19 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer {
+  .section-layout {
+    @apply max-w-screen-2xl m-auto py-20 px-4 flex flex-col gap-20;
+  }
+}
 body {
   color: #09090b; /*zinc-950*/
   background: #f8fafc; /*slate-50*/
 }
-.card{
+
+section#home {
+  background-image: url("/pexels-iván-rivero-1001965.jpg");
+  background-clip: border-box;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.card {
   margin-left: auto;
   margin-right: auto;
   display: block;
   /* cursor: pointer; */
   -o-object-fit: cover;
   object-fit: cover;
-  transition: transform .3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
 }
-.card:hover{
+.card:hover {
   transform: scale(1.12);
 }

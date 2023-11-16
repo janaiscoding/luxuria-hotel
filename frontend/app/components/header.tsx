@@ -1,5 +1,5 @@
 "use client";
-import Button from "../Button";
+import Button from "./ui/button";
 
 const Header = () => {
   const list = [
@@ -9,7 +9,7 @@ const Header = () => {
     { name: "Contact us", active: false },
   ];
   return (
-    <nav className="flex justify-between items-center py-4 px-60">
+    <nav className="flex justify-between items-center py-4 sticky top-0 z-50 bg-slate-50 px-20">
       <a href="/" className="text-xl font-semibold">
         Luxuria
       </a>

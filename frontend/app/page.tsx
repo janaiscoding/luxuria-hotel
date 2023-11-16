@@ -1,18 +1,16 @@
-
-import BookingForm from "./components/BookingForm";
-import Header from "./components/navigation/Header";
-import HeroMain from "./components/hero_section/HeroMain";
-import AboutMain from "./components/about_section/AboutMain";
-import RoomsMain from "./components/rooms_section/RoomsMain";
+import About from "./components/about-main";
+import AboutMain from "./components/about-main";
+import Header from "./components/header";
+import Hero from "./components/hero-main";
+import Motive from "./components/motive-main";
 
 export default function Home() {
   return (
     <main className="">
       <Header />
-      <HeroMain />
-      {/* <BookingForm />  */}
-      <AboutMain />
-      <RoomsMain />
+      <Hero />
+      <Motive />
+      <About />
     </main>
   );
 }

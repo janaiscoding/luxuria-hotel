@@ -22,7 +22,7 @@ const Button = ({
     <button
       onClick={onClick}
       aria-label={ariaLabel}
-      className="border border-solid py-2 px-4 border-neutral-900 text-neutral-900"
+      className="py-2 px-4 text-zinc-950 bg-orange-200 hover:bg-orange-300"
     >
       {content}
     </button>
