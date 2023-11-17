@@ -4,7 +4,7 @@
 
 @layer {
   .section-layout {
-    @apply max-w-screen-2xl m-auto py-20 px-4 flex flex-col gap-20;
+    @apply max-w-screen-2xl m-auto py-10 px-4 flex flex-col gap-20;
   }
 }
 body {
@@ -19,7 +19,13 @@ section#home {
   background-position: center;
   background-size: cover;
 }
-
+#background-perfect-place {
+  background-image: url("/hero_hotel_image.jpg");
+  background-clip: border-box;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
 .card {
   margin-left: auto;
   margin-right: auto;
@@ -31,4 +37,9 @@ section#home {
 }
 .card:hover {
   transform: scale(1.12);
+}
+.separator{
+  width: 1px;
+  height: 4rem;
+  flex-basis: auto;
 }

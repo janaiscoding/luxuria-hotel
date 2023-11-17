@@ -1,4 +1,5 @@
 import { motiveList } from "../lib/utils";
+import Stats from "./about_section/stats";
 
 const Motive = () => {
   return (

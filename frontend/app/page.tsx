@@ -1,5 +1,6 @@
 import About from "./components/about-main";
 import AboutMain from "./components/about-main";
+import Stats from "./components/about_section/stats";
 import Header from "./components/header";
 import Hero from "./components/hero-main";
 import Motive from "./components/motive-main";
