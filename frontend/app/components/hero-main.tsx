@@ -9,7 +9,7 @@ const Hero = () => {
       <div className="max-h-[80vh] h-[80vh] w-full bg-zinc-950/70 absolute z-10"></div>
       <div className="z-20 text-center flex flex-col items-center justify-center gap-6">
         <h2 className="text-xl text-gray-300">Hotel Luxuria Experience</h2>
-        <h1 className="text-6xl text-slate-50 font-bold">
+        <h1 role="heading" className="text-6xl text-slate-50 font-bold">
           ENJOY A UNIQUE<br></br> EXPERIENCE
         </h1>
         <a
