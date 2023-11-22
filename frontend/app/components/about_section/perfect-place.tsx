@@ -5,6 +5,7 @@ import email from "@/public/icons/email.png";
 import verticalRoom2 from "@/public/gallery/vertical_room_2.jpg";
 import horizontalRoom1 from "@/public/gallery/horizontal_room_1.jpg";
 import horizontalRoom2 from "@/public/gallery/horizontal_room_2.jpg";
+import Stats from "./stats";
 
 const PerfectPlace = () => {
   const handleRooms = () => {
@@ -30,7 +31,8 @@ const PerfectPlace = () => {
             atmorphere that promotes <br /> rest and rejuvenation after a long
             day of exploring or business meetings.
           </p>
-          <div className="flex gap-6 flex-col md:flex-row">
+          <Stats />
+          {/* <div className="flex gap-6 flex-col md:flex-row">
             <div className="flex gap-4 items-center justify-center">
               <Image src={telephone} alt="telephone icon" width={40} />
               <div className="flex flex-col gap-2">
@@ -45,7 +47,7 @@ const PerfectPlace = () => {
                 <h3 className="text-2xl">mail@mail.com</h3>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </article>
 

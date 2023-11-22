@@ -5,8 +5,8 @@ import Image from "next/image";
 
 const Stats = () => {
   return (
-    <div className="flex flex-col md:flex-row justify-evenly items-center gap-6">
-      <div className="w-full flex gap-2 items-center justify-center">
+    <div className="flex flex-col md:flex-row justify-center items-center gap-6">
+      <div className="flex gap-2 items-center justify-center">
         <Image src={guestIcon} alt="guest icon" width={80} />
         <div className="w-full">
           <p className="text-neutral-700 text-lg">Guests</p>
@@ -14,7 +14,7 @@ const Stats = () => {
         </div>
       </div>
       {/* <div className="md:w-[1px] md:h-[4rem] flex-auto h-[1px] w-1/2 bg-orange-800/30"></div> */}
-      <div className="w-full flex gap-2 items-center justify-center">
+      <div className="flex gap-2 items-center justify-center">
         <Image src={roomIcon} alt="guest icon" width={80} />
         <div className="w-full">
           <p className="text-neutral-700 text-lg">Rooms</p>
@@ -22,7 +22,7 @@ const Stats = () => {
         </div>
       </div>
       {/* <div className="md:w-[1px] md:h-[4rem] flex-auto h-[1px] w-1/2 bg-orange-800/30"></div> */}
-      <div className="w-full flex gap-2 items-center justify-center">
+      <div className="flex gap-2 items-center justify-center">
         <Image src={experienceIcon} alt="guest icon" width={80} />
         <div className="w-full">
           <p className="text-neutral-700 text-lg">Years of experience</p>

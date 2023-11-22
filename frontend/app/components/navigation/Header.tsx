@@ -1,5 +1,5 @@
 "use client";
-import Button from "./ui/button";
+import Button from "../ui/button";
 
 const Header = () => {
   const list = [
@@ -9,11 +9,11 @@ const Header = () => {
     { name: "Contact us", active: false },
   ];
   return (
-    <nav className="flex justify-between items-center py-4 sticky top-0 z-50 bg-slate-50 px-20 shadow-md">
+    <nav className="flex justify-between items-center py-4 sticky top-0 z-50 bg-slate-50 px-4 shadow-md">
       <a href="/" className="text-xl font-semibold">
         Luxuria
       </a>
-      <ul className="flex gap-10">
+      <ul className="md:flex gap-10 hidden">
         {list.map((el, i) => (
           <li
             key={i}
@@ -24,10 +24,10 @@ const Header = () => {
         ))}
       </ul>
       <Button
-        content="Book room"
-        ariaLabel="Book room button"
+        content="Sign in"
+        ariaLabel="Sign in button"
         onClick={() => {
-          console.log("click book room");
+          console.log("click Sign in");
         }}
         darkTheme={true}
       />

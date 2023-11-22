@@ -1,4 +1,4 @@
-import RoomsAndSuites from "./rooms_section/rooms-suites";
+import RoomsAndSuites from "./rooms-suites";
 
 const Rooms = () => {
   return (
