@@ -19,6 +19,7 @@ section#home {
   background-position: center;
   background-size: cover;
 }
+
 #background-perfect-place {
   background-image: url("/hero_hotel_image.jpg");
   background-clip: border-box;
