@@ -11,3 +11,10 @@ To do:
         - will create bookings if possible
 
 ## 2. Reservation { id, startDate, endDate, roomType, persons }
+
+
+Setting up db: 
+have postgresql installed
+psql postgres to open
+put all commands to create db
+\q to exit

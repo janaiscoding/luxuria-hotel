@@ -38,8 +38,10 @@
     "@types/morgan": "^1.9.4",
     "@types/passport": "^1.0.12",
     "@types/passport-jwt": "^3.0.9",
+    "@types/pg": "^8.10.9",
     "@types/validator": "^13.7.17",
     "nodemon": "^2.0.22",
+    "pg": "^8.11.3",
     "typescript": "^5.3.2"
   }
 }
