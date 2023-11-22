@@ -1,4 +1,4 @@
-import About from "./components/about-main";
+import About from "./components/about_section/About";
 import Header from "./components/navigation/Header";
 import Hero from "./components/Hero";
 import Motive from "./components/Motive";
@@ -9,7 +9,7 @@ import Footer from "./components/navigation/Footer";
 
 export default function Home() {
   return (
-    <main className="">
+    <main className="luxuria_app">
       <Header />
       <Hero />
       <Motive />

@@ -1,4 +1,6 @@
-const Mark = () => {
+import Socials from "./Socials";
+
+const WebsiteFooter = () => {
   return (
     <div className="border-t border-zinc-600 flex justify-between pt-10">
       <div className="flex gap-4 items-baseline">
@@ -12,14 +14,4 @@ const Mark = () => {
   );
 };
 
-const Socials = () => {
-  return (
-    <div className="flex gap-1">
-      <p>Social icons</p>
-      <p>Social icons</p>
-      <p>Social icons</p>
-    </div>
-  );
-};
-
-export default Mark;
+export default WebsiteFooter;
