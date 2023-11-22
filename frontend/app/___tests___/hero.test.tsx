@@ -14,11 +14,11 @@ describe("Hero Component", () => {
     });
     expect(heading).toBeInTheDocument();
   });
-  it("Renders a link for /rooms", () => {
+  it("Renders a link for /#rooms", () => {
     render(<Hero />);
     const link = screen.getByRole("link");
     expect(link.textContent).toMatch(/rooms/i);
-    expect(link).toHaveAttribute("href", "/rooms");
+    expect(link).toHaveAttribute("href", "/#rooms");
   });
   it("Renders the booking form", () => {
     render(<Hero />);

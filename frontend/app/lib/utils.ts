@@ -17,59 +17,34 @@ export const motiveList = [
       "When it comes to choosing a hotel, location plays a crucial role in ensuring a good experience for guests. The right location can make all the difference in terms of convienience, acessibility and overall satisfaction.",
   },
 ];
+export const roomTypes = ["single", "king", "double", "deluxe"];
 
 export const roomsData = [
   {
     id: 0,
-    name: "Deluxe Room1",
+    name: "Single Room",
+    type: "single",
     url: roomURL,
     price: 170,
   },
   {
     id: 1,
-    name: "Standard Room2",
+    name: "King Room",
+    type: "king",
     url: roomURL,
     price: 170,
   },
   {
     id: 2,
-    name: "Deluxe Room3",
+    name: "Double Room",
+    type: "double",
     url: roomURL,
     price: 170,
   },
   {
     id: 3,
-    name: "Deluxe Room4",
-    url: roomURL,
-    price: 170,
-  },
-  {
-    id: 4,
-    name: "Deluxe Room5",
-    url: roomURL,
-    price: 170,
-  },
-  {
-    id: 5,
-    name: "Deluxe Room6",
-    url: roomURL,
-    price: 170,
-  },
-  {
-    id: 6,
-    name: "Deluxe Room7",
-    url: roomURL,
-    price: 170,
-  },
-  {
-    id: 7,
-    name: "Deluxe Room8",
-    url: roomURL,
-    price: 170,
-  },
-  {
-    id: 8,
-    name: "Deluxe Room9",
+    name: "Deluxe Room",
+    type: "deluxe",
     url: roomURL,
     price: 170,
   },

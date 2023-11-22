@@ -1,12 +1,11 @@
 import About from "./components/about-main";
-import AboutMain from "./components/about-main";
-import Stats from "./components/about_section/stats";
 import Header from "./components/navigation/Header";
 import Hero from "./components/Hero";
 import Motive from "./components/Motive";
 import Rooms from "./components/rooms_section/Rooms";
-import Testimonials from "./components/testimonial_section/Testimonials";
-import BookingForm from "./components/ui/booking-form";
+import SocialProof from "./components/social_proof/SocialProof";
+import Contact from "./components/contact/Contact";
+import Footer from "./components/navigation/Footer";
 
 export default function Home() {
   return (
@@ -16,7 +15,9 @@ export default function Home() {
       <Motive />
       <About />
       <Rooms />
-      <Testimonials />
+      <SocialProof />
+      <Contact />
+      <Footer />
     </main>
   );
 }

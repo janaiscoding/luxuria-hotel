@@ -25,7 +25,7 @@ const HeroText = () => {
         ENJOY A UNIQUE<br></br> EXPERIENCE
       </h1>
       <a
-        href="/rooms"
+        href="/#rooms"
         className="py-2 px-4 text-zinc-950 bg-orange-300 hover:bg-orange-400"
       >
         Rooms & Suites
