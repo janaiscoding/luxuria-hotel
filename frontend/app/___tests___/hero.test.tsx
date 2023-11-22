@@ -20,4 +20,9 @@ describe("Hero Component", () => {
     expect(link.textContent).toMatch(/rooms/i);
     expect(link).toHaveAttribute("href", "/rooms");
   });
+  it("Renders the booking form", () => {
+    render(<Hero />);
+    const form = screen.getByRole("form");
+    expect(form).toBeInTheDocument();
+  });
 });

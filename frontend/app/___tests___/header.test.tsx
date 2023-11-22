@@ -6,7 +6,7 @@ import "@testing-library/jest-dom";
 
 import Header from "../components/navigation/Header";
 
-describe("Header, navigation component", () => {
+describe("Header component", () => {
   it("Renders the correct logo", () => {
     render(<Header />);
     const logo = screen.getByRole("link", {

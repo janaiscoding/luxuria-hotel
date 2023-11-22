@@ -6,7 +6,7 @@ import "@testing-library/jest-dom";
 
 import BookingForm from "../components/ui/booking-form";
 
-describe("Booking form", () => {
+describe("Booking form component", () => {
   it("Renders the correct booking form", () => {
     render(<BookingForm />);
     const form = screen.getByRole("form");

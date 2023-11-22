@@ -7,11 +7,11 @@ const BookingForm = () => {
     console.log("Form was submitted");
   };
   return (
-    <div className="flex z-20 absolute top-[80%] left-1/2 -translate-x-1/2 shadow-md bg-orange-300">
+    <div className="z-20 absolute top-[80%] left-1/2 -translate-x-1/2 shadow-md bg-orange-300">
       <form
         aria-label="form"
         onSubmit={(e) => handleBook(e)}
-        className="flex gap-10 p-10 m-auto items-center justify-center shadow-md"
+        className="hidden md:flex gap-10 p-10 m-auto items-center justify-center shadow-md"
       >
         <label>
           <p>Check In</p>

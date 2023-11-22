@@ -1,12 +1,11 @@
 import { motiveList } from "../lib/utils";
-import Stats from "./about_section/stats";
 
 const Motive = () => {
   return (
     <section id="motive" className="bg-neutral-900">
-      <div className="max-w-screen-2xl m-auto py-32 px-4">
+      <div className="max-w-screen-2xl m-auto py-20 px-4">
         <h1 className="text-4xl font-medium text-neutral-50 mb-10">
-          Why choose our boutique hotel?
+          Why choose our hotel?
         </h1>
         <ul className="flex gap-10 flex-col md:flex-row">
           {motiveList.map((el, i) => (
