@@ -2,6 +2,7 @@ import { SyntheticEvent, useState } from "react";
 import { DatePicker } from "./DatePicker";
 import { InputGuests } from "./InputGuests";
 import { useToast } from "@/components/ui/use-toast";
+import { DatePickerEnd } from "./DatePickerEnd";
 
 const BookingForm = () => {
   const { toast } = useToast();
@@ -35,7 +36,7 @@ const BookingForm = () => {
         className="hidden md:flex gap-1 p-10 items-center justify-center shadow-md"
       >
         <DatePicker date={startDate} setter={setStartDate} content="Check in" />
-        <DatePicker date={endDate} setter={setEndDate} content="Check out" />
+        <DatePickerEnd start={startDate} date={endDate} setter={setEndDate} content="Check out" />
         <InputGuests setter={setGuests} />
         <button className="border border-solid h-9 py-1 px-3 bg-neutral-900 text-slate-50 hover:bg-neutral-800 shadow-sm rounded-md">
           Book
