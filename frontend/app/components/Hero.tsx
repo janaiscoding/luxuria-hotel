@@ -3,6 +3,7 @@ import Image from "next/image";
 import heroImage from "@/public/hero_hotel_image.jpg";
 import Overlay from "./ui/Overlay";
 import BookingForm from "./booking_form/BookingForm";
+import { getBookings } from "../api/get-all-bookings/route";
 
 const Hero = () => {
   return (
@@ -10,7 +11,7 @@ const Hero = () => {
       className="h-[80vh] w-full flex flex-col items-center justify-center relative"
       id="home"
     >
-      <Image src={heroImage} alt="background" fill={true} priority placeholder="blur" style={{objectFit: "cover"}} />
+      <Image src={heroImage} alt="background" fill={true} priority placeholder="blur" style={{objectFit: "cover"}} className="w-auto" />
       <Overlay overlayHeight={80} />
       <HeroText />
       <BookingForm />
