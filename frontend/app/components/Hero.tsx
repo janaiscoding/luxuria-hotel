@@ -1,21 +1,22 @@
 "use client";
-
+import Image from "next/image";
+import heroImage from "@/public/hero_hotel_image.jpg";
 import Overlay from "./ui/Overlay";
-import BookingForm from "./ui/booking-form";
+import BookingForm from "./booking_form/BookingForm";
 
 const Hero = () => {
   return (
     <section
-      className="h-[80vh] w-full flex flex-col items-center justify-center"
+      className="h-[80vh] w-full flex flex-col items-center justify-center relative"
       id="home"
     >
+      <Image src={heroImage} fill={true} alt="background" priority />
       <Overlay overlayHeight={80} />
       <HeroText />
       <BookingForm />
     </section>
   );
 };
-
 
 const HeroText = () => {
   return (

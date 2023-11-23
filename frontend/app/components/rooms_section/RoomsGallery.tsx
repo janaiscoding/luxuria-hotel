@@ -1,4 +1,5 @@
-import { roomsData } from "@/app/lib/utils";
+
+import { roomsData } from "@/app/lib/data";
 import RoomCard from "./room-card";
 
 const RoomsGallery = ({ activeCategory }: { activeCategory: string }) => {

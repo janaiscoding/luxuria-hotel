@@ -1,4 +1,4 @@
-import { roomTypes } from "@/app/lib/utils";
+import { roomTypes } from "@/app/lib/data";
 import { SetStateAction } from "react";
 
 // A component that deals with rendering room types and sorting them

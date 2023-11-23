@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import room1 from "@/public/gallery/michel-stockman-sMh8FU25ZkE-unsplash.jpg";
-import Button from "../ui/button";
+import Button from "../ui/button-luxuria";
 
 const TheRestaurant = () => {
   const handleRead = () => {

@@ -1,4 +1,4 @@
-import { motiveList } from "../lib/utils";
+import { motiveList } from "../lib/data";
 
 const Motive = () => {
   return (

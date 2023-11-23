@@ -1,5 +1,5 @@
 "use client";
-import Button from "../ui/button";
+import Button from "../ui/button-luxuria";
 
 const Header = () => {
   const list = [
