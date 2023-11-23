@@ -1,4 +1,4 @@
-import FiveStars from "@/app/lib/FiveStarsSVG";
+import FiveStars from "@/app/utils/FiveStarsSVG";
 
 const Testimonials = () => {
   return (

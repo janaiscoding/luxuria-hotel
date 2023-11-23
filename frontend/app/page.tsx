@@ -6,7 +6,6 @@ import Rooms from "./components/rooms_section/Rooms";
 import SocialProof from "./components/social_proof/SocialProof";
 import Contact from "./components/contact/Contact";
 import Footer from "./components/navigation/Footer";
-import prisma from '../lib/prisma';
 
 export default function Home() {
   return (

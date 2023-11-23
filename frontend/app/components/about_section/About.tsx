@@ -3,7 +3,7 @@ import horizontalRoom2 from "@/public/gallery/horizontal_room_2.jpg";
 
 const About = () => {
   return (
-    <section id="about" className="section-layout">
+    <section id="about" className="max-w-screen-2xl m-auto py-20 px-4">
       <div className="flex flex-col justify-between lg:flex-row gap-10">
         <article className="flex flex-col gap-2 items-start basis-full ">
           <div>
