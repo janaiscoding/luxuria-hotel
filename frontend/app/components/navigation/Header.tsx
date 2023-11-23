@@ -1,5 +1,6 @@
 "use client";
 import Button from "../ui/button-luxuria";
+import { PopupForm } from "../booking_form/PopupForm";
 
 const Header = () => {
   const list = [
@@ -9,7 +10,7 @@ const Header = () => {
     { name: "Contact us", active: false },
   ];
   return (
-    <nav className="flex justify-between items-center py-4 sticky top-0 z-50 bg-slate-50 px-4 shadow-md">
+    <nav className="flex justify-between items-center py-2 sticky top-0 z-50 bg-slate-50 px-4 shadow-md">
       <a href="/" className="text-xl font-semibold">
         Luxuria
       </a>
@@ -23,14 +24,7 @@ const Header = () => {
           </li>
         ))}
       </ul>
-      <Button
-        content="Sign in"
-        ariaLabel="Sign in button"
-        onClick={() => {
-          console.log("click Sign in");
-        }}
-        darkTheme={true}
-      />
+      <PopupForm />
     </nav>
   );
 };

@@ -6,10 +6,11 @@ import Rooms from "./components/rooms_section/Rooms";
 import SocialProof from "./components/social_proof/SocialProof";
 import Contact from "./components/contact/Contact";
 import Footer from "./components/navigation/Footer";
+import { Toaster } from "@/components/ui/toaster";
 
 export default function Home() {
   return (
-    <main className="luxuria_app">
+    <main className="font-lora">
       <Header />
       <Hero />
       <Motive />
@@ -18,6 +19,7 @@ export default function Home() {
       <SocialProof />
       <Contact />
       <Footer />
+      <Toaster />
     </main>
   );
 }

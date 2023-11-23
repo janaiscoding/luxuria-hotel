@@ -80,3 +80,8 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.stroke {
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+

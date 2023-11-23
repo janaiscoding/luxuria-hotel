@@ -2,8 +2,12 @@ import type { Metadata } from "next";
 import { Montserrat, Lora } from "next/font/google";
 import "./globals.css";
 
-const montserrat = Montserrat({ subsets: ["latin"] });
-const lora = Lora({ subsets: ["latin"] });
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-montserrat",
+});
+const lora = Lora({ subsets: ["latin"], variable: "--font-lora" });
+
 export const metadata: Metadata = {
   title: "Luxuria Hotels",
   description: "Book your luxurious accomodation room",
@@ -16,7 +20,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={lora.className}>{children}</body>
+      <body className={`${lora.variable} ${montserrat.variable}`}>
+        {children}
+      </body>
     </html>
   );
 }
