@@ -11,6 +11,7 @@ const Socials = () => {
         width="24"
         height="24"
         viewBox="0 0 48 48"
+        className="hover:scale-105 hover:cursor-pointer"
       >
         <path
           fill="#03A9F4"
@@ -25,6 +26,7 @@ const Socials = () => {
         width="24"
         height="24"
         viewBox="0 0 48 48"
+        className="hover:scale-105 hover:cursor-pointer"
       >
         <path
           fill="#3F51B5"
@@ -43,6 +45,7 @@ const Socials = () => {
         width="24"
         height="24"
         viewBox="0 0 48 48"
+        className="hover:scale-105 hover:cursor-pointer"
       >
         <path
           fill="#304ffe"

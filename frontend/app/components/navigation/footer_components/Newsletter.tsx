@@ -1,8 +1,9 @@
+import { Input } from "@/components/ui/input";
 const Newsletter = () => {
   return (
-    <div className="flex flex-col gap-4">
-      <p>Sign up to get our newsletter</p>
-      <input placeholder="Your email..." className="transparent"></input>
+    <div className="flex flex-col gap-4 text-md">
+      <p>Sign up for our newsletter</p>
+      <Input type="email" placeholder="Your email..." className="border-slate-50/20" />
     </div>
   );
 };

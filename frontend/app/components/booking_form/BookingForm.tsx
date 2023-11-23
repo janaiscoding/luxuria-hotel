@@ -28,7 +28,7 @@ const BookingForm = () => {
   };
 
   return (
-    <div className="z-20 absolute top-[90%] left-1/2 -translate-x-1/2 shadow-md bg-slate-50">
+    <div className="z-20 absolute top-[90%] left-1/2 -translate-x-1/2 shadow-md bg-slate-50 font-lora">
       <form
         aria-label="form"
         onSubmit={(e) => handleBook(e)}

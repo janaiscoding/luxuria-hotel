@@ -1,6 +1,6 @@
 "use client";
 
-import { roomsData } from "@/app/lib/utils";
+import { roomsData } from "@/app/utils/data";
 import { useState } from "react";
 import ArrowUpRight from "../ui/arrow-up-right";
 import Image from "next/image";
