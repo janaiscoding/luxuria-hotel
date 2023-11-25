@@ -3,8 +3,10 @@ import { sql } from "@vercel/postgres";
 const Dashboard = async () => {
   const { rows } = await sql`SELECT * from bookings;`;
 
+    console.log(rows)
   return (
     <div>
+        hello from dashboard
       {rows.map((item) => (
         <p key={item.id}>
           {" "}

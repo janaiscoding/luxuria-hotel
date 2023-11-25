@@ -24,6 +24,13 @@ export function DatePickerEnd({
   setter: React.Dispatch<React.SetStateAction<Date | undefined>>;
   content: string;
 }) {
+  //https://react-day-picker.js.org/basics/modifiers#disabling-days
+  const disabledDays = [
+    new Date(2023, 5, 10),
+    new Date(2023, 5, 12),
+    new Date(2023, 5, 20),
+    { from: new Date(2022, 4, 18), to: new Date(2022, 4, 29) }
+  ];
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -40,6 +47,7 @@ export function DatePickerEnd({
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
         <Calendar
+          disabled={disabledDays}
           mode="single"
           selected={date}
           onSelect={setter}

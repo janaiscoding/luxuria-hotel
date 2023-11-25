@@ -8,24 +8,29 @@ import { DatePickerEnd } from "./DatePickerEnd";
 const BookingForm = () => {
   const { toast } = useToast();
 
-  const [startDate, setStartDate] = useState<Date | undefined>();
-  const [endDate, setEndDate] = useState<Date | undefined>();
+  const [arrivalDate, setArrivalDate] = useState<Date | undefined>();
+  const [departureDate, setDepartureDate] = useState<Date | undefined>();
   const [guests, setGuests] = useState<number | undefined>();
 
   const handleBook = async (e: SyntheticEvent) => {
     e.preventDefault();
-    if (guests && startDate && endDate) {
-      // Call the api route from @app/api/create-reservation/route.ts with the specified method
-      const res = await fetch(`/api/create-reservation/?guests=${guests}`, {
-        method: "POST",
-      });
+    if (guests && arrivalDate && departureDate) {
+      // all must be present
+      // todo: make sure arrival < departure
+      // Call the api route from @app/api/create-booking/route.ts with the specified method
+      const res = await fetch(
+        `/api/create-booking/?guests=${guests}&arrival=${arrivalDate}&departure=${departureDate}`,
+        {
+          method: "POST",
+        }
+      );
       // Success
       if (res.ok) {
         // Display UI toast notification
         toast({
-          title: "Reservation placed",
+          title: "We received your reservation",
           variant: "success",
-          description: `We received your reservation for ${guests} persons, we look forward to seeing you!`,
+          description: `Reservation for ${guests} persons, on the date of ${arrivalDate} was submitted successfully!`,
         });
       } else {
         // Db error
@@ -52,11 +57,15 @@ const BookingForm = () => {
         onSubmit={(e) => handleBook(e)}
         className="hidden md:flex gap-1 p-10 items-center justify-center shadow-md"
       >
-        <DatePicker date={startDate} setter={setStartDate} content="Check in" />
+        <DatePicker
+          date={arrivalDate}
+          setter={setArrivalDate}
+          content="Check in"
+        />
         <DatePickerEnd
-          start={startDate}
-          date={endDate}
-          setter={setEndDate}
+          start={arrivalDate}
+          date={departureDate}
+          setter={setDepartureDate}
           content="Check out"
         />
         <InputGuests setter={setGuests} />
