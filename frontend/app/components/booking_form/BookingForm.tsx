@@ -1,3 +1,4 @@
+"use client";
 import { SyntheticEvent, useState } from "react";
 import { DatePicker } from "./DatePicker";
 import { InputGuests } from "./InputGuests";
@@ -11,19 +12,35 @@ const BookingForm = () => {
   const [endDate, setEndDate] = useState<Date | undefined>();
   const [guests, setGuests] = useState<number | undefined>();
 
-  const handleBook = (e: SyntheticEvent) => {
+  const handleBook = async (e: SyntheticEvent) => {
     e.preventDefault();
-    if (startDate && endDate && guests) {
-      toast({
-        title: "Reservation placed",
-        variant: "success",
-        description: `We received your reservation for ${guests} persons, we look forward to seeing you!`,
+    if (guests && startDate && endDate) {
+      // Call the api route from @app/api/create-reservation/route.ts with the specified method
+      const res = await fetch(`/api/create-reservation/?guests=${guests}`, {
+        method: "POST",
       });
+      // Success
+      if (res.ok) {
+        // Display UI toast notification
+        toast({
+          title: "Reservation placed",
+          variant: "success",
+          description: `We received your reservation for ${guests} persons, we look forward to seeing you!`,
+        });
+      } else {
+        // Db error
+        toast({
+          title: "Unexpected Error.",
+          variant: "destructive",
+          description: `Sorry! A server error has occured, please try again later.`,
+        });
+      }
     } else {
+      // Not all fields were completed
       toast({
-        title: "Error",
+        title: "Missing information!",
         variant: "destructive",
-        description: `Please complete the fields!`,
+        description: `Please complete all the required fields!`,
       });
     }
   };

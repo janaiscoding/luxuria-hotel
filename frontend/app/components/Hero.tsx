@@ -1,9 +1,7 @@
-"use client";
 import Image from "next/image";
 import heroImage from "@/public/hero_hotel_image.jpg";
 import Overlay from "./ui/Overlay";
 import BookingForm from "./booking_form/BookingForm";
-import { getBookings } from "../api/get-all-bookings/route";
 
 const Hero = () => {
   return (
