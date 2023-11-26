@@ -13,8 +13,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { DateBefore } from "react-day-picker";
 
-export function DatePicker({
+export function DatePickerStart({
   date,
   setter,
   content,
@@ -23,6 +24,8 @@ export function DatePicker({
   setter: React.Dispatch<React.SetStateAction<Date | undefined>>;
   content: string;
 }) {
+  const beforeMatcher: DateBefore = { before: new Date() };
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -39,6 +42,7 @@ export function DatePicker({
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
         <Calendar
+          disabled={beforeMatcher}
           mode="single"
           selected={date}
           onSelect={setter}

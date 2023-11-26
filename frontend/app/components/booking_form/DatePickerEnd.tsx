@@ -12,6 +12,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { DateBefore } from "react-day-picker";
 
 export function DatePickerEnd({
   start,
@@ -24,13 +25,13 @@ export function DatePickerEnd({
   setter: React.Dispatch<React.SetStateAction<Date | undefined>>;
   content: string;
 }) {
-  //https://react-day-picker.js.org/basics/modifiers#disabling-days
-  const disabledDays = [
-    new Date(2023, 5, 10),
-    new Date(2023, 5, 12),
-    new Date(2023, 5, 20),
-    { from: new Date(2022, 4, 18), to: new Date(2022, 4, 29) }
-  ];
+  // https://react-day-picker.js.org/basics/modifiers#disabling-days
+  // On departure I want to disable the option to pick from the past until the arrival date (start) if specified
+  // If not specified, disable all days until today.
+  const beforeMatcher: DateBefore = start
+    ? { before: start }
+    : { before: new Date() };
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -47,7 +48,7 @@ export function DatePickerEnd({
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
         <Calendar
-          disabled={disabledDays}
+          disabled={beforeMatcher}
           mode="single"
           selected={date}
           onSelect={setter}

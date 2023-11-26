@@ -24,7 +24,7 @@ const Header = () => {
           </li>
         ))}
       </ul>
-      <PopupForm />
+      {/* <PopupForm /> */}
     </nav>
   );
 };

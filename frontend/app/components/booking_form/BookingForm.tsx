@@ -1,45 +1,23 @@
 "use client";
 import { SyntheticEvent, useState } from "react";
-import { DatePicker } from "./DatePicker";
+import { DatePickerStart } from "./DatePickerStart";
 import { InputGuests } from "./InputGuests";
 import { useToast } from "@/components/ui/use-toast";
 import { DatePickerEnd } from "./DatePickerEnd";
+import createReservation from "@/app/api/createReservation";
 
 const BookingForm = () => {
   const { toast } = useToast();
 
-  const [arrivalDate, setArrivalDate] = useState<Date | undefined>();
+  const [arrivalDate, setArrivalDate] = useState<Date | undefined>(); // always starts with today
   const [departureDate, setDepartureDate] = useState<Date | undefined>();
   const [guests, setGuests] = useState<number | undefined>();
 
   const handleBook = async (e: SyntheticEvent) => {
     e.preventDefault();
     if (guests && arrivalDate && departureDate) {
-      // all must be present
-      // todo: make sure arrival < departure
-      // Call the api route from @app/api/create-booking/route.ts with the specified method
-      const res = await fetch(
-        `/api/create-booking/?guests=${guests}&arrival=${arrivalDate}&departure=${departureDate}`,
-        {
-          method: "POST",
-        }
-      );
-      // Success
-      if (res.ok) {
-        // Display UI toast notification
-        toast({
-          title: "We received your reservation",
-          variant: "success",
-          description: `Reservation for ${guests} persons, on the date of ${arrivalDate} was submitted successfully!`,
-        });
-      } else {
-        // Db error
-        toast({
-          title: "Unexpected Error.",
-          variant: "destructive",
-          description: `Sorry! A server error has occured, please try again later.`,
-        });
-      }
+      console.log(arrivalDate < departureDate);
+      // createReservation(guests, arrivalDate, departureDate)
     } else {
       // Not all fields were completed
       toast({
@@ -57,7 +35,7 @@ const BookingForm = () => {
         onSubmit={(e) => handleBook(e)}
         className="hidden md:flex gap-1 p-10 items-center justify-center shadow-md"
       >
-        <DatePicker
+        <DatePickerStart
           date={arrivalDate}
           setter={setArrivalDate}
           content="Check in"
