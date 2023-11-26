@@ -11,13 +11,12 @@ const BookingForm = () => {
 
   const [arrivalDate, setArrivalDate] = useState<Date | undefined>(); // always starts with today
   const [departureDate, setDepartureDate] = useState<Date | undefined>();
-  const [guests, setGuests] = useState<number | undefined>();
+  const [guestsNumber, setGuestsNumber] = useState<number | undefined>();
 
   const handleBook = async (e: SyntheticEvent) => {
     e.preventDefault();
-    if (guests && arrivalDate && departureDate) {
-      console.log(arrivalDate < departureDate);
-      // createReservation(guests, arrivalDate, departureDate)
+    if (guestsNumber && arrivalDate && departureDate) {
+      createReservation(guestsNumber, arrivalDate, departureDate);
     } else {
       // Not all fields were completed
       toast({
@@ -46,7 +45,7 @@ const BookingForm = () => {
           setter={setDepartureDate}
           content="Check out"
         />
-        <InputGuests setter={setGuests} />
+        <InputGuests setter={setGuestsNumber} />
         <button className="border border-solid h-9 py-1 px-3 bg-neutral-900 text-slate-50 hover:bg-neutral-800 shadow-sm rounded-md">
           Book
         </button>

@@ -4,14 +4,16 @@ import { NextResponse } from "next/server";
 // @route api/create-booking
 export async function POST(request: Request) {
   const { searchParams } = new URL(request.url);
+  // Field names in booking form
   let guestsNumber = searchParams.get("guests");
   let arrivalDate = searchParams.get("arrival");
   let departureDate = searchParams.get("departure");
 
   try {
     if (!guestsNumber || !arrivalDate || !departureDate)
-      throw new Error("Guest number is requires");
+      throw new Error("All fields are required.");
     else {
+      // convert them to correct data type
       const arrDate = new Date(arrivalDate);
       const depDate = new Date(departureDate);
       //@ts-ignore
@@ -20,7 +22,8 @@ export async function POST(request: Request) {
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
   }
-
-  const bookings = await sql`SELECT * FROM bookings;`;
-  return NextResponse.json({ bookings }, { status: 200 });
+  return NextResponse.json(
+    { message: "We received your reservation!" },
+    { status: 201 }
+  );
 }
