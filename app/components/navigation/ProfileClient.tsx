@@ -12,19 +12,22 @@ import Image from "next/image";
 // The profile will always show as a pop-up element
 export default function ProfileClient() {
   const { user } = useUser();
-
+  // console.log(user);
+  // https://github.com/auth0/nextjs-auth0/tree/main gotta see how to get the unique user id from auth0
   return (
     user && (
       <Popover>
         <PopoverTrigger asChild>
           <div className="flex gap-1 items-center justify-center hover:cursor-pointer">
-            <Image
-              src={user.picture!}
-              alt={`${user.name} profile picture`}
-              width={40}
-              height={40}
-              className="rounded-full"
-            />
+            {user.picture && (
+              <Image
+                src={user.picture}
+                alt={`${user.name} profile picture`}
+                width={40}
+                height={40}
+                className="rounded-full"
+              />
+            )}
           </div>
         </PopoverTrigger>
         <PopoverContent className="w-80">
