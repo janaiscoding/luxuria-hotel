@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Popover,
   PopoverContent,
@@ -6,41 +7,46 @@ import {
 } from "@/components/ui/popover";
 
 import { SyntheticEvent, useState } from "react";
-import { DatePicker } from "./DatePickerStart";
-import { InputPopup } from "./InputPopup";
 
 export function PopupForm() {
-  const [startDate, setStartDate] = useState<Date | undefined>();
-  const [endDate, setEndDate] = useState<Date | undefined>();
-  const [guests, setGuests] = useState<number | undefined>();
-
-  const handleBook = (e: SyntheticEvent) => {
+  const handleSignIn = (e: SyntheticEvent) => {
     e.preventDefault();
-    console.log(startDate, endDate, guests);
   };
   return (
     <Popover>
       <PopoverTrigger asChild>
         <button className="border border-solid h-9 py-1 px-3 bg-neutral-900 text-slate-50 hover:bg-neutral-800 shadow-sm rounded-md">
-          Book
+          Sign in
         </button>
       </PopoverTrigger>
       <PopoverContent className="w-80">
         <form
           aria-label="form"
-          onSubmit={(e) => handleBook(e)}
-          className="flex flex-col gap-1 items-start justify-center"
+          onSubmit={(e) => handleSignIn(e)}
+          className="flex flex-col gap-1 items-center justify-center"
         >
-          <DatePicker
-            date={startDate}
-            setter={setStartDate}
-            content="Check in"
-          />
-          <DatePicker date={endDate} setter={setEndDate} content="Check out" />
-          <InputPopup setter={setGuests} />
-          <button className="border border-solid h-9 py-1 px-3 bg-neutral-900 text-slate-50 hover:bg-neutral-800 shadow-sm rounded-md">
-            Book
-          </button>
+          <legend className="font-montserrat">Welcome back!</legend>
+          <label className="w-full">
+            Email
+            <Input type="email" placeholder="email" />
+          </label>
+
+          <label className="w-full">
+            Password
+            <Input type="password" placeholder="email" />
+          </label>
+
+          <div className="flex gap-1">
+            <button
+              type="submit"
+              className="border border-solid h-9 py-1 px-3 bg-neutral-900 text-slate-50 hover:bg-neutral-800 shadow-sm rounded-md"
+            >
+              Sign in
+            </button>
+            <button className="border border-solid h-9 py-1 px-3 bg-neutral-900 text-slate-50 hover:bg-neutral-800 shadow-sm rounded-md">
+              Create account
+            </button>
+          </div>
         </form>
       </PopoverContent>
     </Popover>

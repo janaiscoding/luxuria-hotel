@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Montserrat, Lora } from "next/font/google";
 import "./globals.css";
 
+import { UserProvider } from "@auth0/nextjs-auth0/client";
+
 const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-montserrat",
@@ -20,9 +22,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${lora.variable} ${montserrat.variable} font-lora`}>
-        {children}
-      </body>
+      <UserProvider>
+        <body className={`${lora.variable} ${montserrat.variable} font-lora`}>
+          {children}
+        </body>
+      </UserProvider>
     </html>
   );
 }

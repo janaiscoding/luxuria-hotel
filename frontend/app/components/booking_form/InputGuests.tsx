@@ -2,8 +2,10 @@ import { Input } from "@/components/ui/input";
 import { SetStateAction } from "react";
 
 export function InputGuests({
+  guests,
   setter,
 }: {
+  guests: number | undefined;
   setter: React.Dispatch<SetStateAction<number | undefined>>;
 }) {
   // Might change to dropdown selection group.
@@ -19,3 +21,4 @@ export function InputGuests({
     />
   );
 }
+

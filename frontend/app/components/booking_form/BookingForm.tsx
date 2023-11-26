@@ -28,8 +28,12 @@ const BookingForm = () => {
         description: `Please complete all the required fields!`,
       });
     }
+    setArrivalDate(undefined);
+    setDepartureDate(undefined);
+    setGuestsNumber(undefined);
+    console.log(guestsNumber)
   };
-
+  
 
   return (
     <div className="z-20 absolute top-[90%] left-1/2 -translate-x-1/2 shadow-md bg-slate-50 font-lora">
@@ -50,7 +54,7 @@ const BookingForm = () => {
           setter={setDepartureDate}
           content="Check out"
         />
-        <InputGuests setter={setGuestsNumber} />
+        <InputGuests guests={guestsNumber} setter={setGuestsNumber} />
         <button className="border border-solid h-9 py-1 px-3 bg-neutral-900 text-slate-50 hover:bg-neutral-800 shadow-sm rounded-md">
           Book
         </button>

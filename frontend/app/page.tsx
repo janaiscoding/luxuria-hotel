@@ -7,6 +7,7 @@ import SocialProof from "./components/social_proof/SocialProof";
 import Contact from "./components/contact/Contact";
 import Footer from "./components/navigation/Footer";
 import { Toaster } from "@/components/ui/toaster";
+
 export default function Home() {
 
   return (
