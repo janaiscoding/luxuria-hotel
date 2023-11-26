@@ -13,19 +13,27 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { DateBefore } from "react-day-picker";
+import { DateBefore, DateInterval, DateRange } from "react-day-picker";
 
 export function DatePickerStart({
   date,
+  end,
   setter,
   content,
 }: {
   date: Date | undefined;
+  end: Date | undefined;
   setter: React.Dispatch<React.SetStateAction<Date | undefined>>;
   content: string;
 }) {
-  const beforeMatcher: DateBefore = { before: new Date() };
-
+  // If end date isn't provided, we just can't select days before today
+  // If end date is provided, we can only pick days from today to end
+  const disabledMatcher = end
+    ? {
+        after: end,
+        before: new Date(),
+      }
+    : { before: new Date() };
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -42,7 +50,7 @@ export function DatePickerStart({
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
         <Calendar
-          disabled={beforeMatcher}
+          disabled={disabledMatcher}
           mode="single"
           selected={date}
           onSelect={setter}

@@ -17,6 +17,9 @@ const BookingForm = () => {
     e.preventDefault();
     if (guestsNumber && arrivalDate && departureDate) {
       createReservation(guestsNumber, arrivalDate, departureDate);
+      setArrivalDate(undefined);
+      setDepartureDate(undefined);
+      setGuestsNumber(undefined);
     } else {
       // Not all fields were completed
       toast({
@@ -27,6 +30,7 @@ const BookingForm = () => {
     }
   };
 
+
   return (
     <div className="z-20 absolute top-[90%] left-1/2 -translate-x-1/2 shadow-md bg-slate-50 font-lora">
       <form
@@ -36,6 +40,7 @@ const BookingForm = () => {
       >
         <DatePickerStart
           date={arrivalDate}
+          end={departureDate}
           setter={setArrivalDate}
           content="Check in"
         />
