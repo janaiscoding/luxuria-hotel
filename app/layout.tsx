@@ -21,9 +21,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <UserProvider>
-        <body className={`${lora.variable} ${montserrat.variable} font-lora`}>
+        <body
+          className={`${lora.variable} ${montserrat.variable} font-lora`}
+        >
           {children}
         </body>
       </UserProvider>

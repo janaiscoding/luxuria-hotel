@@ -6,7 +6,7 @@ const Dashboard = async () => {
     console.log(rows)
   return (
     <div>
-        hello from dashboard
+    hello from dashboard - test for now
       {rows.map((item) => (
         <p key={item.id}>
           {" "}

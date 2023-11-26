@@ -6,30 +6,28 @@ import ProfileClient from "./ProfileClient";
 
 const Header = () => {
   const list = [
-    { name: "Home", active: true },
-    { name: "About Us", active: false },
-    { name: "Rooms", active: false },
-    { name: "Contact us", active: false },
+    { name: "Home", link: "home" },
+    { name: "About Us", link: "about" },
+    { name: "Rooms", link: "rooms" },
+    { name: "Contact us", link: "contact" },
   ];
   const { user, error, isLoading } = useUser();
   return (
-    <nav className="flex justify-between items-center py-2 sticky top-0 z-50 bg-slate-50 px-4 shadow-md">
+    <nav className="flex justify-between items-center py-2 sticky top-0 z-50 bg-slate-50 px-4 shadow-md h-12">
       <a href="/" className="text-xl font-semibold">
         Luxuria
       </a>
 
       <ul className="md:flex gap-10 hidden">
         {list.map((el, i) => (
-          <li
-            key={i}
-            className={`${el.active && "underline"} hover:cursor-pointer`}
-          >
-            {el.name}
+          <li key={i} className={`hover:cursor-pointer hover:text-orange-800`}>
+            <a href={`/#${el.link}`}>{el.name}</a>
           </li>
         ))}
       </ul>
       {user && <ProfileClient />}
       {isLoading && <div>Loading user...</div>}
+      {error && <div>Error</div>}
       {!isLoading && !user && <a href="/api/auth/login">Login</a>}
     </nav>
   );
