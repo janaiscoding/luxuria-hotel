@@ -3,7 +3,7 @@ import Header from "./components/navigation/Header";
 import Hero from "./components/Hero";
 import Motive from "./components/Motive";
 import Rooms from "./components/rooms_section/Rooms";
-import SocialProof from "./components/social_proof/SocialProof";
+import SocialProof from "./components/testimonials/SocialProof";
 import Contact from "./components/contact/Contact";
 import Footer from "./components/navigation/Footer";
 import { Toaster } from "@/components/ui/toaster";

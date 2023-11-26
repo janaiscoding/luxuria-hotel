@@ -9,6 +9,7 @@ const Header = () => {
     { name: "Home", link: "home" },
     { name: "About Us", link: "about" },
     { name: "Rooms", link: "rooms" },
+    { name: "Testimonials", link: "testimonials" },
     { name: "Contact us", link: "contact" },
   ];
   const { user, error, isLoading } = useUser();
