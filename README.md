@@ -1,9 +1,11 @@
-# Luxuria Hotel - A full stack hotel and accommodation booking website - work in progress 
-Currently creating a landing page where users can browse and book a room, planning to add backend integration for user login and checking their bookings in the future. 
+# To do 
 
-[Live](https://luxuria-hotel.vercel.app/)
+- [x] add postgresql backend to nextjs
+- [x] create bookings table
+- [x] create route for placing a new booking
+- [x] validate submitted user dates arrival must be lower than departure
+- [x] validate number of persons to be between 1 and 4
+- [x] display errors and success messages when placing a new booking
+- [x] create Auth with Auth0/nextjs-auth0 yay <3
+- [] create user dashboard to see their own bookings
 
-# Tech stack 
-
-- Next.js, React, TypeScript
-- TailwindCSS, shadcn/ui
