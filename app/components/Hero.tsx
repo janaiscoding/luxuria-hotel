@@ -21,15 +21,15 @@ const HeroText = () => {
   return (
     <div className="z-20 text-center flex flex-col items-center justify-center gap-2 text-slate-50 drop-shadow">
       <p className="md:text-xl text-gray-300">Hotel Luxuria Experience</p>
-      <h1 role="heading" className="text-3xl md:text-6xl font-bold">
-        ENJOY A <span className="font-montserrat underline italic decoration-orange-500">UNIQUE</span><br></br> EXPERIENCE
+      <h1 role="heading" className="text-4xl md:text-6xl font-bold">
+        ENJOY A <span className="font-montserrat underline decoration-orange-500">UNIQUE</span><br></br> EXPERIENCE
       </h1>
-      {/* <a
+      <a
         href="/#rooms"
         className="py-2 px-4 text-zinc-950 bg-orange-300 hover:bg-orange-400"
       >
         Rooms & Suites
-      </a> */}
+      </a>
     </div>
   );
 };

@@ -9,6 +9,7 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 
 import Image from "next/image";
 
+// The profile will always show as a pop-up element
 export default function ProfileClient() {
   const { user } = useUser();
 
