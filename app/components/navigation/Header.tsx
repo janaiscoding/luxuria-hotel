@@ -27,7 +27,7 @@ const Header = () => {
       </ul>
       {user && <ProfileClient />}
       {isLoading && <div>Loading user...</div>}
-      {error && <div>Error</div>}
+      {!isLoading && error && <div>Error</div>}
       {!isLoading && !user && <a href="/api/auth/login">Login</a>}
     </nav>
   );
