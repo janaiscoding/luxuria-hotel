@@ -1,7 +1,7 @@
 "use client";
+import { signIn } from "next-auth/react";
 import ProfileClient from "./ProfileClient";
 import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
 
 const Header = () => {
   const list = [
@@ -12,8 +12,8 @@ const Header = () => {
     { name: "Contact us", link: "contact" },
   ];
 
-  const { data: session } = useSession({ required: false });
-  console.log(session);
+  const { data: session } = useSession();
+
   return (
     <nav className="flex justify-between items-center py-2 sticky top-0 z-50 bg-slate-50 px-4 shadow-md h-12">
       <a href="/" className="text-xl font-semibold">
@@ -30,7 +30,13 @@ const Header = () => {
       {session?.user ? (
         <ProfileClient user={session.user} />
       ) : (
-        <a href="/api/auth/signin">Sign in</a>
+        <button
+          onClick={() =>
+            signIn("github", { callbackUrl: "/", redirect: false })
+          }
+        >
+          Sign in with GitHub
+        </button>
       )}
     </nav>
   );

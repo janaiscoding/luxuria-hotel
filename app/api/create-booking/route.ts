@@ -1,7 +1,28 @@
 import { sql } from "@vercel/postgres";
 import { NextResponse } from "next/server";
 
-// @route api/create-booking
+/**
+ * @api {post} api/create-booking Create a new booking
+ * @apiName CreateBooking
+ * @apiGroup Booking
+ *
+ * @apiParam {Number} guests Booking guest number.
+ * @apiParam {String} arrival Booking arrival date.
+ * @apiParam {String} departure Booking deparute date.
+ *
+ * @apiSuccess Success-Response:
+ *     HTTP/1.1 201 CREATED
+ *     {
+ *       "message": "Your reservation was created!"
+ *     }
+ *
+ * @apiError Error-Response:
+ *    HTTP/1.1 500 Internal Server Error
+ *    {
+ *      "error": "Database error."
+ *    }
+ */
+
 export async function POST(request: Request) {
   const { searchParams } = new URL(request.url);
   // Field names in booking form
@@ -23,7 +44,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error }, { status: 500 });
   }
   return NextResponse.json(
-    { message: "We received your reservation!" },
+    { message: "Your reservation was created!" },
     { status: 201 }
   );
 }

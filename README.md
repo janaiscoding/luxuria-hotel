@@ -2,9 +2,12 @@
 
 Full-stack hotel acommodation booking website
 
-## Tech stack: 
+## Tech stack
 
 Next.js | TypeScript | PostgreSQL | Auth0 | React | Jest Testing Library | TailwindCSS | shadcn/ui |  
+
+## API Reference
+
 
 
 ## To do

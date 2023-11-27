@@ -8,9 +8,9 @@ import Contact from "./components/contact/Contact";
 import Footer from "./components/navigation/Footer";
 import { Toaster } from "@/components/ui/toaster";
 
-export default function Home() {
+export default function App() {
   return (
-    <main className="font-lora">
+    <>
       <Header />
       <Hero />
       <Motive />
@@ -20,7 +20,7 @@ export default function Home() {
       <Contact />
       <Footer />
       <Toaster />
-    </main>
+    </>
   );
 }
 // Color pallete:

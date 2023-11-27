@@ -5,6 +5,7 @@ import {
   PopoverTrigger,
   PopoverContent,
 } from "@/components/ui/popover";
+import { signOut } from "next-auth/react";
 
 type User =
   | {
@@ -37,7 +38,7 @@ export default function ProfileClient({ user }: { user: User }) {
           <div className="flex gap-1 items-center justify-center">
             <h2>Welcome, {user.name}</h2>
           </div>
-          <a href="/api/auth/logout">Logout</a>
+          <button onClick={() => signOut({ callbackUrl: "/" })}>Logout</button>
         </PopoverContent>
       </Popover>
     )
