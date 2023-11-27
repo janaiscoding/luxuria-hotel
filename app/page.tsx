@@ -9,7 +9,6 @@ import Footer from "./components/navigation/Footer";
 import { Toaster } from "@/components/ui/toaster";
 
 export default function Home() {
-
   return (
     <main className="font-lora">
       <Header />

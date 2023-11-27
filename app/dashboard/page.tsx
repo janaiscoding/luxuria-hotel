@@ -1,12 +1,13 @@
+"use client";
 import { sql } from "@vercel/postgres";
 
 const Dashboard = async () => {
   const { rows } = await sql`SELECT * from bookings;`;
 
-    console.log(rows)
+  console.log(rows);
   return (
     <div>
-    hello from dashboard - test for now
+      hello from dashboard - test for now
       {rows.map((item) => (
         <p key={item.id}>
           {" "}

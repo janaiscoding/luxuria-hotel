@@ -1,8 +1,7 @@
 "use client";
-import Button from "../ui/button-luxuria";
-import { PopupForm } from "../booking_form/PopupForm";
-import { useUser } from "@auth0/nextjs-auth0/client";
 import ProfileClient from "./ProfileClient";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 const Header = () => {
   const list = [
@@ -12,7 +11,9 @@ const Header = () => {
     { name: "Testimonials", link: "testimonials" },
     { name: "Contact us", link: "contact" },
   ];
-  const { user, error, isLoading } = useUser();
+
+  const { data: session } = useSession({ required: false });
+  console.log(session);
   return (
     <nav className="flex justify-between items-center py-2 sticky top-0 z-50 bg-slate-50 px-4 shadow-md h-12">
       <a href="/" className="text-xl font-semibold">
@@ -26,10 +27,11 @@ const Header = () => {
           </li>
         ))}
       </ul>
-      {user && <ProfileClient />}
-      {isLoading && <div>Loading user...</div>}
-      {!isLoading && error && <div>Error</div>}
-      {!isLoading && !user && <a href="/api/auth/login">Login</a>}
+      {session?.user ? (
+        <ProfileClient user={session.user} />
+      ) : (
+        <a href="/api/auth/signin">Sign in</a>
+      )}
     </nav>
   );
 };
