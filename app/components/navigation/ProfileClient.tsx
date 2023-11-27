@@ -35,10 +35,11 @@ export default function ProfileClient({ user }: { user: User }) {
           </div>
         </PopoverTrigger>
         <PopoverContent className="w-80">
-          <div className="flex gap-1 items-center justify-center">
+          <div>
             <h2>Welcome, {user.name}</h2>
+            <a href="/dashboard">Dashboard</a>
           </div>
-          <button onClick={() => signOut({ callbackUrl: "/" })}>Logout</button>
+          <button onClick={() => signOut({ callbackUrl: "/" })}>Sign out</button>
         </PopoverContent>
       </Popover>
     )

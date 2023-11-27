@@ -24,7 +24,7 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request) {
   try {
     const bookings = await sql`SELECT * FROM bookings;`;
-    return NextResponse.json({ bookings: bookings.rows }, { status: 200 });
+    return NextResponse.json({ bookings }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
   }
