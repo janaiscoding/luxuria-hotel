@@ -35,20 +35,5 @@ export const options: NextAuthOptions = {
       clientId: process.env.GITHUB_ID as string,
       clientSecret: process.env.GITHUB_SECRET as string,
     }),
-    CredentialsProvider({
-      name: "Demo Account",
-      //@ts-ignore
-      async authorize(credentials, req) {
-        try {
-          const { rows } =
-            await sql`SELECT * FROM users WHERE email='myemail@mail.com' AND password='mypw';`;
-          if (rows) {
-            return rows[0];
-          }
-        } catch {
-          return null;
-        }
-      },
-    }),
   ],
 };
