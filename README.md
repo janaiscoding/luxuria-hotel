@@ -19,6 +19,12 @@ Next.js | TypeScript | PostgreSQL | NextAuth.js | React | Jest Testing Library |
 - [x] validate number of persons to be between 1 and 4
 - [x] display errors and success messages when placing a new booking
 - [x] replaced auth0 with next-auth
+- [x] created user table and linked bookings with foreign keys to it
+
+* must see how to add all my users to the db   
+* must create login for adding new user with a hashed password
+* must validate the hashed pw in the credentials authorize next-auth function
+
 - [ ] create user dashboard to see their own bookings
 - [ ] link session user to booking post requests
 - [ ] pop-up for booking form on mobile maybe an ui element that opens up from bottom
