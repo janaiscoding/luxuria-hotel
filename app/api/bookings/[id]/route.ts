@@ -27,19 +27,19 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   const { id } = params;
-  const booking = await sql`SELECT * FROM bookings WHERE id=${id}`;
+  const { rows } = await sql`SELECT * FROM bookings WHERE id=${id}`;
 
-  if (booking.rows.length === 0)
+  if (rows[0]) {
     return NextResponse.json(
-      { error: "This booking does not exist." },
-      { status: 404 }
+      {
+        message: "Get individual booking information!",
+        booking: rows[0],
+      },
+      { status: 200 }
     );
-
+  }
   return NextResponse.json(
-    {
-      message: "Get individual booking information!",
-      booking: booking.rows[0],
-    },
-    { status: 200 }
+    { error: "This booking does not exist." },
+    { status: 404 }
   );
 }

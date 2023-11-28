@@ -14,13 +14,13 @@ import { NextResponse } from "next/server";
  *     HTTP/1.1 200 OK
  *     {
  *        message: "All bookings were retrieved!",
- *        bookings: [] as {id: number, arrivaldate: string, departuredate: string, guestsnumber: number}[]; 
+ *        bookings: [] as {id: number, arrivaldate: string, departuredate: string, guestsnumber: number}[];
  *     }
  *
  * @apiError Error-Response:
  *    HTTP/1.1 500 Internal Server Error
  *    {
- *      "error": "Database error."
+ *      "error": "An unexpected database error has occured."
  *    }
  */
 
@@ -28,12 +28,17 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
 
   const { rows } = await sql`SELECT * FROM bookings;`;
+  if (rows) {
+    return NextResponse.json(
+      { message: "All bookings were retrieved!", bookings: rows },
+      { status: 200 }
+    );
+  }
   return NextResponse.json(
-    { message: "All bookings were retrieved!", bookings: rows },
-    { status: 200 }
+    { error: "An unexpected database error has occured." },
+    { status: 500 }
   );
 }
-
 
 /**
  * @api {post} api/bookings Create a new booking
