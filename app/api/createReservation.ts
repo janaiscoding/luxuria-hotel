@@ -7,15 +7,16 @@ const createReservation = (
 ) => {
   // All must be present
   // todo: make sure arrival < departure -- complete.
-  // Call the api route from @app/api/create-booking/route.ts with the specified method
+  // Call the api route from @app/api/bookings/route.ts with the specified method
   fetch(
-    `/api/create-booking/?guests=${guests}&arrival=${arrivalDate}&departure=${departureDate}`,
+    `/api/bookings/?guests=${guests}&arrival=${arrivalDate}&departure=${departureDate}`,
     {
       method: "POST",
     }
   )
     .then((res) => res.json())
     .then((data) => {
+      console.log(data);
       toast({
         title: `${data.message}`,
         variant: "success",

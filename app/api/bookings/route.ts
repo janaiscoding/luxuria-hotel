@@ -11,6 +11,40 @@ import { NextResponse } from "next/server";
  * @apiParam {String} departure Booking deparute date.
  *
  * @apiSuccess Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *        message: "All bookings were retrieved!",
+ *        bookings: [] as {id: number, arrivaldate: string, departuredate: string, guestsnumber: number}[]; 
+ *     }
+ *
+ * @apiError Error-Response:
+ *    HTTP/1.1 500 Internal Server Error
+ *    {
+ *      "error": "Database error."
+ *    }
+ */
+
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+
+  const { rows } = await sql`SELECT * FROM bookings;`;
+  return NextResponse.json(
+    { message: "All bookings were retrieved!", bookings: rows },
+    { status: 200 }
+  );
+}
+
+
+/**
+ * @api {post} api/bookings Create a new booking
+ * @apiName CreateBooking
+ * @apiGroup Booking
+ *
+ * @apiParam {Number} guests Booking guest number.
+ * @apiParam {String} arrival Booking arrival date.
+ * @apiParam {String} departure Booking deparute date.
+ *
+ * @apiSuccess Success-Response:
  *     HTTP/1.1 201 CREATED
  *     {
  *       "message": "Your reservation was created!"
@@ -22,7 +56,6 @@ import { NextResponse } from "next/server";
  *      "error": "Database error."
  *    }
  */
-
 export async function POST(request: Request) {
   const { searchParams } = new URL(request.url);
   // Field names in booking form
@@ -43,6 +76,7 @@ export async function POST(request: Request) {
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
   }
+
   return NextResponse.json(
     { message: "Your reservation was created!" },
     { status: 201 }

@@ -13,13 +13,10 @@ const BookingForm = () => {
   const [departureDate, setDepartureDate] = useState<Date | undefined>();
   const [guestsNumber, setGuestsNumber] = useState<number | undefined>();
 
-  const handleBook = async (e: SyntheticEvent) => {
+  const handleBook = (e: SyntheticEvent) => {
     e.preventDefault();
     if (guestsNumber && arrivalDate && departureDate) {
       createReservation(guestsNumber, arrivalDate, departureDate);
-      setArrivalDate(undefined);
-      setDepartureDate(undefined);
-      setGuestsNumber(undefined);
     } else {
       // Not all fields were completed
       toast({
@@ -28,13 +25,13 @@ const BookingForm = () => {
         description: `Please complete all the required fields!`,
       });
     }
+    clearData();
+  };
+  const clearData = () => {
     setArrivalDate(undefined);
     setDepartureDate(undefined);
     setGuestsNumber(undefined);
-    console.log(guestsNumber)
   };
-  
-
   return (
     <div className="z-20 absolute top-[90%] left-1/2 -translate-x-1/2 shadow-md bg-slate-50 font-lora">
       <form

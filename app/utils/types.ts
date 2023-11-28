@@ -3,4 +3,10 @@ type TUser = {
   email: string;
 };
 
-export type { TUser };
+type TBooking = {
+  id: number;
+  arrivaldate: string;
+  departuredate: string;
+  guestsnumber: number;
+};
+export type { TUser, TBooking };
