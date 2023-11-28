@@ -5,12 +5,13 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request) {
   try {
     //can add username VARCHAR(100), from userId relation
-    await sql`CREATE TABLE bookings (
-        id SERIAL PRIMARY KEY,
-        arrivalDate DATE,
-        departureDate DATE,
-        guestsNumber INTEGER                
-        );`;
+    // await sql`CREATE TABLE bookings (
+    //   booking_id SERIAL PRIMARY KEY,
+    //   arrival_date DATE,
+    //   departure_date DATE,
+    //   guests_number INTEGER,
+    //   user_id SERIAL REFERENCES users (user_id)   
+    //   );`;
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
@@ -20,3 +21,9 @@ export async function GET(request: Request) {
     { status: 200 }
   );
 }
+
+// CREATE TABLE users (
+//   user_id SERIAL PRIMARY KEY NOT NULL,
+//   email TEXT NOT NULL,
+//   password TEXT NOT NULL
+//   )

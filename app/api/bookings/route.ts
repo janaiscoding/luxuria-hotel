@@ -3,12 +3,12 @@ import { NextResponse } from "next/server";
 
 /**
  * @api {post} api/create-booking Create a new booking
- * @apiName CreateBooking
- * @apiGroup Booking
+ * @apiName Createbooking
+ * @apiGroup booking
  *
- * @apiParam {Number} guests Booking guest number.
- * @apiParam {String} arrival Booking arrival date.
- * @apiParam {String} departure Booking deparute date.
+ * @apiParam {Number} guests booking guest number.
+ * @apiParam {String} arrival booking arrival date.
+ * @apiParam {String} departure booking deparute date.
  *
  * @apiSuccess Success-Response:
  *     HTTP/1.1 200 OK
@@ -42,17 +42,17 @@ export async function GET(request: Request) {
 
 /**
  * @api {post} api/bookings Create a new booking
- * @apiName CreateBooking
- * @apiGroup Booking
+ * @apiName Createbooking
+ * @apiGroup booking
  *
- * @apiParam {Number} guests Booking guest number.
- * @apiParam {String} arrival Booking arrival date.
- * @apiParam {String} departure Booking deparute date.
+ * @apiParam {Number} guests booking guest number.
+ * @apiParam {String} arrival booking arrival date.
+ * @apiParam {String} departure booking deparute date.
  *
  * @apiSuccess Success-Response:
  *     HTTP/1.1 201 CREATED
  *     {
- *       "message": "Your reservation was created!"
+ *       "message": "Your booking was created!"
  *     }
  *
  * @apiError Error-Response:
@@ -67,7 +67,7 @@ export async function POST(request: Request) {
   let guestsNumber = searchParams.get("guests");
   let arrivalDate = searchParams.get("arrival");
   let departureDate = searchParams.get("departure");
-
+  let userID = searchParams.get("userId");
   try {
     if (!guestsNumber || !arrivalDate || !departureDate)
       throw new Error("All fields are required.");
@@ -76,14 +76,14 @@ export async function POST(request: Request) {
       const arrDate = new Date(arrivalDate);
       const depDate = new Date(departureDate);
       //@ts-ignore
-      await sql`INSERT INTO bookings (arrivalDate, departureDate, guestsNumber) VALUES (${arrDate}, ${depDate}, ${guestsNumber});`;
+      await sql`INSERT INTO bookings (arrival_date, departure_date, guests_number, user_id) VALUES (${arrDate}, ${depDate}, ${guestsNumber}, ${userId});`;
     }
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
   }
 
   return NextResponse.json(
-    { message: "Your reservation was created!" },
+    { message: "Your booking was created!" },
     { status: 201 }
   );
 }

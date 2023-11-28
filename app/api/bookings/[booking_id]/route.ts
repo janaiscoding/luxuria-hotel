@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 /**
  * @api {get} api/bookings/:id Get a specified id booking
- * @apiGroup Bookings
+ * @apiGroup bookings
  *
  * @apiParam {id} id The booking id.
  *
@@ -23,10 +23,10 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: { booking_id: string } }
 ) {
-  const { id } = params;
-  const { rows } = await sql`SELECT * FROM bookings WHERE id=${id}`;
+  const { booking_id } = params;
+  const { rows } = await sql`SELECT * FROM bookings WHERE booking_id=${booking_id}`;
 
   if (rows[0]) {
     return NextResponse.json(

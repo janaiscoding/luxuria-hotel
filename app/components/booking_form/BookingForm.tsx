@@ -16,7 +16,8 @@ const BookingForm = () => {
   const handleBook = (e: SyntheticEvent) => {
     e.preventDefault();
     if (guestsNumber && arrivalDate && departureDate) {
-      createReservation(guestsNumber, arrivalDate, departureDate);
+      console.log(guestsNumber, arrivalDate, departureDate, "my user id here");
+      // createReservation(guestsNumber, arrivalDate, departureDate);
     } else {
       // Not all fields were completed
       toast({

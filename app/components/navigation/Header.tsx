@@ -1,7 +1,14 @@
 "use client";
-import { signIn } from "next-auth/react";
+import { SignInResponse, signIn } from "next-auth/react";
 import ProfileClient from "./ProfileClient";
 import { useSession } from "next-auth/react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Input } from "@/components/ui/input";
+import { SyntheticEvent, useState } from "react";
 
 const Header = () => {
   const list = [
@@ -27,19 +34,83 @@ const Header = () => {
           </li>
         ))}
       </ul>
-      {session?.user ? (
-        <ProfileClient user={session.user} />
-      ) : (
-        <button
-          onClick={() =>
-            signIn("github", { callbackUrl: "/", redirect: false })
-          }
-        >
-          Sign in with GitHub
-        </button>
-      )}
+      {session?.user ? <ProfileClient user={session.user} /> : <LoginMethods />}
     </nav>
   );
 };
 
+const LoginMethods = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [error, setError] = useState("");
+
+  const handleSubmit = (e: SyntheticEvent) => {
+    e.preventDefault();
+    signIn("credentials", {
+      email,
+      password,
+      callbackUrl: "/",
+      redirect: false,
+    }).then((res) => {
+      if (res && !res.ok) {
+        setError("Wrong email or password.");
+      }
+    });
+  };
+
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <button className="border border-solid h-9 py-1 px-3 bg-neutral-900 text-slate-50 hover:bg-neutral-800 shadow-sm rounded-md hover:cursor-pointer">
+          Sign in
+        </button>
+      </PopoverTrigger>
+      <PopoverContent className="w-full p-6 flex flex-col items-center">
+        <form className="" onSubmit={(e) => handleSubmit(e)}>
+          <label htmlFor="email">
+            Email
+            <Input type="email" onChange={(e) => setEmail(e.target.value)} />
+          </label>
+
+          <label htmlFor="password">
+            Password
+            <Input
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </label>
+          {error && <p>{error}</p>}
+          <div>
+            <button
+              className="border border-solid h-9 py-1 px-3 bg-neutral-900 text-slate-50 hover:bg-neutral-800 shadow-sm rounded-md"
+              type="submit"
+            >
+              Sign in
+            </button>
+            <p>Don't have an account? Create one</p>
+          </div>
+        </form>
+        <div> or sign in using </div>
+        <div className="flex justify-between w-full">
+          <button
+            className="border border-solid h-9 py-1 px-3 bg-neutral-900 text-slate-50 hover:bg-neutral-800 shadow-sm rounded-md"
+            onClick={() =>
+              signIn("github", { callbackUrl: "/", redirect: false })
+            }
+          >
+            GitHub
+          </button>
+
+          <button
+            className="border border-solid h-9 py-1 px-3 bg-neutral-900 text-slate-50 hover:bg-neutral-800 shadow-sm rounded-md"
+            type="submit"
+          >
+            Demo
+          </button>
+        </div>
+      </PopoverContent>
+    </Popover>
+  );
+};
 export default Header;

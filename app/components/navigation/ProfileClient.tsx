@@ -23,7 +23,7 @@ export default function ProfileClient({ user }: { user: User }) {
       <Popover>
         <PopoverTrigger asChild>
           <div className="flex gap-1 items-center justify-center hover:cursor-pointer">
-            {user.image && (
+            {user.image ? (
               <Image
                 src={user.image}
                 alt={`${user.name} profile picture`}
@@ -31,6 +31,8 @@ export default function ProfileClient({ user }: { user: User }) {
                 height={40}
                 className="rounded-full"
               />
+            ) : (
+              <div>{user.email}</div>
             )}
           </div>
         </PopoverTrigger>
@@ -39,7 +41,9 @@ export default function ProfileClient({ user }: { user: User }) {
             <h2>Welcome, {user.name}</h2>
             <a href="/dashboard">Dashboard</a>
           </div>
-          <button onClick={() => signOut({ callbackUrl: "/" })}>Sign out</button>
+          <button onClick={() => signOut({ callbackUrl: "/" })}>
+            Sign out
+          </button>
         </PopoverContent>
       </Popover>
     )
