@@ -1,5 +1,4 @@
 import { sql } from "@vercel/postgres";
-import { NextApiRequest } from "next";
 import { NextResponse } from "next/server";
 
 /**
