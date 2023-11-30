@@ -29,7 +29,7 @@ const SignupForm = () => {
       <legend className="text-xl">Create account</legend>
 
       <label htmlFor="name">
-        Name{" "}
+       Your name{" "}
         {name.length === 25 && (
           <span className="text-xs text-red-800">
             *not longer than 25 chars
