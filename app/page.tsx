@@ -7,8 +7,10 @@ import SocialProof from "./components/testimonials/SocialProof";
 import Contact from "./components/contact/Contact";
 import Footer from "./components/navigation/Footer";
 import { Toaster } from "@/components/ui/toaster";
+import { useEffect } from "react";
 
 export default function App() {
+
   return (
     <>
       <Header />

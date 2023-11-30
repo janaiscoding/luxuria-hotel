@@ -7,6 +7,8 @@ import { DatePickerEnd } from "./DatePickerEnd";
 import createReservation from "@/app/api/createReservation";
 import { useSession } from "next-auth/react";
 import getUserIdFromEmail from "@/app/api/getUserId";
+import createUser from "@/app/api/createUser";
+import saveGithubAcctoDb from "@/app/api/saveGithubAcctoDb";
 
 const BookingForm = () => {
   const { toast } = useToast();
@@ -19,18 +21,26 @@ const BookingForm = () => {
 
   const handleBook = async (e: SyntheticEvent) => {
     e.preventDefault();
-    if (!session || !userID) {
+   
+    if (!session) {
+      // Session does not exist.
       toast({
         title: "Please sign in! :) Sorry~",
         variant: "destructive",
         description: `Sign in in top right of the screen to be able to place a reservation!`,
       });
     } else {
-      //If an user is signed in get the userid based on unique email
+      // If session exist, there is 2 possibilities: credentials or github. Email will always exist
       await fetch(`/api/users/${session.user!.email}`, { method: "GET" })
         .then((res) => res.json())
         .then((data) => {
-          setUserId(data.userID.user_id);
+          if(data.userID) {
+            setUserId(data.userID.user_id);
+          }
+           // create github acc 
+           //@ts-ignore
+           saveGithubAcctoDb(session.user!.name, session.user!.email, setUserId);
+
         })
         .catch((err) => {
           console.log(err);

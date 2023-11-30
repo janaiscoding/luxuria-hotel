@@ -8,7 +8,12 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
-import React, { SetStateAction, SyntheticEvent, useState } from "react";
+import React, {
+  SetStateAction,
+  SyntheticEvent,
+  useEffect,
+  useState,
+} from "react";
 import AuthComponent from "../authentication/AuthComponent";
 
 const Header = () => {

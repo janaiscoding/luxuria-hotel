@@ -88,9 +88,9 @@ export async function POST(request: Request) {
         if (hashed) {
           await sql`INSERT INTO users (name, email, password) VALUES ( ${name}, ${email}, ${hashed});`;
         }
-
+        const user = await sql`SELECT user_id, name, email FROM users WHERE email=${email}`
         return NextResponse.json(
-          { message: "Your account was created successfully!" },
+          { message: "Your account was created successfully!", user },
           { status: 201 }
         );
       }
