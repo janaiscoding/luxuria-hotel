@@ -32,18 +32,30 @@ export default function ProfileClient({ user }: { user: User }) {
                 className="rounded-full"
               />
             ) : (
-              <div>{user.email}</div>
+              <div className="border border-solid h-9 py-1 px-3 bg-neutral-900 text-slate-50 hover:bg-neutral-800 shadow-sm rounded-md">
+                {user.name}
+              </div>
             )}
           </div>
         </PopoverTrigger>
         <PopoverContent className="w-80">
-          <div>
-            <h2>Welcome, {user.name}</h2>
-            <a href="/dashboard">Dashboard</a>
+          <div className="flex flex-col items-start gap-2">
+            <h2 className="text-xl">Welcome, {user.name}</h2>
+            <div className="flex ">
+              <a
+                href="/dashboard"
+                className="border border-solid h-9 py-1 px-3 bg-orange-800 text-slate-50 hover:bg-orange-900 shadow-sm rounded-md"
+              >
+                See your bookings
+              </a>
+              <button
+                className="border border-solid h-9 py-1 px-3 bg-neutral-900 text-slate-50 hover:bg-neutral-800 shadow-sm rounded-md"
+                onClick={() => signOut({ callbackUrl: "/" })}
+              >
+                Sign out
+              </button>
+            </div>
           </div>
-          <button onClick={() => signOut({ callbackUrl: "/" })}>
-            Sign out
-          </button>
         </PopoverContent>
       </Popover>
     )

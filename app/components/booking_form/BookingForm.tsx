@@ -5,9 +5,11 @@ import { InputGuests } from "./InputGuests";
 import { useToast } from "@/components/ui/use-toast";
 import { DatePickerEnd } from "./DatePickerEnd";
 import createReservation from "@/app/api/createReservation";
+import { useSession } from "next-auth/react";
 
 const BookingForm = () => {
   const { toast } = useToast();
+  const {data: session } = useSession()
 
   const [arrivalDate, setArrivalDate] = useState<Date | undefined>(); // always starts with today
   const [departureDate, setDepartureDate] = useState<Date | undefined>();
@@ -16,6 +18,7 @@ const BookingForm = () => {
   const handleBook = (e: SyntheticEvent) => {
     e.preventDefault();
     if (guestsNumber && arrivalDate && departureDate) {
+      // fetch userid
       console.log(guestsNumber, arrivalDate, departureDate, "my user id here");
       // createReservation(guestsNumber, arrivalDate, departureDate);
     } else {
