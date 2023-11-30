@@ -3,13 +3,14 @@ import { toast } from "@/components/ui/use-toast";
 const createReservation = (
   guests: number,
   arrivalDate: Date,
-  departureDate: Date
+  departureDate: Date,
+  userID: number
 ) => {
   // All must be present
   // todo: make sure arrival < departure -- complete.
   // Call the api route from @app/api/bookings/route.ts with the specified method
   fetch(
-    `/api/bookings/?guests=${guests}&arrival=${arrivalDate}&departure=${departureDate}`,
+    `/api/bookings/?guests=${guests}&arrival=${arrivalDate}&departure=${departureDate}&userID=${userID}`,
     {
       method: "POST",
     }

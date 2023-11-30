@@ -2,10 +2,10 @@ import { sql } from "@vercel/postgres";
 import { NextResponse } from "next/server";
 
 /**
- * @api {get} api/bookings/:id Get a specified id booking
- * @apiGroup bookings
+ * @api {get} api/user/:email Get a specified user id from an email check
+ * @apiGroup users
  *
- * @apiParam {id} id The booking id.
+ * @apiParam {email} email User's unique email.
  *
  * @apiSuccess Success-Response:
  *     HTTP/1.1 200 OK
@@ -17,17 +17,16 @@ import { NextResponse } from "next/server";
  * @apiError Error-Response:
  *    HTTP/1.1 404 Not Found
  *    {
- *      "error": "This booking does not exist."
+ *      "error": "This user does not exist."
  *    }
  */
 
 export async function GET(
   req: Request,
-  { params }: { params: { user_id: string } }
+  { params }: { params: { email: string } }
 ) {
-  const { user_id } = params;
-  const { rows } =
-    await sql`SELECT user_id FROM users WHERE user_id=${user_id}`;
+  const { email } = params;
+  const { rows } = await sql`SELECT user_id FROM users WHERE email=${email}`;
 
   if (rows[0]) {
     return NextResponse.json(

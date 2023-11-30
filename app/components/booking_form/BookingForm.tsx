@@ -6,30 +6,49 @@ import { useToast } from "@/components/ui/use-toast";
 import { DatePickerEnd } from "./DatePickerEnd";
 import createReservation from "@/app/api/createReservation";
 import { useSession } from "next-auth/react";
+import getUserIdFromEmail from "@/app/api/getUserId";
 
 const BookingForm = () => {
   const { toast } = useToast();
-  const {data: session } = useSession()
+  const { data: session } = useSession();
 
   const [arrivalDate, setArrivalDate] = useState<Date | undefined>(); // always starts with today
   const [departureDate, setDepartureDate] = useState<Date | undefined>();
   const [guestsNumber, setGuestsNumber] = useState<number | undefined>();
+  const [userID, setUserId] = useState<number | null>();
 
-  const handleBook = (e: SyntheticEvent) => {
+  const handleBook = async (e: SyntheticEvent) => {
     e.preventDefault();
-    if (guestsNumber && arrivalDate && departureDate) {
-      // fetch userid
-      console.log(guestsNumber, arrivalDate, departureDate, "my user id here");
-      // createReservation(guestsNumber, arrivalDate, departureDate);
-    } else {
-      // Not all fields were completed
+    if (!session || !userID) {
       toast({
-        title: "Missing information!",
+        title: "Please sign in! :) Sorry~",
         variant: "destructive",
-        description: `Please complete all the required fields!`,
+        description: `Sign in in top right of the screen to be able to place a reservation!`,
       });
+    } else {
+      //If an user is signed in get the userid based on unique email
+      await fetch(`/api/users/${session.user!.email}`, { method: "GET" })
+        .then((res) => res.json())
+        .then((data) => {
+          setUserId(data.userID.user_id);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      if (guestsNumber && arrivalDate && departureDate && userID) {
+        createReservation(guestsNumber, arrivalDate, departureDate, userID);
+      } else {
+        // Not all fields were completed
+        toast({
+          title: "Missing information!",
+          variant: "destructive",
+          description: `Please complete all the required fields!`,
+        });
+      }
     }
-    clearData();
+
+    // clearData();
   };
   const clearData = () => {
     setArrivalDate(undefined);

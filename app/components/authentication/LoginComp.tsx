@@ -27,8 +27,8 @@ const LoginComp = ({
           <button
             onClick={() =>
               signIn("credentials", {
-                email: "myemail@mail.com",
-                password: "mypw",
+                email: "cake.enjoyer@fakemail.com",
+                password: "parola12",
                 callbackUrl: "/",
                 redirect: false,
               })
