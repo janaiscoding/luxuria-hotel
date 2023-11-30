@@ -24,6 +24,7 @@ export async function GET(request: Request) {
 
 // CREATE TABLE users (
 //   user_id SERIAL PRIMARY KEY NOT NULL,
-//   email TEXT NOT NULL,
-//   password TEXT NOT NULL
+//   email TEXT NOT NULL UNIQUE,
+//   password TEXT NOT NULL,
+//   name VARCHAR(25) NOT NULL 
 //   )

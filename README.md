@@ -21,6 +21,7 @@ Next.js | TypeScript | PostgreSQL | NextAuth.js | React | Jest Testing Library |
 - [x] replaced auth0 with next-auth
 - [x] created user table and linked bookings with foreign keys to it
 
+https://panjeh.medium.com/git-status-fatal-bad-object-head-af22724f48b9
 * must see how to add all my users to the db   
 * must create login for adding new user with a hashed password
 * must validate the hashed pw in the credentials authorize next-auth function
