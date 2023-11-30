@@ -27,8 +27,8 @@ const LoginComp = ({
           <button
             onClick={() =>
               signIn("credentials", {
-                email: "cake.enjoyer@fakemail.com",
-                password: "parola12",
+                email: process.env.NEXT_PUBLIC_DEMO_EMAIL,
+                password: process.env.NEXT_PUBLIC_DEMO_PASSWORD,
                 callbackUrl: "/",
                 redirect: false,
               })

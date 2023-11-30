@@ -27,8 +27,8 @@ const SignupComp = ({
         <button
           onClick={() =>
             signIn("credentials", {
-              email: process.env.DEMO_EMAIL,
-              password: process.env.DEMO_PASSWORD,
+              email: process.env.NEXT_PUBLIC_DEMO_EMAIL,
+              password: process.env.NEXT_PUBLIC_DEMO_PASSWORD,
               callbackUrl: "/",
               redirect: false,
             })
