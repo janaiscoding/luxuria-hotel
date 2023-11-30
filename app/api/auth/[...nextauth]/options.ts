@@ -1,6 +1,7 @@
 import type { NextAuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
+import bcryptjs from "bcryptjs";
 import { sql } from "@vercel/postgres";
 
 export const options: NextAuthOptions = {
@@ -21,13 +22,16 @@ export const options: NextAuthOptions = {
       },
       //@ts-ignore
       async authorize(credentials, req) {
-        const { rows } =
-          await sql`SELECT * FROM users WHERE email=${credentials?.email} AND password=${credentials?.password};`;
-        if (rows) {
-          return rows[0];
-        }
+        const password = credentials!.password;
+        const email = credentials!.email;
 
-        return null;
+        const { rows: user } =
+          await sql`SELECT * FROM users WHERE email=${email}`;
+
+        const isAuth = await bcryptjs.compare(password, user[0].password);
+        
+        if (!isAuth) return null;
+        return user[0];
       },
     }),
 
