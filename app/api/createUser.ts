@@ -6,12 +6,20 @@ const createUser = (name: string, email: string, password: string) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
-      //   toast({
-      //     title: `${data.message}`,
-      //     variant: "success",
-      //     description: `The reservation for ${guests} was placed successfully.`,
-      //   });
+      if (data.error) {
+        toast({
+          title: data.error,
+          variant: "destructive",
+          description: `Please log in into your account or sign up using a different email.`,
+        });
+      }
+      if (data.message) {
+        toast({
+          title: data.message,
+          variant: "success",
+          description: `Welcome to Luxuria Hotel.`,
+        });
+      }
     })
     .catch((err) => {
       toast({

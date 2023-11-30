@@ -77,24 +77,23 @@ export async function POST(request: Request) {
       // Make sure emails are unique. If there are any found, a 400 will be sent.
       const { rows: uniqueEmail } =
         await sql`SELECT email FROM users WHERE email=${email}`;
-      if (uniqueEmail.length > 0)
+      if (uniqueEmail.length > 0) {
         return NextResponse.json(
-          {
-            error: "An account with this email already exists.",
-          },
-          { status: 400 }
+          { error: "An account with this email already exists." },
+          { status: 500 }
         );
+      } else {
+        // Everything is valid, now I have to has the pw and create the user
+        const hashed = await bcryptjs.hash(password, 10);
+        if (hashed) {
+          await sql`INSERT INTO users (name, email, password) VALUES ( ${name}, ${email}, ${hashed});`;
+        }
 
-      // Everything is valid, now I have to has the pw and create the user
-      const hashed = await bcryptjs.hash(password, 10);
-      if (hashed) {
-        await sql`INSERT INTO users (name, email, password) VALUES ( ${name}, ${email}, ${hashed});`;
+        return NextResponse.json(
+          { message: "Your account was created successfully!" },
+          { status: 201 }
+        );
       }
-
-      return NextResponse.json(
-        { message: "Your account was created successfully!" },
-        { status: 201 }
-      );
     }
   } catch (err) {
     return NextResponse.json(
