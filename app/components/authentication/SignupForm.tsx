@@ -25,7 +25,7 @@ const SignupForm = () => {
     }
   };
   return (
-    <form className="text-sm" onSubmit={(e) => handleSubmit(e)}>
+    <form className="flex flex-col gap-2 text-sm" onSubmit={(e) => handleSubmit(e)}>
       <legend className="text-xl">Create account</legend>
 
       <label htmlFor="name">

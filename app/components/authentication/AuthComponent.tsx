@@ -1,8 +1,8 @@
 import { Popover, PopoverTrigger } from "@/components/ui/popover";
-import LoginForm from "./LoginForm";
-import SignupForm from "./SignupComp";
+
 import { useState } from "react";
 import SignupComp from "./SignupComp";
+import LoginComp from "./LoginComp";
 
 const AuthComponent = () => {
     const [showLogin, setShowLogin] = useState(true);
@@ -14,7 +14,7 @@ const AuthComponent = () => {
           </button>
         </PopoverTrigger>
         {showLogin ? (
-          <LoginForm setShowLogin={setShowLogin} />
+          <LoginComp setShowLogin={setShowLogin} />
         ) : (
           <SignupComp setShowLogin={setShowLogin} />
         )}
