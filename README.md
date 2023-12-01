@@ -10,7 +10,7 @@ Next.js | TypeScript | PostgreSQL | NextAuth.js | React | Jest Testing Library |
 
 
 
-## To do
+## Tasks
 
 - [x] add postgresql backend to nextjs
 - [x] create bookings table
@@ -20,14 +20,19 @@ Next.js | TypeScript | PostgreSQL | NextAuth.js | React | Jest Testing Library |
 - [x] display errors and success messages when placing a new booking
 - [x] replaced auth0 with next-auth
 - [x] created user table and linked bookings with foreign keys to it
-
-https://panjeh.medium.com/git-status-fatal-bad-object-head-af22724f48b9
-* must see how to add all my users to the db   
-* must create login for adding new user with a hashed password
-* must validate the hashed pw in the credentials authorize next-auth function
-
-- [ ] create user dashboard to see their own bookings
-- [ ] link session user to booking post requests
+- [x] add hashing and comparing hashing with bcryptjs for newly created users
+- [x] create user dashboard to see their own bookings
+- [x] link session user to booking post requests
+- [x] added navigation on mobile 
+- [x] added bookings to current user dashboard
+- [x] added information about rooms being under construction
+- [x] fix homescreen button not having smooth-scrolling
+- [ ] move github project pointing to localhost to point to normal app url
+- [ ] allow users to delete their records 
+- [ ] add maybe sorting posibilities on each row column 
 - [ ] pop-up for booking form on mobile maybe an ui element that opens up from bottom
 - [ ] think about rooms structure, will i allow users to push to rooms db / will i make a db / do i create pages for each room etc.
-- [ ] user page with history and room and possibility to update (?) the reservation 
+- [x] user page with history and room and possibility to update (?) the reservation 
+
+### Useful links for this project
+
