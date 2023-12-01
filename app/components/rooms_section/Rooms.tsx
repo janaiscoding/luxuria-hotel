@@ -12,8 +12,8 @@ const Rooms = () => {
   return (
     <section id="rooms">
       <div className="max-w-screen-2xl m-auto py-20 px-4 flex flex-col items-start gap-2">
-        <div className="flex gap-1 items-center">
-          <h1 className="text-center text-4xl md:text-6xl font-medium text-zinc-950 mb-4">
+        <div className="flex md:flex-row flex-col gap-1 items-center mb-4">
+          <h1 className="text-center text-4xl md:text-6xl font-medium text-zinc-950">
             Rooms & Suites
           </h1>
           <Popover>

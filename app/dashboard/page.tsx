@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/toaster";
 import Footer from "../components/navigation/Footer";
 import getUsersBookings from "../api/getUsersBookings";
 import getUserIdFromEmail from "../api/getUserId";
+import BookingItem from "../components/booking_item/BookingItem";
 
 const Dashboard = () => {
   const { data: session } = useSession();
@@ -25,18 +26,21 @@ const Dashboard = () => {
       fetchBookings();
     }
   }, [session?.user]);
-  
+
   return (
     <main className=" min-h-screen ">
       <div className="flex flex-col min-h-screen justify-between">
         <Header />
         <div className="max-w-screen-2xl  px-4 overflow-auto">
-          <h1>
+          <h1 className="text-2xl">
             👋 Hello, {session?.user?.name}! Welcome to your profile dashboard!
           </h1>
-          <div>
-            <h1>Your bookings</h1>
-            {bookings && bookings.map((b) => <p key={b.booking_id}>{b.guests_number}</p>)}
+          <div className="flex flex-col gap-2">
+            <h1 className="text-3xl text-orange-800 font-bold">Your bookings</h1>
+            {bookings &&
+              bookings.map((booking) => (
+                <BookingItem key={booking.booking_id} booking={booking} />
+              ))}
           </div>
         </div>
         <div className="justify-end">

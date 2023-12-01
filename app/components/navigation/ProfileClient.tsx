@@ -5,6 +5,7 @@ import {
   PopoverTrigger,
   PopoverContent,
 } from "@/components/ui/popover";
+import { Close } from "@radix-ui/react-popover";
 import { signOut } from "next-auth/react";
 
 type User =
@@ -15,9 +16,19 @@ type User =
     }
   | undefined;
 import Image from "next/image";
+import { useRef } from "react";
+import CloseIcon from "../ui/close-icon";
 
 // The profile will always show as a pop-up element
 export default function ProfileClient({ user }: { user: User }) {
+  const list = [
+    { name: "Home", link: "home" },
+    { name: "About Us", link: "about" },
+    { name: "Rooms", link: "rooms" },
+    { name: "Testimonials", link: "testimonials" },
+    { name: "Contact us", link: "contact" },
+  ];
+  const closeRef = useRef<HTMLButtonElement | null>(null);
   return (
     user && (
       <Popover>
@@ -40,7 +51,12 @@ export default function ProfileClient({ user }: { user: User }) {
         </PopoverTrigger>
         <PopoverContent className="w-80">
           <div className="flex flex-col items-start gap-2">
-            <h2 className="text-xl">Welcome, {user.name}</h2>
+            <div className="flex justify-between w-full">
+              <h2 className="text-xl">Welcome, {user.name}</h2>
+              <Close ref={closeRef}>
+                <CloseIcon />
+              </Close>
+            </div>
             <div className="flex ">
               <a
                 href="/dashboard"
@@ -55,6 +71,18 @@ export default function ProfileClient({ user }: { user: User }) {
                 Sign out
               </button>
             </div>
+            <ul className="flex flex-col gap-2 md:hidden">
+              <li>Navigation</li>
+              {list.map((el, i) => (
+                <li
+                  key={i}
+                  className={`hover:cursor-pointer hover:text-orange-800`}
+                  onClick={() => closeRef.current?.click()}
+                >
+                  <a href={`/#${el.link}`}>{el.name}</a>
+                </li>
+              ))}
+            </ul>
           </div>
         </PopoverContent>
       </Popover>
