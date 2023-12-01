@@ -26,7 +26,7 @@ export async function GET(
   { params }: { params: { email: string } }
 ) {
   const { email } = params;
-  const { rows } = await sql`SELECT user_id FROM users WHERE email=${email}`;
+  const { rows } = await sql`SELECT user_id FROM users WHERE email=${email};`;
 
   if (rows[0]) {
     return NextResponse.json(

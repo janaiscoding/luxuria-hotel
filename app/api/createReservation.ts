@@ -1,10 +1,12 @@
 import { toast } from "@/components/ui/use-toast";
+import serverErrorPopup from "../components/popups/serverErrorPopup";
 
 const createReservation = (
   guests: number,
   arrivalDate: Date,
   departureDate: Date,
-  userID: number
+  userID: number,
+  handleSuccess: () => void
 ) => {
   // All must be present
   // todo: make sure arrival < departure -- complete.
@@ -17,19 +19,19 @@ const createReservation = (
   )
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
-      toast({
-        title: `${data.message}`,
-        variant: "success",
-        description: `The reservation for ${guests} was placed successfully.`,
-      });
+      if (data.message === "Your booking was created!") {
+        toast({
+          title: `${data.message}`,
+          variant: "success",
+          description: `Your reservation for ${guests} was placed successfully.`,
+        });
+        handleSuccess()
+      } else {
+        serverErrorPopup();
+      }
     })
-    .catch((err) => {
-      toast({
-        title: "Unexpected Error :(",
-        variant: "destructive",
-        description: `Sorry! A server error has occured, please try again later.`,
-      });
+    .catch(() => {
+      serverErrorPopup();
     });
 };
 export default createReservation;

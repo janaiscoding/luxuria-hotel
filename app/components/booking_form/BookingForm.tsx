@@ -7,65 +7,54 @@ import { DatePickerEnd } from "./DatePickerEnd";
 import createReservation from "@/app/api/createReservation";
 import { useSession } from "next-auth/react";
 import getUserIdFromEmail from "@/app/api/getUserId";
-import createUser from "@/app/api/createUser";
-import saveGithubAcctoDb from "@/app/api/saveGithubAcctoDb";
+import loginPopup from "../popups/loginPopup";
+import missingInfoPopup from "../popups/missingInfoPopup";
 
 const BookingForm = () => {
-  const { toast } = useToast();
   const { data: session } = useSession();
 
   const [arrivalDate, setArrivalDate] = useState<Date | undefined>(); // always starts with today
   const [departureDate, setDepartureDate] = useState<Date | undefined>();
   const [guestsNumber, setGuestsNumber] = useState<number | undefined>();
-  const [userID, setUserId] = useState<number | null>();
+
+  const bookingSubmitButton = document.getElementById(
+    "BSB"
+  ) as HTMLButtonElement;
+  const inputGuestsNumber = document.getElementById("IGN") as HTMLInputElement;
 
   const handleBook = async (e: SyntheticEvent) => {
     e.preventDefault();
-   
-    if (!session) {
-      // Session does not exist.
-      toast({
-        title: "Please sign in! :) Sorry~",
-        variant: "destructive",
-        description: `Sign in in top right of the screen to be able to place a reservation!`,
-      });
-    } else {
-      // If session exist, there is 2 possibilities: credentials or github. Email will always exist
-      await fetch(`/api/users/${session.user!.email}`, { method: "GET" })
-        .then((res) => res.json())
-        .then((data) => {
-          if(data.userID) {
-            setUserId(data.userID.user_id);
-          }
-           // create github acc 
-           //@ts-ignore
-
-
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-
+    // As soon as the form is submitted, change button innerText so that it displays a loading effect
+    bookingSubmitButton.innerText = "Loading...";
+    !session && loginPopup();
+    if (session && session.user) {
+      // Grab user ID from session user email so we can add it to booking (DB Relationship: One to One)
+      const userID = await getUserIdFromEmail(session.user.email!);
+      // Only if all info was provided, call the reservation API endpoint. Fetching is abstracted within the createReservation function
       if (guestsNumber && arrivalDate && departureDate && userID) {
-        createReservation(guestsNumber, arrivalDate, departureDate, userID);
+        // Will create reservation, display success/error message and clear data on success.
+        createReservation(
+          guestsNumber,
+          arrivalDate,
+          departureDate,
+          userID,
+          clearData
+        );
       } else {
-        // Not all fields were completed
-        toast({
-          title: "Missing information!",
-          variant: "destructive",
-          description: `Please complete all the required fields!`,
-        });
+        // Not all fields were completed, display missing info popup
+        missingInfoPopup();
       }
     }
-
-    // clearData();
   };
   const clearData = () => {
+    // Clear all data
     setArrivalDate(undefined);
     setDepartureDate(undefined);
     setGuestsNumber(undefined);
+    inputGuestsNumber.value = "";
+    // Restore button to default
+    bookingSubmitButton.innerText = "Book";
   };
-  let disabledObject = {}
 
   return (
     <div className="z-20 absolute top-[90%] left-1/2 -translate-x-1/2 shadow-md bg-slate-50 font-lora">
@@ -86,8 +75,13 @@ const BookingForm = () => {
           setter={setDepartureDate}
           content="Check out"
         />
-        <InputGuests guests={guestsNumber} setter={setGuestsNumber} />
-        <button className="border border-solid h-9 py-1 px-3 bg-neutral-900 text-slate-50 hover:bg-neutral-800 shadow-sm rounded-md">
+        <InputGuests setter={setGuestsNumber} />
+
+        <button
+          id="BSB"
+          type="submit"
+          className="border border-solid h-9 py-1 px-3 bg-neutral-900 text-slate-50 hover:bg-neutral-800 shadow-sm rounded-md"
+        >
           Book
         </button>
       </form>

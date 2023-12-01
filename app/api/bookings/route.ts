@@ -65,16 +65,16 @@ export async function POST(request: Request) {
   let guestsNumber = searchParams.get("guests");
   let arrivalDate = searchParams.get("arrival");
   let departureDate = searchParams.get("departure");
-  let userID = searchParams.get("userId");
+  let userID = searchParams.get("userID");
   try {
-    if (!guestsNumber || !arrivalDate || !departureDate)
+    if (!guestsNumber || !arrivalDate || !departureDate || !userID)
       throw new Error("All fields are required.");
     else {
       // convert them to correct data type
       const arrDate = new Date(arrivalDate);
       const depDate = new Date(departureDate);
       //@ts-ignore
-      await sql`INSERT INTO bookings (arrival_date, departure_date, guests_number, user_id) VALUES (${arrDate}, ${depDate}, ${guestsNumber}, ${userId});`;
+      await sql`INSERT INTO bookings (arrival_date, departure_date, guests_number, user_id) VALUES (${arrDate}, ${depDate}, ${guestsNumber}, ${userID});`;
     }
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
