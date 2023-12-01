@@ -2,7 +2,7 @@ import { sql } from "@vercel/postgres";
 import { NextResponse } from "next/server";
 
 /**
- * @api {get} api/user/:email Get a specified user id from an email check
+ * @api {get} api/user/:email Get a specified user id from a provided email
  * @apiGroup users
  *
  * @apiParam {email} email User's unique email.

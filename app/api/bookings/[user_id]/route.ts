@@ -2,16 +2,16 @@ import { sql } from "@vercel/postgres";
 import { NextResponse } from "next/server";
 
 /**
- * @api {get} api/bookings/:id Get a specified id booking
+ * @api {get} api/bookings/:user_id Get a specified bookings that are for one user.
  * @apiGroup bookings
  *
- * @apiParam {id} id The booking id.
+ * @apiParam {user_id} user_id The user id for which we retrieve bookings for.
  *
  * @apiSuccess Success-Response:
  *     HTTP/1.1 200 OK
  *     {
  *       "message": "Get individual booking information!",
- *       "booking": {id: number, arrivaldate: string, departuredate: string, guestsnumber: number}
+ *       "bookings": {id: number, arrivaldate: string, departuredate: string, guestsnumber: number}
  *     }
  *
  * @apiError Error-Response:
@@ -23,11 +23,11 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   req: Request,
-  { params }: { params: { booking_id: string } }
+  { params }: { params: { user_id: string } }
 ) {
-  const { booking_id } = params;
-  const { rows } = await sql`SELECT * FROM bookings WHERE booking_id=${booking_id}`;
-
+  const { user_id } = params;
+  const { rows } = await sql`SELECT * FROM bookings WHERE user_id=${user_id}`;
+  console.log(rows)
   if (rows[0]) {
     return NextResponse.json(
       {

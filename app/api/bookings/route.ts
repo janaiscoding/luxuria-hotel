@@ -2,13 +2,9 @@ import { sql } from "@vercel/postgres";
 import { NextResponse } from "next/server";
 
 /**
- * @api {post} api/create-booking Create a new booking
- * @apiName Createbooking
+ * @api {get} api/bookings Get all bookings
+ * @apiName getBookings
  * @apiGroup booking
- *
- * @apiParam {Number} guests booking guest number.
- * @apiParam {String} arrival booking arrival date.
- * @apiParam {String} departure booking deparute date.
  *
  * @apiSuccess Success-Response:
  *     HTTP/1.1 200 OK
@@ -25,6 +21,7 @@ import { NextResponse } from "next/server";
  */
 
 export async function GET(request: Request) {
+
   const { rows } = await sql`SELECT * FROM bookings;`;
   if (rows) {
     return NextResponse.json(

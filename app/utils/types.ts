@@ -4,9 +4,10 @@ type TUser = {
 };
 
 type TBooking = {
-  id: number;
-  arrivaldate: string;
-  departuredate: string;
-  guestsnumber: number;
+  booking_id: number;
+  arrival_date: string;
+  departure_date: string;
+  guests_number: number;
+  user_id: number;
 };
 export type { TUser, TBooking };
