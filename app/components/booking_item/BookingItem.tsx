@@ -1,5 +1,6 @@
 import { TBooking } from "@/app/utils/types";
 import { format } from "date-fns";
+import CloseIcon from "../ui/close-icon";
 
 const BookingItem = ({ booking }: { booking: TBooking }) => {
   const departureDate = format(
@@ -13,12 +14,12 @@ const BookingItem = ({ booking }: { booking: TBooking }) => {
   );
 
   return (
-    <div className="flex gap-1 bg-slate-700 text-slate-50 p-2 rounded-md">
+    <div className="flex gap-1 bg-slate-700 text-slate-50 p-2 rounded-md ">
       <p>
         {arrivalDate} - {departureDate},
       </p>
       <p>for {booking.guests_number} people</p>
-      <p>cancel</p>
+      <CloseIcon />
     </div>
   );
 };

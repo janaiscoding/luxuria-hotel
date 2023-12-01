@@ -17,10 +17,8 @@ const BookingForm = () => {
   const [departureDate, setDepartureDate] = useState<Date | undefined>();
   const [guestsNumber, setGuestsNumber] = useState<number | undefined>();
 
-  const bookingSubmitButton = document.getElementById(
-    "BSB"
-  ) as HTMLButtonElement;
-  const inputGuestsNumber = document.getElementById("IGN") as HTMLInputElement;
+  let bookingSubmitButton: HTMLButtonElement;
+  let inputGuestsNumber: HTMLInputElement;
 
   const handleBook = async (e: SyntheticEvent) => {
     e.preventDefault();
@@ -55,7 +53,10 @@ const BookingForm = () => {
     // Restore button to default
     bookingSubmitButton.innerText = "Book";
   };
-
+  useEffect(() => {
+    bookingSubmitButton = document.getElementById("BSB") as HTMLButtonElement;
+    inputGuestsNumber = document.getElementById("IGN") as HTMLInputElement;
+  }, []);
   return (
     <div className="z-20 absolute top-[90%] left-1/2 -translate-x-1/2 shadow-md bg-slate-50 font-lora">
       <form

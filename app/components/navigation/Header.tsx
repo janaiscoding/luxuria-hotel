@@ -21,7 +21,7 @@ const Header = () => {
     }
   };
   return (
-    <nav className="flex justify-between items-center py-2 sticky top-0 z-50 bg-slate-50 px-4 px-20 shadow-md h-12">
+    <nav className="flex justify-between items-center py-2 sticky top-0 z-50 bg-slate-50 px-4 md:px-20 shadow-md h-12">
       <div
         className="text-xl font-semibold hover:cursor-pointer"
         onClick={handleLogoClick}
