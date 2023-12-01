@@ -14,7 +14,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import AuthComponent from "../authentication/AuthComponent";
+import UserSessionStatus from "../authentication/UserSessionStatus";
 
 const Header = () => {
   const list = [
@@ -24,8 +24,6 @@ const Header = () => {
     { name: "Testimonials", link: "testimonials" },
     { name: "Contact us", link: "contact" },
   ];
-
-  const { data: session } = useSession();
 
   return (
     <nav className="flex justify-between items-center py-2 sticky top-0 z-50 bg-slate-50 px-4 shadow-md h-12">
@@ -40,11 +38,7 @@ const Header = () => {
           </li>
         ))}
       </ul>
-      {session?.user ? (
-        <ProfileClient user={session.user} />
-      ) : (
-        <AuthComponent />
-      )}
+    <UserSessionStatus /> 
     </nav>
   );
 };
