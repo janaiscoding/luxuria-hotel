@@ -1,20 +1,6 @@
 "use client";
-import { SignInResponse, signIn } from "next-auth/react";
-import ProfileClient from "./ProfileClient";
-import { useSession } from "next-auth/react";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Input } from "@/components/ui/input";
-import React, {
-  SetStateAction,
-  SyntheticEvent,
-  useEffect,
-  useState,
-} from "react";
 import UserSessionStatus from "../authentication/UserSessionStatus";
+import { usePathname, useRouter } from "next/navigation";
 
 const Header = () => {
   const list = [
@@ -25,11 +11,23 @@ const Header = () => {
     { name: "Contact us", link: "contact" },
   ];
 
+  const router = useRouter();
+  const pathname = usePathname();
+  const handleLogoClick = () => {
+    if (pathname === "/") {
+      window.scroll(0, 0);
+    } else {
+      router.push("/");
+    }
+  };
   return (
-    <nav className="flex justify-between items-center py-2 sticky top-0 z-50 bg-slate-50 px-4 shadow-md h-12">
-      <a href="/" className="text-xl font-semibold">
+    <nav className="flex justify-between items-center py-2 sticky top-0 z-50 bg-slate-50 px-4 px-20 shadow-md h-12">
+      <div
+        className="text-xl font-semibold hover:cursor-pointer"
+        onClick={handleLogoClick}
+      >
         Luxuria
-      </a>
+      </div>
 
       <ul className="md:flex gap-10 hidden">
         {list.map((el, i) => (
@@ -38,7 +36,7 @@ const Header = () => {
           </li>
         ))}
       </ul>
-    <UserSessionStatus /> 
+      <UserSessionStatus />
     </nav>
   );
 };

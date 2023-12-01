@@ -31,7 +31,7 @@ const Dashboard = () => {
     <main className=" min-h-screen ">
       <div className="flex flex-col min-h-screen justify-between">
         <Header />
-        <div className="max-w-screen-2xl  px-4 overflow-auto">
+        <div className="max-w-7xl  px-4 overflow-auto">
           <h1 className="text-2xl">
             👋 Hello, {session?.user?.name}! Welcome to your profile dashboard!
           </h1>
