@@ -14,12 +14,13 @@ const BookingItem = ({ booking }: { booking: TBooking }) => {
   );
 
   return (
-    <div className="flex gap-1 bg-slate-700 text-slate-50 p-2 rounded-md ">
-      <p>
-        {arrivalDate} - {departureDate},
+    <div className="flex text-center">
+      <p className="border border-slate-800 p-2 basis-full">{arrivalDate}</p>
+      <p className="border border-slate-800 p-2 basis-full">{departureDate}</p>
+      <p className="border border-slate-800 p-2 basis-full">{booking.guests_number} </p>
+      <p className="border border-slate-800 p-2 basis-full hover:cursor-pointer hover:text-orange-600">
+        Cancel
       </p>
-      <p>for {booking.guests_number} people</p>
-      <CloseIcon />
     </div>
   );
 };

@@ -3,9 +3,11 @@
 @tailwind utilities;
 
 
+
 body {
   color: #09090b; /*zinc-950*/
   background: #f8fafc; /*slate-50*/
+  font-family: var(--font-lora);
 }
 
 @layer base {

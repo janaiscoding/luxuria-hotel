@@ -1,12 +1,18 @@
-import type { Metadata } from "next";
-import "./globals.css";
 import { Montserrat, Lora } from "next/font/google";
 import AuthProvider from "./context/AuthProvider";
+import type { Metadata } from "next";
+import "./globals.css";
+
 const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-montserrat",
+  display: "swap",
 });
-const lora = Lora({ subsets: ["latin"], variable: "--font-lora" });
+const lora = Lora({
+  subsets: ["latin"],
+  variable: "--font-lora",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Luxuria Hotel",
@@ -20,8 +26,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={`${lora.variable} ${montserrat.variable} font-lora`}>
+    <html lang="en">
+      <body
+        className={`${lora.variable} ${montserrat.variable} scroll-smooth font-lora`}
+      >
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>

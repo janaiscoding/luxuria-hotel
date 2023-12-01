@@ -16,14 +16,12 @@ const BookingForm = () => {
   const [arrivalDate, setArrivalDate] = useState<Date | undefined>(); // always starts with today
   const [departureDate, setDepartureDate] = useState<Date | undefined>();
   const [guestsNumber, setGuestsNumber] = useState<number | undefined>();
-
-  let bookingSubmitButton: HTMLButtonElement;
-  let inputGuestsNumber: HTMLInputElement;
+  const [buttonText, setButtonText] = useState("Book");
 
   const handleBook = async (e: SyntheticEvent) => {
     e.preventDefault();
     // As soon as the form is submitted, change button innerText so that it displays a loading effect
-    bookingSubmitButton.innerText = "Loading...";
+    setButtonText("Loading...");
     !session && loginPopup();
     if (session && session.user) {
       // Grab user ID from session user email so we can add it to booking (DB Relationship: One to One)
@@ -49,14 +47,12 @@ const BookingForm = () => {
     setArrivalDate(undefined);
     setDepartureDate(undefined);
     setGuestsNumber(undefined);
-    inputGuestsNumber.value = "";
+    //@ts-ignore
+    document.getElementById("IGN").value = "";
     // Restore button to default
-    bookingSubmitButton.innerText = "Book";
+    setButtonText("Book");
   };
-  useEffect(() => {
-    bookingSubmitButton = document.getElementById("BSB") as HTMLButtonElement;
-    inputGuestsNumber = document.getElementById("IGN") as HTMLInputElement;
-  }, []);
+
   return (
     <div className="z-20 absolute top-[90%] left-1/2 -translate-x-1/2 shadow-md bg-slate-50 font-lora">
       <form
@@ -83,7 +79,7 @@ const BookingForm = () => {
           type="submit"
           className="border border-solid h-9 py-1 px-3 bg-neutral-900 text-slate-50 hover:bg-neutral-800 shadow-sm rounded-md"
         >
-          Book
+          {buttonText}
         </button>
       </form>
     </div>
