@@ -1,5 +1,5 @@
 "use client";
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import { DatePickerStart } from "./DatePickerStart";
 import { InputGuests } from "./InputGuests";
 import { useToast } from "@/components/ui/use-toast";
@@ -39,7 +39,7 @@ const BookingForm = () => {
           }
            // create github acc 
            //@ts-ignore
-           saveGithubAcctoDb(session.user!.name, session.user!.email, setUserId);
+
 
         })
         .catch((err) => {
@@ -65,6 +65,8 @@ const BookingForm = () => {
     setDepartureDate(undefined);
     setGuestsNumber(undefined);
   };
+  let disabledObject = {}
+
   return (
     <div className="z-20 absolute top-[90%] left-1/2 -translate-x-1/2 shadow-md bg-slate-50 font-lora">
       <form

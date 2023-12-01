@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 
@@ -13,7 +12,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { DateBefore, DateInterval, DateRange } from "react-day-picker";
+import { useEffect, useState } from "react";
 
 export function DatePickerStart({
   date,
@@ -28,12 +27,7 @@ export function DatePickerStart({
 }) {
   // If end date isn't provided, we just can't select days before today
   // If end date is provided, we can only pick days from today to end
-  const disabledMatcher = end
-    ? {
-        after: end,
-        before: new Date(),
-      }
-    : { before: new Date() };
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -50,7 +44,14 @@ export function DatePickerStart({
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
         <Calendar
-          disabled={disabledMatcher}
+          disabled={
+            end
+              ? {
+                  before: new Date(), // anything before today (can't book in the past obviously)
+                  after: end,
+                }
+              : { before: new Date() }
+          }
           mode="single"
           selected={date}
           onSelect={setter}
