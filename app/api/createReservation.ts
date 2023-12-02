@@ -25,12 +25,13 @@ const createReservation = (
           variant: "success",
           description: `Your reservation for ${guests} was placed successfully.`,
         });
-        handleSuccess()
+        handleSuccess();
       } else {
         serverErrorPopup();
       }
     })
-    .catch(() => {
+    .catch((err) => {
+      // console.log(err);
       serverErrorPopup();
     });
 };
