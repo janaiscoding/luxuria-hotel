@@ -13,13 +13,11 @@ import deleteBooking from "../api/deleteBooking";
 const Dashboard = () => {
   const { data: session } = useSession();
   const [bookings, setBookings] = useState<TBooking[]>([] as TBooking[]);
-  const [userID, setUserID] = useState<number | undefined>();
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchBookings = async () => {
     const userID = await getUserIdFromEmail(session!.user!.email!);
     if (userID) {
-      setUserID(userID);
       getUsersBookings(userID, setBookings);
       setIsLoading(false);
     }
@@ -27,6 +25,7 @@ const Dashboard = () => {
 
   const onDelete = (id: number) => {
     deleteBooking(id);
+    fetchBookings();
   };
   useEffect(() => {
     if (session && session.user) {
@@ -41,7 +40,7 @@ const Dashboard = () => {
         <div className="flex flex-col gap-6">
           <Header />
           <div className="max-w-7xl md:w-1/2 self-center h-full px-4 py-10 overflow-auto self-center basis-full flex flex-col gap-2">
-            <h1 className="text-2xl">
+            <h1 className="text-xl w-full">
               👋 Hello, {session?.user?.name}! Here you can see your bookings
             </h1>
             <div className="flex flex-col">
@@ -62,7 +61,6 @@ const Dashboard = () => {
                   <BookingItem
                     key={booking.booking_id}
                     booking={booking}
-                    sessionUser={userID}
                     onDelete={onDelete}
                   />
                 ))}
