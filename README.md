@@ -4,11 +4,9 @@ Full-stack hotel acommodation booking website
 
 ## Tech stack
 
-Next.js | TypeScript | PostgreSQL | NextAuth.js | React | Jest Testing Library | TailwindCSS | shadcn/ui |  
+Next.js | TypeScript | PostgreSQL | NextAuth.js | React | Jest Testing Library | TailwindCSS | shadcn/ui |
 
 ## API Reference
-
-
 
 ## Tasks
 
@@ -23,16 +21,18 @@ Next.js | TypeScript | PostgreSQL | NextAuth.js | React | Jest Testing Library |
 - [x] add hashing and comparing hashing with bcryptjs for newly created users
 - [x] create user dashboard to see their own bookings
 - [x] link session user to booking post requests
-- [x] added navigation on mobile 
+- [x] added navigation on mobile
 - [x] added bookings to current user dashboard
 - [x] added information about rooms being under construction
 - [x] fix homescreen button not having smooth-scrolling
 - [ ] move github project pointing to localhost to point to normal app url
-- [ ] allow users to delete their records 
-- [ ] add maybe sorting posibilities on each row column 
+- [x] allow users to delete their records
+  - for this, i had to validate user session to be correct on the client and server in order to allow deletion
+  - i get my auth session, and i only delete the same record where the booking id matches with the user id taken from session user email
+  
+- [ ] add maybe sorting posibilities on each row column
 - [ ] pop-up for booking form on mobile maybe an ui element that opens up from bottom
 - [ ] think about rooms structure, will i allow users to push to rooms db / will i make a db / do i create pages for each room etc.
-- [x] user page with history and room and possibility to update (?) the reservation 
+- [x] user page with history and room and possibility to update (?) the reservation
 
 ### Useful links for this project
-
