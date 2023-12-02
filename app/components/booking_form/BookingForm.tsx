@@ -71,7 +71,7 @@ const BookingForm = () => {
         onSubmit={(e) => handleBook(e)}
         className="hidden md:flex flex-col gap-2 p-10 shadow-md"
       >
-        <legend className="text-zinc-700">Place a booking now, fast, easy, secure!</legend>
+        {/* <legend className="text-zinc-700">Place a booking now, fast, easy, secure!</legend> */}
         <div className="flex gap-1 items-center justify-center">
           <DatePickerStart
             date={arrivalDate}

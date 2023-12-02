@@ -27,7 +27,7 @@ export async function GET(
 ) {
   const { user_id } = params;
   const { rows } = await sql`SELECT * FROM bookings WHERE user_id=${user_id}`;
-  console.log(rows)
+
   if (rows[0]) {
     return NextResponse.json(
       {
@@ -42,3 +42,4 @@ export async function GET(
     { status: 404 }
   );
 }
+

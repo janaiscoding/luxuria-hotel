@@ -1,5 +1,7 @@
 import { sql } from "@vercel/postgres";
+import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
+import { options } from "../auth/[...nextauth]/options";
 
 /**
  * @api {get} api/bookings Get all bookings
@@ -21,7 +23,6 @@ import { NextResponse } from "next/server";
  */
 
 export async function GET(request: Request) {
-
   const { rows } = await sql`SELECT * FROM bookings;`;
   if (rows) {
     return NextResponse.json(
@@ -81,4 +82,54 @@ export async function POST(request: Request) {
     { message: "Your booking was created!" },
     { status: 201 }
   );
+}
+
+/**
+ * @api {delete} api/bookings/?id=id Delete a booking, protected route serverside
+ * @apiName deleteBooking
+ * @apiGroup booking
+ *
+ * @apiParam {id} id booking_id to be deleted
+ *
+ * @apiSuccess Success-Response:
+ *     HTTP/1.1 202 ACCEPTED
+ *     {
+ *       "message": "The booking was successfully canceled."
+ *     }
+ *
+ * @apiError Error-Response:
+ *    HTTP/1.1 500 Internal Server Error
+ *    {
+ *      "error": "The booking id was not provided."
+ *    }
+ */
+
+export async function DELETE(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const session = await getServerSession();
+  if (session) {
+    // Is signed in
+    let id = searchParams.get("id");
+    try {
+      if (!id) throw new Error("The booking id was not provided.");
+      else {
+        // Session user must match the booking user_id
+        // this way we only get userID from auth session
+        await sql`DELETE 
+        FROM bookings 
+        WHERE user_id = (SELECT user_id FROM users WHERE email = ${session.user?.email}) 
+        AND bookings.booking_id=${id};`;
+
+        return NextResponse.json(
+          { message: "The booking was successfully canceled." },
+          { status: 202 }
+        );
+      }
+    } catch (error) {
+      return NextResponse.json({ error }, { status: 500 });
+    }
+  } else {
+    // Not Signed in
+    NextResponse.json({ status: 401 });
+  }
 }
