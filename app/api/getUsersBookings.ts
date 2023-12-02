@@ -5,7 +5,7 @@ const getUsersBookings = (
   userID: number,
   setter: React.Dispatch<SetStateAction<TBooking[]>>
 ) => {
-  fetch(`/api/bookings/?user_id=${userID}`, {
+  fetch(`/api/users/${userID}/bookings`, {
     method: "GET",
   })
     .then((res) => res.json())

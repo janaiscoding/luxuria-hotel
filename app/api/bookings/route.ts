@@ -106,10 +106,12 @@ export async function POST(request: Request) {
 
 export async function DELETE(request: Request) {
   const { searchParams } = new URL(request.url);
+  let id = searchParams.get("id");
   const session = await getServerSession();
-  if (session) {
-    // Is signed in
-    let id = searchParams.get("id");
+  // Not signed in
+  if (!session) NextResponse.json({ status: 401 });
+  // Is signed in
+  else {
     try {
       if (!id) throw new Error("The booking id was not provided.");
       else {
@@ -117,6 +119,37 @@ export async function DELETE(request: Request) {
         // this way we only get userID from auth session
         await sql`DELETE 
         FROM bookings 
+        WHERE user_id = (SELECT user_id FROM users WHERE email = ${session.user?.email}) 
+        AND bookings.booking_id=${id};`;
+
+        return NextResponse.json(
+          { message: "The booking was successfully canceled." },
+          { status: 202 }
+        );
+      }
+    } catch (error) {
+      return NextResponse.json({ error }, { status: 500 });
+    }
+  }
+}
+
+export async function PUT(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const session = await getServerSession();
+  if (session) {
+    // Is signed in
+    // Field names in booking form
+    let guestsNumber = searchParams.get("guests");
+    let arrivalDate = searchParams.get("arrival");
+    let departureDate = searchParams.get("departure");
+    let userID = searchParams.get("userID");
+    try {
+      if (!id) throw new Error("The booking id was not provided.");
+      else {
+        // Session user must match the booking user_id
+        // this way we only get userID from auth session
+        await sql`UPDATE bookings 
+        SET guests_number=${guests}
         WHERE user_id = (SELECT user_id FROM users WHERE email = ${session.user?.email}) 
         AND bookings.booking_id=${id};`;
 
