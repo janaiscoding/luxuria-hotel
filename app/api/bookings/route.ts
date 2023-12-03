@@ -1,7 +1,7 @@
 import { sql } from "@vercel/postgres";
+import { NextApiRequest } from "next";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
-import { options } from "../auth/[...nextauth]/options";
 
 /**
  * @api {get} api/bookings Get all bookings
@@ -22,19 +22,19 @@ import { options } from "../auth/[...nextauth]/options";
  *    }
  */
 
-export async function GET(request: Request) {
-  const { rows } = await sql`SELECT * FROM bookings;`;
-  if (rows) {
-    return NextResponse.json(
-      { message: "All bookings were retrieved!", bookings: rows },
-      { status: 200 }
-    );
-  }
-  return NextResponse.json(
-    { error: "An unexpected database error has occured." },
-    { status: 500 }
-  );
-}
+// export async function GET() {
+//   const { rows } = await sql`SELECT * FROM bookings;`;
+//   if (rows) {
+//     return NextResponse.json(
+//       { message: "All bookings were retrieved!", bookings: rows },
+//       { status: 200 }
+//     );
+//   }
+//   return NextResponse.json(
+//     { error: "An unexpected database error has occured." },
+//     { status: 500 }
+//   );
+// }
 
 /**
  * @api {post} api/bookings Create a new booking
@@ -57,31 +57,38 @@ export async function GET(request: Request) {
  *      "error": "Database error."
  *    }
  */
-export async function POST(request: Request) {
-  const { searchParams } = new URL(request.url);
-  // Field names in booking form
-  let guestsNumber = searchParams.get("guests");
-  let arrivalDate = searchParams.get("arrival");
-  let departureDate = searchParams.get("departure");
-  let userID = searchParams.get("userID");
+
+export async function POST(req: Request) {
+  // https://dev.to/iambstha/http-get-post-request-in-nextjs-stable-app-router-557m
+  const { guestsNumber, arrivalDate, departureDate } = await req.json();
+  const session = await getServerSession();
+  if (!session) {
+    // Throw a please sign in notification
+    return NextResponse.json({ error: "Please sign in." }, { status: 401 });
+  }
   try {
-    if (!guestsNumber || !arrivalDate || !departureDate || !userID)
+    if (!guestsNumber || !arrivalDate || !departureDate)
       throw new Error("All fields are required.");
     else {
-      // convert them to correct data type
-      const arrDate = new Date(arrivalDate);
-      const depDate = new Date(departureDate);
+      // Convert dates to correct data type for storing in db
+      const arrival = new Date(arrivalDate);
+      const departure = new Date(departureDate);
+
+      // Get user ID from session.user.email
+      const { rows } =
+        await sql`SELECT user_id FROM users WHERE email=${session.user?.email}`;
+      const userID = rows[0].user_id;
+
       //@ts-ignore
-      await sql`INSERT INTO bookings (arrival_date, departure_date, guests_number, user_id) VALUES (${arrDate}, ${depDate}, ${guestsNumber}, ${userID});`;
+      await sql`INSERT INTO bookings (arrival_date, departure_date, guests_number, user_id) VALUES (${arrival}, ${departure}, ${guestsNumber}, ${userID});`;
+      return NextResponse.json(
+        { message: "Your booking was created!" },
+        { status: 201 }
+      );
     }
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
   }
-
-  return NextResponse.json(
-    { message: "Your booking was created!" },
-    { status: 201 }
-  );
 }
 
 /**
@@ -136,20 +143,22 @@ export async function DELETE(request: Request) {
 export async function PUT(request: Request) {
   const { searchParams } = new URL(request.url);
   const session = await getServerSession();
+  // Field names in booking form
+  let id = searchParams.get("id");
+  let guestsNumber = searchParams.get("guests");
+  let arrivalDate = searchParams.get("arrival");
+  let departureDate = searchParams.get("departure");
+
   if (session) {
     // Is signed in
-    // Field names in booking form
-    let guestsNumber = searchParams.get("guests");
-    let arrivalDate = searchParams.get("arrival");
-    let departureDate = searchParams.get("departure");
-    let userID = searchParams.get("userID");
+
     try {
       if (!id) throw new Error("The booking id was not provided.");
       else {
         // Session user must match the booking user_id
         // this way we only get userID from auth session
         await sql`UPDATE bookings 
-        SET guests_number=${guests}
+        SET guests_number=${guestsNumber}
         WHERE user_id = (SELECT user_id FROM users WHERE email = ${session.user?.email}) 
         AND bookings.booking_id=${id};`;
 

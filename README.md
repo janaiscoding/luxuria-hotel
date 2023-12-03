@@ -6,7 +6,10 @@ Full-stack hotel acommodation booking website
 
 Next.js | TypeScript | PostgreSQL | NextAuth.js | React | Jest Testing Library | TailwindCSS | shadcn/ui |
 
-## API Reference
+## REST API Reference
+
+- `POST` `/api/bookings` `(created a new hotel booking)` `body: { guests, arrivalDate, departureDate }` `server-side session protected`
+- `DELETE` `/api/bookings/:id` (deletes an existing booking)
 
 ## Tasks
 
@@ -30,8 +33,8 @@ Next.js | TypeScript | PostgreSQL | NextAuth.js | React | Jest Testing Library |
   - for this, i had to validate user session to be correct on the client and server in order to allow deletion
   - i get my auth session, and i only delete the same record where the booking id matches with the user id taken from session user email
 - [] reworking endpoints
-    - must secure all of them server side 
-    - users/id/bookings doesnt work
+  - must secure all of them server side
+  - users/id/bookings doesnt work
 - [ ] add maybe sorting posibilities on each row column
 - [ ] pop-up for booking form on mobile maybe an ui element that opens up from bottom
 - [ ] think about rooms structure, will i allow users to push to rooms db / will i make a db / do i create pages for each room etc.

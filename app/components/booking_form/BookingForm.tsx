@@ -1,58 +1,48 @@
 "use client";
-import { SyntheticEvent, useEffect, useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import { DatePickerStart } from "./DatePickerStart";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-
 import { DatePickerEnd } from "./DatePickerEnd";
 import createReservation from "@/app/api/createReservation";
-import { useSession } from "next-auth/react";
-import getUserIdFromEmail from "@/app/api/getUserId";
-import loginPopup from "../popups/loginPopup";
 import missingInfoPopup from "../popups/missingInfoPopup";
+import SelectorGuests from "./SelectorGuests";
 
 const BookingForm = () => {
-  const { data: session } = useSession();
+  // UI Helpers
+  // To be able to force a re-render on selector group so that it goes back to default showing placeholder value
+  //https://github.com/radix-ui/primitives/issues/1569#issuecomment-1434801848 solution found here
+  const [key, setKey] = useState<number>(+new Date());
+  const [buttonText, setButtonText] = useState("Book");
 
+  // Mandatory form data
   const [arrivalDate, setArrivalDate] = useState<Date | undefined>(); // always starts with today
   const [departureDate, setDepartureDate] = useState<Date | undefined>();
   const [guestsNumber, setGuestsNumber] = useState<number | undefined>();
-  const [key, setKey] = useState<number>(+new Date()); // To be able to force a re-render on selector group so that it goes back to default showing placeholder value
-  //https://github.com/radix-ui/primitives/issues/1569#issuecomment-1434801848 solution found here
-  const [buttonText, setButtonText] = useState("Book");
 
   const handleBook = async (e: SyntheticEvent) => {
     e.preventDefault();
     // As soon as the form is submitted, change button innerText so that it displays a loading effect
     setButtonText("Loading...");
-    !session && loginPopup();
-    if (session && session.user) {
-      // Grab user ID from session user email so we can add it to booking (DB Relationship: One to One)
-      const userID = await getUserIdFromEmail(session.user.email!);
-      // Only if all info was provided, call the reservation API endpoint. Fetching is abstracted within the createReservation function
-      if (guestsNumber && arrivalDate && departureDate && userID) {
-        // Will create reservation, display success/error message and clear data on success.
-        createReservation(
-          guestsNumber,
-          arrivalDate,
-          departureDate,
-          userID,
-          clearData
-        );
-        clearData();
-      } else {
-        // Not all fields were completed, display missing info popup
-        missingInfoPopup();
-      }
+    // Will create reservation, display success/error message and clear data on success.
+    if (guestsNumber && arrivalDate && departureDate) {
+      // Create a booking obj which will be sent to req.body by using JSON.stringify
+      const bookingObj = {
+        guestsNumber,
+        arrivalDate,
+        departureDate,
+      };
+      // This is protected server side, which means that only signed in users are able to make bookings, but that's checked on the server
+      createReservation(bookingObj, clearData);
+      // Adding this in case of session error, it won't clean the form fields but it will stop the btn from showing loading state
+      setButtonText("Book");
+    } else {
+      // Not all fields were completed, display missing info popup
+      missingInfoPopup();
+      // Revert book btn back to default
+      setButtonText("Book");
     }
   };
   const clearData = () => {
-    // Clear all data
+    // Clear all form data
     setArrivalDate(undefined);
     setDepartureDate(undefined);
     setGuestsNumber(undefined);
@@ -60,7 +50,7 @@ const BookingForm = () => {
     setGuestsNumber(undefined);
     // Restore button to default
     setButtonText("Book");
-    // Force re-render for selector group
+    // Force re-render for selector group to show placeholder again
     setKey(+new Date());
   };
 
@@ -85,30 +75,11 @@ const BookingForm = () => {
             setter={setDepartureDate}
             content="Check out"
           />
-          <Select
-            key={key}
-            value={guestsNumber?.toString()}
-            onValueChange={(value) => setGuestsNumber(parseInt(value))}
-          >
-            <SelectTrigger className="w-[280px] text-muted-foreground hover:text-accent-foreground">
-              <SelectValue placeholder="Persons" />
-            </SelectTrigger>
-            <SelectContent className="hover:cursor-pointer">
-              <SelectItem value="1" className="hover:cursor-pointer">
-                1 person
-              </SelectItem>
-              <SelectItem value="2" className="hover:cursor-pointer">
-                2 persons
-              </SelectItem>
-              <SelectItem value="3" className="hover:cursor-pointer">
-                3 persons
-              </SelectItem>
-              <SelectItem value="4" className="hover:cursor-pointer">
-                4 persons
-              </SelectItem>
-            </SelectContent>
-          </Select>
-
+          <SelectorGuests
+            myKey={key}
+            guestsNumber={guestsNumber}
+            setter={setGuestsNumber}
+          />
           <button
             id="BSB"
             type="submit"
