@@ -1,18 +1,80 @@
 # Luxuria Hotel
 
-Full-stack hotel acommodation booking website
+Full-stack hotel acommodation booking website with authentication
 
 ## Tech stack
 
-Next.js | TypeScript | PostgreSQL | NextAuth.js | React | Jest Testing Library | TailwindCSS | shadcn/ui |
+Next.js | TypeScript | PostgreSQL | NextAuth.js | React | Jest Testing Library | TailwindCSS | shadcn/ui
 
-## REST API Reference
+# REST API Documentation
 
-- `GET` `/api/bookings` (get all existing bookings) `protected. session-specific. will only fetch signed in user's bookings`
+### Create a new user: `POST` `/api/users` `body: {name, email, password}`
+
+Not a protected route. Checks for valid unique email. Will hash the user password before storing to the database table.
+
+<details>
+
+<summary>API Response Examples</summary>
+
+Success Response
+
+```js
+HTTP/1.1 201 Created
+  {
+    "message": "Your account was created successfully!"
+  }
+```
+
+Error Response
+
+```js
+
+HTTP/1.1 500 Internal Server Error
+  {
+    "error": "An unexpected error has occured."
+  }
+
+HTTP/1.1 400 Bad Request
+  {
+    "error": "An account with this email already exists."
+  }
+```
+
+</details>
+
+### Bookings
+
+- `GET` `/api/bookings` `(get all existing bookings)` `protected. session-specific. will only fetch signed in user's bookings`
 - `POST` `/api/bookings` `(created a new hotel booking)` `body: { guests, arrivalDate, departureDate }` `server-side session protected`
-- `DELETE` `/api/bookings/:id` (deletes an existing booking) `protected`
+- `DELETE` `/api/bookings/:id` `(deletes an existing booking)` `server-side session protected`
 
-## Tasks
+# Getting started and Installation
+
+`git clone git@github.com:janaiscoding/luxuria-hotel.git`
+
+`cd luxuria-hotel`
+
+`npm install`
+
+Create a `.env.local` file at the root of the directory and complete it as per the following instructions:
+
+```
+# Database setup - Follow this link https://vercel.com/docs/storage/vercel-postgres/quickstart
+# You will need a Vercel account, you will have to create the project in your dashboard, and create the SQL storage
+
+# NextAuth.js Authentication setup will look like this
+NEXTAUTH_URL=http://localhost:3000
+
+Reference for OAuth provider with GitHub setup: https://next-auth.js.org/providers/github if you want to use the GitHub button
+GITHUB_ID=yourgithubappid
+GITHUB_SECRET=yourgithubappsecret
+
+Create a new account and store it here if you want to use the demo button
+NEXT_PUBLIC_DEMO_EMAIL=youremail
+NEXT_PUBLIC_DEMO_PASSWORD=yourpassword
+```
+
+## My ToDo list and notes while developing.
 
 - [x] add postgresql backend to nextjs
 - [x] create bookings table

@@ -50,7 +50,7 @@ export async function POST(req: Request) {
   }
   // Everything is ok, can create new account
   try {
-    // Hash password for storing in db
+    // Hash password for storing in sb
     const hashed = await bcryptjs.hash(password, 10);
     await sql`INSERT INTO users (name, email, password) VALUES ( ${name}, ${email}, ${hashed});`;
     return NextResponse.json(
