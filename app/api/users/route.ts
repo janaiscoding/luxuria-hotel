@@ -1,42 +1,6 @@
 import { sql } from "@vercel/postgres";
 import { NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
-
-/**
- * @api {get} api/users Get all users
- * @apiName getUsers
- * @apiGroup users
- *
- *
- * @apiSuccess Success-Response:
- *     HTTP/1.1 200 OK
- *     {
- *        message: "All users were retrieved!",
- *        users: [] as User[];
- *     }
- *
- * @apiError Error-Response:
- *    HTTP/1.1 500 Internal Server Error
- *    {
- *      "error": "An unexpected error has occured."
- *    }
- *
- */
-
-export async function GET(request: Request) {
-  const { rows: users } = await sql`SELECT name, email FROM users;`;
-  if (users)
-    return NextResponse.json(
-      { message: "All users were retrieved!", users },
-      { status: 200 }
-    );
-
-  return NextResponse.json(
-    { error: "An unexpected error has occured." },
-    { status: 500 }
-  );
-}
-
 /**
  * @api {post} api/users Create a new user
  * @apiName createUser
@@ -65,36 +29,34 @@ export async function GET(request: Request) {
  *    }
  */
 
-export async function POST(request: Request) {
-  const { searchParams } = new URL(request.url);
+export async function POST(req: Request) {
+  const { name, email, password } = await req.json();
+  console.log(name, email, password);
+  if (!name || !email || !password) {
+    return NextResponse.json(
+      { error: "Please complete all required fields." },
+      { status: 404 }
+    );
+  }
 
-  const email = searchParams.get("email");
-  const password = searchParams.get("password");
-  const name = searchParams.get("name");
-
+  // Checks for valid, unique email
+  const { rows: uniqueEmail } =
+    await sql`SELECT email FROM users WHERE email=${email}`;
+  if (uniqueEmail.length > 0) {
+    return NextResponse.json(
+      { error: "An account with this email already exists." },
+      { status: 500 }
+    );
+  }
+  // Everything is ok, can create new account
   try {
-    if (email && name && password) {
-      // Make sure emails are unique. If there are any found, a 400 will be sent.
-      const { rows: uniqueEmail } =
-        await sql`SELECT email FROM users WHERE email=${email}`;
-      if (uniqueEmail.length > 0) {
-        return NextResponse.json(
-          { error: "An account with this email already exists." },
-          { status: 500 }
-        );
-      } else {
-        // Everything is valid, now I have to has the pw and create the user
-        const hashed = await bcryptjs.hash(password, 10);
-        if (hashed) {
-          await sql`INSERT INTO users (name, email, password) VALUES ( ${name}, ${email}, ${hashed});`;
-        }
-        const user = await sql`SELECT user_id, name, email FROM users WHERE email=${email}`
-        return NextResponse.json(
-          { message: "Your account was created successfully!", user },
-          { status: 201 }
-        );
-      }
-    }
+    // Hash password for storing in db
+    const hashed = await bcryptjs.hash(password, 10);
+    await sql`INSERT INTO users (name, email, password) VALUES ( ${name}, ${email}, ${hashed});`;
+    return NextResponse.json(
+      { message: "Your account was created successfully!" },
+      { status: 201 }
+    );
   } catch (err) {
     return NextResponse.json(
       { error: "An unexpected error has occured.", err },

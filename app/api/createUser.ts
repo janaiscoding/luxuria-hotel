@@ -1,11 +1,18 @@
 import { toast } from "@/components/ui/use-toast";
 
 const createUser = (name: string, email: string, password: string) => {
-  fetch(`/api/users/?name=${name}&email=${email}&password=${password}`, {
+  const userObj = { name, email, password };
+  
+  fetch(`/api/users`, {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userObj),
   })
     .then((res) => res.json())
     .then((data) => {
+      console.log(data);
       if (data.error) {
         toast({
           title: data.error,

@@ -2,7 +2,7 @@
 import { SyntheticEvent, useState } from "react";
 import { DatePickerStart } from "./DatePickerStart";
 import { DatePickerEnd } from "./DatePickerEnd";
-import createReservation from "@/app/api/createReservation";
+import createBooking from "@/app/api/createBooking";
 import missingInfoPopup from "../popups/missingInfoPopup";
 import SelectorGuests from "./SelectorGuests";
 
@@ -31,7 +31,7 @@ const BookingForm = () => {
         departureDate,
       };
       // This is protected server side, which means that only signed in users are able to make bookings, but that's checked on the server
-      createReservation(bookingObj, clearData);
+      createBooking(bookingObj, clearData);
       // Adding this in case of session error, it won't clean the form fields but it will stop the btn from showing loading state
       setButtonText("Book");
     } else {

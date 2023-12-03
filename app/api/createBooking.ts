@@ -2,7 +2,7 @@ import { toast } from "@/components/ui/use-toast";
 import serverErrorPopup from "../components/popups/serverErrorPopup";
 import loginPopup from "../components/popups/loginPopup";
 
-const createReservation = (
+const createBooking = (
   bookingObj: {
     guestsNumber: number;
     arrivalDate: Date;
@@ -37,4 +37,4 @@ const createReservation = (
       console.log(err);
     });
 };
-export default createReservation;
+export default createBooking;

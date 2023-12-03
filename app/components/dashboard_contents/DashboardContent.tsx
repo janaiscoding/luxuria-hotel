@@ -11,9 +11,8 @@ const DashboardContent = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchBookings = async () => {
-    const data = await getBookings();
-    setBookings(data);
-    setIsLoading(false);
+    const userBookings = await getBookings();
+    setBookings(userBookings);
   };
 
   const onDelete = (id: number) => {
@@ -22,8 +21,10 @@ const DashboardContent = () => {
   };
 
   useEffect(() => {
-    // When first loading
+    // When first loading, fetch the bookings
     fetchBookings();
+    // Stop the loading effect
+    setIsLoading(false);
   }, []);
 
   return (
