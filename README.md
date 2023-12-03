@@ -6,13 +6,17 @@ Full-stack hotel acommodation booking website with authentication
 
 Next.js | TypeScript | PostgreSQL | NextAuth.js | React | Jest Testing Library | TailwindCSS | shadcn/ui
 
-# REST API Endpoints
+# API Documentation
 
 ## Users
 
-### `POST` `/api/users`
+### `POST api/users`
 
-Create a new user. Checks for valid unique email. Will hash the user password before storing to the database table. `body: {name, email, password}`
+> Create a new user. Checks for valid unique email. Will hash the user password before storing to the database table.
+
+| API Endpoint | HTTP Method | Request Body JSON     |
+| :----------- | :---------- | :-------------------- |
+| /api/users   | POST        | name, email, password |
 
 Success Response
 
@@ -23,26 +27,15 @@ HTTP/1.1 201 Created
   }
 ```
 
-Error Response
-
-```js
-
-HTTP/1.1 500 Internal Server Error
-  {
-    "error": "An unexpected error has occured."
-  }
-
-HTTP/1.1 400 Bad Request
-  {
-    "error": "An account with this email already exists."
-  }
-```
-
 ## Bookings
 
 ### `GET` `/api/bookings`
 
-This is a server protected route. Will fetch session user's bookings.
+> Fetch session user's bookings. This is a server protected route.
+
+| API Endpoint  | HTTP Method |
+| :------------ | :---------- |
+| /api/bookings | GET         |
 
 Success Response
 
@@ -62,24 +55,13 @@ HTTP/1.1 200 OK
   }
 ```
 
-Error Response
-
-```js
-
-HTTP/1.1 401 Unauthorized
-  {
-    "error": "Unauthorized. Please sign in."
-  }
-
-HTTP/1.1 500 Internal Server Error
-  {
-    "error": "Database error message."
-  }
-```
-
 ### `POST` `/api/bookings`
 
-This is a server protected route. Will use the user's session to create a new booking. `body: { guestsNumber, arrivalDate, departureDate }`
+> Create a new booking. This is a server protected route. Will use the user's session.`
+
+| API Endpoint  | HTTP Method | Request Body JSON                        |
+| :------------ | :---------- | :--------------------------------------- |
+| /api/bookings | POST        | guestsNumber, arrivalDate, departureDate |
 
 ```js
 HTTP/1.1 201 Created
@@ -88,28 +70,13 @@ HTTP/1.1 201 Created
   }
 ```
 
-Error Response
-
-```js
-HTTP/1.1 400 Bad Request
-  {
-    "error": "Please complete all the fields."
-  }
-
-HTTP/1.1 401 Unauthorized
-  {
-    "error": "Unauthorized. Please sign in."
-  }
-
-HTTP/1.1 500 Internal Server Error
-  {
-    "error": "Database error message."
-  }
-```
-
 ### `DELETE` `/api/bookings/:id`
 
-This is a server protected route. Will use the user's session to delete a booking that matches the id and user_id. `params: id`
+> Delete a booking. This is a server protected route. Will use the user's session to match user_id and booking_id.
+
+| API Endpoint      | HTTP Method | Request Params |
+| :---------------- | :---------- | :------------- |
+| /api/bookings/:id | DELETE      | id             |
 
 ```js
 HTTP/1.1 202 Accepted
@@ -117,22 +84,6 @@ HTTP/1.1 202 Accepted
     "message": "The booking was successfully canceled."
   }
 ```
-
-Error Response
-
-```js
-HTTP/1.1 401 Unauthorized
-  {
-    "error": "Unauthorized. Please sign in."
-  }
-
-HTTP/1.1 500 Internal Server Error
-  {
-    "error": "An unexpected error has occured.", 
-    "err"
-  }
-```
-
 
 # Getting started and Installation
 
@@ -146,7 +97,7 @@ Create a `.env.local` file at the root of the directory and complete it as per t
 
 ```
 # Database setup - Follow this link https://vercel.com/docs/storage/vercel-postgres/quickstart
-# You will need a Vercel account, you will have to create the project in your dashboard, and create the SQL storage
+# You will need a Vercel account in order to create the project and the SQL storage
 
 # NextAuth.js Authentication setup will look like this
 NEXTAUTH_SECRET=yoursecret https://next-auth.js.org/configuration/options#nextauth_secret
@@ -182,9 +133,8 @@ NEXT_PUBLIC_DEMO_PASSWORD=yourpassword
 - [x] allow users to delete their records
   - for this, i had to validate user session to be correct on the client and server in order to allow deletion
   - i get my auth session, and i only delete the same record where the booking id matches with the user id taken from session user email
-- [] reworking endpoints
+- [ ] reworking endpoints
   - must secure all of them server side
-  - users/id/bookings doesnt work
 - [ ] add maybe sorting posibilities on each row column
 - [ ] pop-up for booking form on mobile maybe an ui element that opens up from bottom
 - [ ] think about rooms structure, will i allow users to push to rooms db / will i make a db / do i create pages for each room etc.
