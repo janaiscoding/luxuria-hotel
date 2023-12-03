@@ -1,22 +1,22 @@
-# Luxuria Hotel
+# 🏨 Luxuria Hotel
 
 Full-stack hotel acommodation booking website with authentication
 
-## Tech stack
+## 🧰 Built with
 
-Next.js | TypeScript | PostgreSQL | NextAuth.js | React | Jest Testing Library | TailwindCSS | shadcn/ui
+[![My Skills](https://skillicons.dev/icons?i=ts,react,nextjs,postgres,jest,postman,tailwind)](https://skillicons.dev)
 
-# API Documentation
+`TypeScript | React | Next.js | PostgreSQL | Jest Testing Library | Postman | TailwindCSS`
 
-## Users
+## 🧑‍🤝‍🧑 Users
 
 ### `POST api/users`
 
-> Create a new user. Checks for valid unique email. Will hash the user password before storing to the database table.
+> Create a new user. Hashing the password before storing.
 
-| API Endpoint | HTTP Method | Request Body JSON     |
-| :----------- | :---------- | :-------------------- |
-| /api/users   | POST        | name, email, password |
+| API Endpoint  | HTTP Method | Request Body JSON       |
+| :------------ | :---------: | :---------------------- |
+| ` /api/users` |   `POST`    | `name, email, password` |
 
 Success Response
 
@@ -27,15 +27,15 @@ HTTP/1.1 201 Created
   }
 ```
 
-## Bookings
+## 📚 Bookings
 
 ### `GET` `/api/bookings`
 
-> Fetch session user's bookings. This is a server protected route.
+> Fetch session user's bookings.
 
-| API Endpoint  | HTTP Method |
-| :------------ | :---------- |
-| /api/bookings | GET         |
+| API Endpoint    | HTTP Method | Protected |
+| :-------------- | :---------: | :-------: |
+| `/api/bookings` |    `GET`    |    ✅     |
 
 Success Response
 
@@ -57,11 +57,11 @@ HTTP/1.1 200 OK
 
 ### `POST` `/api/bookings`
 
-> Create a new booking. This is a server protected route. Will use the user's session.`
+> Create a new booking
 
-| API Endpoint  | HTTP Method | Request Body JSON                        |
-| :------------ | :---------- | :--------------------------------------- |
-| /api/bookings | POST        | guestsNumber, arrivalDate, departureDate |
+| API Endpoint    | HTTP Method | Request Body JSON                          | Protected |
+| :-------------- | :---------- | :----------------------------------------- | :-------: |
+| `/api/bookings` | `POST`      | `guestsNumber, arrivalDate, departureDate` |    ✅     |
 
 ```js
 HTTP/1.1 201 Created
@@ -72,11 +72,11 @@ HTTP/1.1 201 Created
 
 ### `DELETE` `/api/bookings/:id`
 
-> Delete a booking. This is a server protected route. Will use the user's session to match user_id and booking_id.
+> Delete a booking
 
-| API Endpoint      | HTTP Method | Request Params |
-| :---------------- | :---------- | :------------- |
-| /api/bookings/:id | DELETE      | id             |
+| API Endpoint        | HTTP Method | Request Params | Protected |
+| :------------------ | :---------- | :------------- | :-------: |
+| `/api/bookings/:id` | `DELETE`    | `id`           |    ✅     |
 
 ```js
 HTTP/1.1 202 Accepted
@@ -133,8 +133,11 @@ NEXT_PUBLIC_DEMO_PASSWORD=yourpassword
 - [x] allow users to delete their records
   - for this, i had to validate user session to be correct on the client and server in order to allow deletion
   - i get my auth session, and i only delete the same record where the booking id matches with the user id taken from session user email
-- [ ] reworking endpoints
-  - must secure all of them server side
+- [x] reworking endpoints to be restful
+  - [x] api/bookings get, post
+  - [x] api/bookings/:id delete
+  - [x] api/users post
+  - [ ] api/bookings/:id put
 - [ ] add maybe sorting posibilities on each row column
 - [ ] pop-up for booking form on mobile maybe an ui element that opens up from bottom
 - [ ] think about rooms structure, will i allow users to push to rooms db / will i make a db / do i create pages for each room etc.
