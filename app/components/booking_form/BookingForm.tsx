@@ -55,41 +55,39 @@ const BookingForm = () => {
   };
 
   return (
-    <div className="z-20 absolute top-[85%] left-1/2 -translate-x-1/2 shadow-md bg-slate-50 font-lora">
-      <form
-        aria-label="form"
-        onSubmit={(e) => handleBook(e)}
-        className="hidden md:flex flex-col gap-2 p-10 shadow-md"
+    <form
+      aria-label="form"
+      id="booking-form"
+      onSubmit={(e) => handleBook(e)}
+      className="flex md:flex-row flex-col gap-2 p-10 shadow-md z-20 bg-slate-50 md:max-w-2xl -translate-y-1/2"
+    >
+      {/* <legend className="text-zinc-700">Place a booking now, fast, easy, secure!</legend> */}
+
+      <DatePickerStart
+        date={arrivalDate}
+        end={departureDate}
+        setter={setArrivalDate}
+        content="Check in"
+      />
+      <DatePickerEnd
+        start={arrivalDate}
+        date={departureDate}
+        setter={setDepartureDate}
+        content="Check out"
+      />
+      <SelectorGuests
+        myKey={key}
+        guestsNumber={guestsNumber}
+        setter={setGuestsNumber}
+      />
+      <button
+        id="BSB"
+        type="submit"
+        className="border border-solid h-9 py-1 px-3 bg-neutral-900 text-slate-50 hover:bg-neutral-800 shadow-sm rounded-md"
       >
-        {/* <legend className="text-zinc-700">Place a booking now, fast, easy, secure!</legend> */}
-        <div className="flex gap-1 items-center justify-center">
-          <DatePickerStart
-            date={arrivalDate}
-            end={departureDate}
-            setter={setArrivalDate}
-            content="Check in"
-          />
-          <DatePickerEnd
-            start={arrivalDate}
-            date={departureDate}
-            setter={setDepartureDate}
-            content="Check out"
-          />
-          <SelectorGuests
-            myKey={key}
-            guestsNumber={guestsNumber}
-            setter={setGuestsNumber}
-          />
-          <button
-            id="BSB"
-            type="submit"
-            className="border border-solid h-9 py-1 px-3 bg-neutral-900 text-slate-50 hover:bg-neutral-800 shadow-sm rounded-md"
-          >
-            {buttonText}
-          </button>
-        </div>
-      </form>
-    </div>
+        {buttonText}
+      </button>
+    </form>
   );
 };
 

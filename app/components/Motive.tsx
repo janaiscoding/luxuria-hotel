@@ -1,9 +1,11 @@
 import { motiveList } from "../utils/data";
+import BookingForm from "./booking_form/BookingForm";
 
 const Motive = () => {
   return (
-    <section id="motive" className="bg-neutral-900">
-      <div className="max-w-screen-2xl m-auto py-20 px-4">
+    <section id="motive" className="bg-neutral-900 flex items-center flex-col">
+      <BookingForm />
+      <div className="max-w-screen-2xl m-auto pb-20 px-4">
         <h1 className="text-4xl font-medium text-neutral-50 mb-10">
           Why choose our hotel?
         </h1>

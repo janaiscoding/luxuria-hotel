@@ -139,6 +139,7 @@ NEXT_PUBLIC_DEMO_PASSWORD=yourpassword
   - [x] api/users post
   - [ ] api/bookings/:id put
 - [ ] add maybe sorting posibilities on each row column
+- [ ] fix responsive screen 
 - [ ] pop-up for booking form on mobile maybe an ui element that opens up from bottom
 - [ ] think about rooms structure, will i allow users to push to rooms db / will i make a db / do i create pages for each room etc.
 - [x] user page with history and room and possibility to update (?) the reservation

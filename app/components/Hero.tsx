@@ -12,7 +12,6 @@ const Hero = () => {
       <Image src={heroImage} alt="background" fill={true} priority placeholder="blur" style={{objectFit: "cover"}} className="w-auto" />
       <Overlay overlayHeight={80} />
       <HeroText />
-      <BookingForm />
     </section>
   );
 };
