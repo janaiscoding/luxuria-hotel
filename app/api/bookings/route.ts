@@ -11,15 +11,16 @@ import { NextResponse } from "next/server";
  * @apiSuccess Success-Response:
  *     HTTP/1.1 200 OK
  *     {
- *       "message": "Fetched the session user's bookings!"
+ *       "message": "Fetched the session user's bookings!",
+ *       "bookings": TBooking[]
  *     }
  *
  * @apiError Error-Response:
  *    HTTP/1.1 401 Unauthorized
  *    {
  *      "error": "Unauthorized. Please sign in.",
- *      "bookings": TBooking[]
  *    }
+ *
  *    HTTP/1.1 500 Internal Server Error
  *    {
  *      "error": "Database error message."
@@ -40,7 +41,7 @@ export async function GET(req: Request) {
   const userID = rows[0].user_id;
   try {
     const { rows: bookings } =
-      await sql`SELECT * FROM bookings WHERE user_id=${userID};`;
+      await sql`SELECT arrival_date, booking_id, departure_date, guests_number FROM bookings WHERE user_id=${userID};`;
 
     return NextResponse.json(
       { message: "Fetched the session user's bookings!", bookings },
@@ -67,6 +68,10 @@ export async function GET(req: Request) {
  *     }
  *
  * @apiError Error-Response:
+ *    HTTP/1.1 400 Bad Request
+ *    {
+ *      "error": "Please complete all the fields."
+ *    }
  *    HTTP/1.1 401 Unauthorized
  *    {
  *      "error": "Unauthorized. Please sign in."
@@ -82,7 +87,7 @@ export async function POST(req: Request) {
   const { guestsNumber, arrivalDate, departureDate } = await req.json();
   if (!guestsNumber || !arrivalDate || !departureDate) {
     return NextResponse.json(
-      { error: "Please complete all the fields" },
+      { error: "Please complete all the fields." },
       { status: 400 }
     );
   }

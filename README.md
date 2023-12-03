@@ -6,15 +6,13 @@ Full-stack hotel acommodation booking website with authentication
 
 Next.js | TypeScript | PostgreSQL | NextAuth.js | React | Jest Testing Library | TailwindCSS | shadcn/ui
 
-# REST API Documentation
+# REST API Endpoints
 
-### Create a new user: `POST` `/api/users` `body: {name, email, password}`
+## Users
 
-Not a protected route. Checks for valid unique email. Will hash the user password before storing to the database table.
+### `POST` `/api/users`
 
-<details>
-
-<summary>API Response Examples</summary>
+Create a new user. Checks for valid unique email. Will hash the user password before storing to the database table. `body: {name, email, password}`
 
 Success Response
 
@@ -40,13 +38,101 @@ HTTP/1.1 400 Bad Request
   }
 ```
 
-</details>
+## Bookings
 
-### Bookings
+### `GET` `/api/bookings`
 
-- `GET` `/api/bookings` `(get all existing bookings)` `protected. session-specific. will only fetch signed in user's bookings`
-- `POST` `/api/bookings` `(created a new hotel booking)` `body: { guests, arrivalDate, departureDate }` `server-side session protected`
-- `DELETE` `/api/bookings/:id` `(deletes an existing booking)` `server-side session protected`
+This is a server protected route. Will fetch session user's bookings.
+
+Success Response
+
+```js
+HTTP/1.1 200 OK
+  {
+    "message": "Fetched the session user's bookings!",
+    "bookings": [
+      {
+        booking_id: 1,
+        arrival_date: "2023-12-05T22:00:00.000Z",
+        departure_date: "2023-12-17T22:00:00.000Z",
+        guests_number: 2,
+      },
+      ...bookings,
+    ]
+  }
+```
+
+Error Response
+
+```js
+
+HTTP/1.1 401 Unauthorized
+  {
+    "error": "Unauthorized. Please sign in."
+  }
+
+HTTP/1.1 500 Internal Server Error
+  {
+    "error": "Database error message."
+  }
+```
+
+### `POST` `/api/bookings`
+
+This is a server protected route. Will use the user's session to create a new booking. `body: { guestsNumber, arrivalDate, departureDate }`
+
+```js
+HTTP/1.1 201 Created
+  {
+    "message": "Your booking was created!"
+  }
+```
+
+Error Response
+
+```js
+HTTP/1.1 400 Bad Request
+  {
+    "error": "Please complete all the fields."
+  }
+
+HTTP/1.1 401 Unauthorized
+  {
+    "error": "Unauthorized. Please sign in."
+  }
+
+HTTP/1.1 500 Internal Server Error
+  {
+    "error": "Database error message."
+  }
+```
+
+### `DELETE` `/api/bookings/:id`
+
+This is a server protected route. Will use the user's session to delete a booking that matches the id and user_id. `params: id`
+
+```js
+HTTP/1.1 202 Accepted
+  {
+    "message": "The booking was successfully canceled."
+  }
+```
+
+Error Response
+
+```js
+HTTP/1.1 401 Unauthorized
+  {
+    "error": "Unauthorized. Please sign in."
+  }
+
+HTTP/1.1 500 Internal Server Error
+  {
+    "error": "An unexpected error has occured.", 
+    "err"
+  }
+```
+
 
 # Getting started and Installation
 
@@ -63,6 +149,7 @@ Create a `.env.local` file at the root of the directory and complete it as per t
 # You will need a Vercel account, you will have to create the project in your dashboard, and create the SQL storage
 
 # NextAuth.js Authentication setup will look like this
+NEXTAUTH_SECRET=yoursecret https://next-auth.js.org/configuration/options#nextauth_secret
 NEXTAUTH_URL=http://localhost:3000
 
 Reference for OAuth provider with GitHub setup: https://next-auth.js.org/providers/github if you want to use the GitHub button

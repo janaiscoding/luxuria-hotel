@@ -16,13 +16,14 @@ import { NextResponse } from "next/server";
  *     }
  *
  * @apiError Error-Response:
- *    HTTP/1.1 401 Internal Server Error
+ *    HTTP/1.1 401 Unauthorized
  *    {
  *      "error": "Unauthorized. Please sign in."
  *    }
  *    HTTP/1.1 500 Internal Server Error
  *    {
- *      "error": "An unexpected error occured."
+ *      "error": "An unexpected error has occured.", 
+ *      "err"
  *    }
  */
 
@@ -55,8 +56,8 @@ export async function DELETE(
       { message: "The booking was successfully canceled." },
       { status: 202 }
     );
-  } catch (error) {
-    return NextResponse.json({ error }, { status: 500 });
+  } catch (err) {
+    return NextResponse.json({ error: "An unexpected error has occured.", err }, { status: 500 });
   }
 }
 
