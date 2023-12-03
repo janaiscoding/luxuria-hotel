@@ -8,8 +8,9 @@ Next.js | TypeScript | PostgreSQL | NextAuth.js | React | Jest Testing Library |
 
 ## REST API Reference
 
+- `GET` `/api/bookings` (get all existing bookings) `protected. session-specific. will only fetch signed in user's bookings`
 - `POST` `/api/bookings` `(created a new hotel booking)` `body: { guests, arrivalDate, departureDate }` `server-side session protected`
-- `DELETE` `/api/bookings/:id` (deletes an existing booking)
+- `DELETE` `/api/bookings/:id` (deletes an existing booking) `protected`
 
 ## Tasks
 

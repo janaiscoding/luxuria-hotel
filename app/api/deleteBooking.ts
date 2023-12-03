@@ -1,7 +1,7 @@
 import { toast } from "@/components/ui/use-toast";
 
 const deleteBooking = (id: number) => {
-  fetch(`/api/bookings/?id=${id}`, {
+  fetch(`/api/bookings/${id}`, {
     method: "DELETE",
   })
     .then((res) => res.json())

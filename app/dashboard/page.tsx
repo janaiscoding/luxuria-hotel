@@ -5,10 +5,9 @@ import { TBooking } from "../utils/types";
 import Header from "../components/navigation/Header";
 import { Toaster } from "@/components/ui/toaster";
 import Footer from "../components/navigation/Footer";
-import getUsersBookings from "../api/getUsersBookings";
-import getUserIdFromEmail from "../api/getUserId";
 import BookingItem from "../components/booking_item/BookingItem";
 import deleteBooking from "../api/deleteBooking";
+import getBookings from "../api/getBookings";
 
 const Dashboard = () => {
   const { data: session } = useSession();
@@ -16,23 +15,23 @@ const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchBookings = async () => {
-    const userID = await getUserIdFromEmail(session!.user!.email!);
-    if (userID) {
-      getUsersBookings(userID, setBookings);
-      setIsLoading(false);
-    }
+    console.log('fetch...')
+    const data = await getBookings();
+    setBookings(data);
+    setIsLoading(false);
   };
 
   const onDelete = (id: number) => {
+    console.log('delete...')
     deleteBooking(id);
+    console.log('refresh...')
     fetchBookings();
   };
+
   useEffect(() => {
-    if (session && session.user) {
-      // Only performing fetch when the user is loaded.
-      fetchBookings();
-    }
-  }, [session?.user]);
+    // When first loading
+    fetchBookings();
+  }, []);
 
   return (
     <div className=" min-h-screen font-lora">

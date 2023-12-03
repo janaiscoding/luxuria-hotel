@@ -26,12 +26,7 @@ const BookingItem = ({
     new Date(booking.arrival_date),
     "cccc, dd MMM yyyy"
   );
-  const handleDelete = () => {
-    // in order to secure this, we need to make sure that we're on the correct user
-    // we do not want to let other users delete other people's bookings do we?
-    // we already know we can delete with our booking_id BUT we validate on our client session that this is correct and allowed
-    onDelete(booking.booking_id);
-  };
+
   return (
     <div className="flex text-center">
       <p className="border border-slate-800 p-2 basis-full">{arrivalDate}</p>
@@ -51,21 +46,21 @@ const BookingItem = ({
               This action cannot be undone. This will cancel your reservation.
             </DialogDescription>
             <div className="flex gap-2 justify-evenly my-4">
-                <DialogClose asChild>
-                  <button
-                    className="border border-solid py-2 px-4 bg-neutral-900 text-slate-50 hover:bg-neutral-800 rounded-md"
-                    onClick={handleDelete}
-                  >
-                    Yes
-                  </button>
-                </DialogClose>
+              <DialogClose asChild>
+                <button
+                  className="border border-solid py-2 px-4 bg-neutral-900 text-slate-50 hover:bg-neutral-800 rounded-md"
+                  onClick={() => onDelete(booking.booking_id)}
+                >
+                  Yes
+                </button>
+              </DialogClose>
 
-                <DialogClose asChild>
-                  <button className="border border-solid py-2 px-4 bg-neutral-900 text-slate-50 hover:bg-neutral-800 rounded-md">
-                    NO
-                  </button>
-                </DialogClose>
-              </div>
+              <DialogClose asChild>
+                <button className="border border-solid py-2 px-4 bg-neutral-900 text-slate-50 hover:bg-neutral-800 rounded-md">
+                  NO
+                </button>
+              </DialogClose>
+            </div>
           </DialogHeader>
         </DialogContent>
       </Dialog>
