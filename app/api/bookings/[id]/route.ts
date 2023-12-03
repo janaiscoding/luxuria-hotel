@@ -41,24 +41,22 @@ export async function DELETE(
     );
   }
   // Is signed in
-  else if (session) {
-    // Get the user ID based of the session
-    const { rows } =
-      await sql`SELECT user_id FROM users WHERE email = ${session.user?.email};`;
-    const userID = rows[0].user_id;
-    try {
-      // DELETE the record where the session user ID matches the booking_id and user_id for that specific booking
-      await sql`DELETE 
+  // Get the user ID based of the session
+  const { rows } =
+    await sql`SELECT user_id FROM users WHERE email = ${session.user?.email};`;
+  const userID = rows[0].user_id;
+  try {
+    // DELETE the record where the session user ID matches the booking_id and user_id for that specific booking
+    await sql`DELETE 
         FROM bookings 
         WHERE user_id=${userID}
         AND booking_id=${id};`;
-      return NextResponse.json(
-        { message: "The booking was successfully canceled." },
-        { status: 202 }
-      );
-    } catch (error) {
-      return NextResponse.json({ error }, { status: 500 });
-    }
+    return NextResponse.json(
+      { message: "The booking was successfully canceled." },
+      { status: 202 }
+    );
+  } catch (error) {
+    return NextResponse.json({ error }, { status: 500 });
   }
 }
 
