@@ -1,10 +1,10 @@
 import { TBooking } from "../utils/types";
 
-const getBookings = async (sorter: string) => {
+const getBookings = async (sortParam: string) => {
   let bookings!: TBooking[];
-  console.log('3. called books with', sorter)
+
   await fetch(
-    `/api/bookings?sort_by=${sorter}`
+    `/api/bookings?sort_by=${sortParam}`
   )
     .then((res) => res.json())
     .then((data) => {

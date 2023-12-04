@@ -56,25 +56,25 @@ export async function GET(req: Request) {
 
   let sorterClause =
     sorterMap[sortBy as keyof typeof sorterMap] || "arrival_date";
-  if (userID && sorterClause)
-    try {
-      const { rows: bookings } = await sql`SELECT 
+
+  try {
+    const { rows: bookings } = await sql`SELECT 
       arrival_date, booking_id, departure_date, guests_number 
       FROM bookings 
       WHERE user_id=${userID} 
       ORDER BY ${sorterClause};`;
-      console.log(`SELECT 
+    console.log(`SELECT 
       arrival_date, booking_id, departure_date, guests_number 
       FROM bookings 
       WHERE user_id=${userID} 
       ORDER BY ${sorterClause}`);
-      return NextResponse.json(
-        { message: "Fetched the session user's bookings!", bookings },
-        { status: 200 }
-      );
-    } catch (error) {
-      return NextResponse.json({ error }, { status: 500 });
-    }
+    return NextResponse.json(
+      { message: "Fetched the session user's bookings!", bookings },
+      { status: 200 }
+    );
+  } catch (error) {
+    return NextResponse.json({ error }, { status: 500 });
+  }
 }
 
 /**

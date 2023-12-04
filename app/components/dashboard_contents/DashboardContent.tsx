@@ -3,9 +3,9 @@ import getBookings from "@/app/api/getBookings";
 import { TBooking } from "@/app/utils/types";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+
+import Columns from "./Columns";
 import BookingItem from "./BookingItem";
-import ArrowDown from "../ui/arrow-down";
-import ArrowUp from "../ui/arrow-up";
 
 const DashboardContent = () => {
   const { data: session } = useSession();
@@ -13,14 +13,11 @@ const DashboardContent = () => {
   const [bookings, setBookings] = useState<TBooking[]>([] as TBooking[]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Sorting bookings
-  const [ascArrival, setAscArrival] = useState(true);
-  const handleSortArrival = () => {
-    setAscArrival(!ascArrival);
-  };
+  // Sorting bookings by given clause
+  const [sortParam, setSortParam] = useState("asc-arrival");
+
   const fetchBookings = async () => {
-    console.log("2");
-    const userBookings = await getBookings("desc-guests-number");
+    const userBookings = await getBookings(sortParam);
     setBookings(userBookings);
   };
 
@@ -30,12 +27,12 @@ const DashboardContent = () => {
 
   useEffect(() => {
     if (session) {
-      // When first loading, fetch the bookings
+      // When first loading, fetch the bookings - by default asc-arrival
       fetchBookings();
       // Stop the loading effect
       setIsLoading(false);
     }
-  }, [session?.user?.email]);
+  }, [session?.user?.email, sortParam]);
 
   return (
     <div className="max-w-7xl md:w-1/2 self-center h-full px-4 py-10 overflow-auto self-center basis-full flex flex-col gap-2">
@@ -43,24 +40,8 @@ const DashboardContent = () => {
         👋 Hello, {session?.user?.name}! Here you can see your bookings
       </h1>
       <div className="flex flex-col">
-        <div className="flex text-center bg-slate-400 text-slate-800">
-          <div className="border border-slate-800 p-2 basis-full flex gap-1 items-center justify-center">
-            <p>Arriving</p>
-            <div onClick={handleSortArrival} className="hover:cursor-pointer">
-              {ascArrival ? <ArrowDown /> : <ArrowUp />}
-            </div>
-          </div>
-          <div className="border border-slate-800 p-2 basis-full flex gap-1 items-center justify-center">
-            <p>Departure</p>
-          </div>
-          <div className="border border-slate-800 p-2 basis-full flex gap-1 items-center justify-center">
-            <p>Guests</p>
-          </div>
-          <div className="border border-slate-800 p-2 basis-full flex gap-1 items-center justify-center">
-            <p>Cancel</p>
-          </div>
-        </div>
-        {/* {isLoading && <p>Loading your bookings... Please wait...</p>}
+        <Columns sortParam={sortParam} setSortParam={setSortParam} />
+        {isLoading && <p>Loading your bookings... Please wait...</p>}
         {session && !isLoading && bookings.length === 0 && (
           <p>You don't have any bookings yet!</p>
         )}
@@ -73,7 +54,7 @@ const DashboardContent = () => {
               booking={booking}
               onDelete={onDelete}
             />
-          ))} */}
+          ))}
       </div>
     </div>
   );
