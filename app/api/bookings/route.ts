@@ -1,4 +1,4 @@
-import { sql } from "@vercel/postgres";
+import { QueryResult, QueryResultRow, sql } from "@vercel/postgres";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
@@ -7,6 +7,7 @@ import { NextResponse } from "next/server";
  * @apiName getBookings
  * @apiGroup booking
  *
+ * @apiParam {sort_by} sortBy - sorter search param.
  *
  * @apiSuccess Success-Response:
  *     HTTP/1.1 200 OK
@@ -43,33 +44,14 @@ export async function GET(req: Request) {
   // Get sorting filter from searchparams
   const { searchParams } = new URL(req.url);
   const sortBy = searchParams.get("sort_by")!;
-  console.log(typeof sortBy, sortBy);
-
-  const sorterMap = {
-    "asc-arrival": "arrival_date",
-    "desc-arrival": "arrival_date DESC",
-    "asc-departure": "departure_date",
-    "desc-departure": "departure_date DESC",
-    "asc-guests-number": "guests_number",
-    "desc-guests-number": "guests_number DESC",
-  };
-
-  let sorterClause =
-    sorterMap[sortBy as keyof typeof sorterMap] || "arrival_date";
 
   try {
-    const { rows: bookings } = await sql`SELECT 
-      arrival_date, booking_id, departure_date, guests_number 
-      FROM bookings 
-      WHERE user_id=${userID} 
-      ORDER BY ${sorterClause};`;
-    console.log(`SELECT 
-      arrival_date, booking_id, departure_date, guests_number 
-      FROM bookings 
-      WHERE user_id=${userID} 
-      ORDER BY ${sorterClause}`);
+    const { rows: bookings } = await getMyOrderedQuery(userID, sortBy);
     return NextResponse.json(
-      { message: "Fetched the session user's bookings!", bookings },
+      {
+        message: "Fetched the session user's bookings!",
+        bookings,
+      },
       { status: 200 }
     );
   } catch (error) {
@@ -146,3 +128,76 @@ export async function POST(req: Request) {
     return NextResponse.json({ error }, { status: 500 });
   }
 }
+
+// Unfortunately, I couldn't find a work-around for this.
+// It looks ugly but I had to do it because using a template literal for ORDER BY ex: ORDER BY ${sorterClause}
+// wasn't recognized. I tried key/value pairs at first for this but I had to write the entire thing.
+const getMyOrderedQuery = async (userID: number, sortBy: string) => {
+  // const sorterMap = {
+  //   "asc-arrival": "arrival_date",
+  //   "desc-arrival": "arrival_date DESC",
+  //   "asc-departure": "departure_date",
+  //   "desc-departure": "departure_date DESC",
+  //   "asc-guests-number": "guests_number",
+  //   "desc-guests-number": "guests_number DESC",
+  // };
+
+  // let sorterClause =
+  //   sorterMap[sortBy as keyof typeof sorterMap] || "arrival_date";
+
+  let query!: Promise<QueryResult<QueryResultRow>>;
+
+  switch (sortBy) {
+    case "asc-arrival":
+      query = sql`SELECT 
+        arrival_date, booking_id, departure_date, guests_number 
+        FROM bookings 
+        WHERE user_id=${userID} 
+        ORDER BY arrival_date;`;
+      break;
+    case "desc-arrival":
+      query = sql`SELECT 
+        arrival_date, booking_id, departure_date, guests_number 
+        FROM bookings 
+        WHERE user_id=${userID} 
+        ORDER BY arrival_date DESC;`;
+      break;
+    case "asc-departure":
+      query = sql`SELECT 
+        arrival_date, booking_id, departure_date, guests_number 
+        FROM bookings 
+        WHERE user_id=${userID} 
+        ORDER BY departure_date;`;
+      break;
+    case "desc-departure":
+      query = sql`SELECT 
+        arrival_date, booking_id, departure_date, guests_number 
+        FROM bookings 
+        WHERE user_id=${userID} 
+        ORDER BY departure_date DESC;`;
+      break;
+    case "asc-guests-number":
+      query = sql`SELECT 
+        arrival_date, booking_id, departure_date, guests_number 
+        FROM bookings 
+        WHERE user_id=${userID} 
+        ORDER BY guests_number;`;
+      break;
+    case "desc-guests-number":
+      query = sql`SELECT 
+        arrival_date, booking_id, departure_date, guests_number 
+        FROM bookings 
+        WHERE user_id=${userID} 
+        ORDER BY guests_number DESC;`;
+      break;
+    default:
+      // Handle the case when sortBy is not recognized
+      query = sql`SELECT 
+        arrival_date, booking_id, departure_date, guests_number 
+        FROM bookings 
+        WHERE user_id=${userID}
+        ORDER BY arrival_date;`;
+      break;
+  }
+  return query;
+};

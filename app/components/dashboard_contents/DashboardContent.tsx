@@ -13,8 +13,8 @@ const DashboardContent = () => {
   const [bookings, setBookings] = useState<TBooking[]>([] as TBooking[]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Sorting bookings by given clause
-  const [sortParam, setSortParam] = useState("asc-arrival");
+  // Sorting bookings by given clause, will do a refetch with a new SQL statement
+  const [sortParam, setSortParam] = useState("desc-arrival");
 
   const fetchBookings = async () => {
     const userBookings = await getBookings(sortParam);

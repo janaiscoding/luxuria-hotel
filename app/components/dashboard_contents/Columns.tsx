@@ -49,15 +49,17 @@ const Columns = ({
       </div>
       <div className="border border-slate-800 p-2 basis-full flex gap-1 items-center justify-center">
         <p>Guests</p>
-        {sortParam === "asc-guests" ? (
-          <div onClick={() => setSortParam("desc-guests-number")}>
-            <ArrowUp />
-          </div>
-        ) : (
-          <div onClick={() => setSortParam("asc-guests-number")}>
-            <ArrowDown />
-          </div>
-        )}
+        <div className="hover:cursor-pointer">
+          {sortParam === "asc-guests-number" ? (
+            <div onClick={() => setSortParam("desc-guests-number")}>
+              <ArrowUp />
+            </div>
+          ) : (
+            <div onClick={() => setSortParam("asc-guests-number")}>
+              <ArrowDown />
+            </div>
+          )}
+        </div>
       </div>
       <div className="border border-slate-800 p-2 basis-full flex gap-1 items-center justify-center">
         <p>Cancel</p>
