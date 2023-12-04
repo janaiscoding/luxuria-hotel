@@ -4,17 +4,17 @@ export const motiveList = [
   {
     title: "Best Locations",
     description:
-      "When it comes to choosing a hotel, location plays a crucial role in ensuring a good experience for guests. The right location can make all the difference in terms of convienience, acessibility and overall satisfaction.",
+      "Selecting the ideal hotel involves considering the location, a pivotal factor in crafting a delightful experience for guests. Optimal convenience, accessibility, and overall satisfaction hinge on finding the right location.",
   },
   {
     title: "Fast & easy booking",
     description:
-      "When it comes to choosing a hotel, location plays a crucial role in ensuring a good experience for guests. The right location can make all the difference in terms of convienience, acessibility and overall satisfaction.",
+      "When it comes to choosing a hotel, a seamless and quick booking process is essential. A hassle-free reservation experience enhances overall satisfaction for guests, ensuring convenience and accessibility.",
   },
   {
     title: "Room Service",
     description:
-      "When it comes to choosing a hotel, location plays a crucial role in ensuring a good experience for guests. The right location can make all the difference in terms of convienience, acessibility and overall satisfaction.",
+      "In the quest for the perfect hotel, the significance of location cannot be overstated. A well-chosen location not only ensures convenience and accessibility but also contributes significantly to overall guest satisfaction.",
   },
 ];
 export const roomTypes = ["single", "king", "double", "deluxe"];

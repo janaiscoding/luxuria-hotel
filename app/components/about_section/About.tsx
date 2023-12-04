@@ -15,11 +15,11 @@ const About = () => {
               Comfort & design. <br></br> The perfect place for relaxation
             </h1>
             <p className="text-zinc-700 text-lg lg:w-3/4">
-              A cozy hotel room provides a sense of warmth and relaxations,
-              making guests feel right at home. Whether it&apos;s plush bedding,
-              soft lighting, or inviting decor, these elements contribute to an
-              atmorphere that promotes rest and rejuvenation after a long day of
-              exploring or business meetings.
+              A comfortable hotel room creates an atmosphere of warmth and
+              relaxation, instantly making guests feel at home. Whether it's
+              luxurious bedding, gentle lighting, or inviting decor, these
+              elements collectively foster an environment that encourages rest
+              and rejuvenation after a day of exploration or business meetings
             </p>
           </div>
         </article>

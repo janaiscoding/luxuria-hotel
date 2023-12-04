@@ -14,9 +14,9 @@ Full-stack hotel acommodation website with authentication. Users can create and 
 
 > Create a new user. Hashing the password before storing.
 
-| API Endpoint  | HTTP Method |      Request Body       |
-| :------------ | :---------: | :---------------------: |
-| ` /api/users` |   `POST`    | `name, email, password` |
+| API Endpoint  | HTTP Method |      Request Body       | Protected |
+| :------------ | :---------: | :---------------------: | :-------: |
+| ` /api/users` |   `POST`    | `name, email, password` |    ❌     |
 
 Success Response
 
@@ -149,5 +149,5 @@ NEXT_PUBLIC_DEMO_PASSWORD=yourpassword
 
 ### Useful links for this project
 
-I will be adopting Angular commit messages linting from now on because ofc they look nice 
+I will be adopting Angular commit messages linting from now on because ofc they look nice
 https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional#type-enum
