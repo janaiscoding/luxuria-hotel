@@ -43,16 +43,16 @@ export default function ProfileClient({ user }: { user: User }) {
                 className="rounded-full"
               />
             ) : (
-              <div className="border border-solid h-9 py-1 px-3 bg-neutral-900 text-slate-50 hover:bg-neutral-800 shadow-sm rounded-md">
-                {user.name}
-              </div>
+              <button className="border border-solid h-9 py-1 px-3 bg-orange-800 text-slate-50 hover:bg-orange-900 shadow-sm rounded-full">
+                {user.name?.charAt(0)}
+              </button>
             )}
           </div>
         </PopoverTrigger>
         <PopoverContent className="w-80">
           <div className="flex flex-col items-start gap-2">
             <div className="flex justify-between w-full">
-              <h2 className="text-xl">Welcome, {user.name}</h2>
+              <h2 className="text-xl">Welcome back, {user.name}</h2>
               <Close ref={closeRef}>
                 <CloseIcon />
               </Close>

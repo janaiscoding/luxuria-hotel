@@ -16,14 +16,16 @@ const SignupComp = ({
 
       <div> or sign in using </div>
       <AuthProvidedMethods />
-      <div className="text-xs">
-        Already have an account?{" "}
-        <span
+      <div className="text-xs flex w-full gap-1">
+        <p>Already have an account? </p>
+        <a
+          tabIndex={1}
+          aria-label="Swap to sign in form"
           onClick={() => setShowLogin(true)}
           className="text-orange-800 hover:cursor-pointer hover:underline"
         >
           Sign in{" "}
-        </span>
+        </a>
       </div>
     </PopoverContent>
   );

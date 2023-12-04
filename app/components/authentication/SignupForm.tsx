@@ -39,6 +39,8 @@ const SignupForm = () => {
   return (
     <form
       className="flex flex-col gap-2 text-sm"
+      aria-label="signup-form"
+      id="signup-form"
       onSubmit={(e) => handleSubmit(e)}
     >
       <legend className="text-xl">Create account</legend>

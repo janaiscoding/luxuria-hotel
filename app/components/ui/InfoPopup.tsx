@@ -16,7 +16,7 @@ const InfoPopup = ({
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <h3 className={className}>{title}</h3>
+        <button className={className}>{title}</button>
       </PopoverTrigger>
       <PopoverContent className="w-80 z-50 bg-slate-50 text-md p-2 rounded-md shadow-md border border-solid border-orange-800">
         <p>{content}</p>

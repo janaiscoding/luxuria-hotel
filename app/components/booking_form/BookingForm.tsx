@@ -56,7 +56,7 @@ const BookingForm = () => {
 
   return (
     <form
-      aria-label="form"
+      aria-label="Booking form"
       id="booking-form"
       onSubmit={(e) => handleBook(e)}
       className="flex md:flex-row flex-col gap-2 p-10 shadow-md z-20 bg-slate-50 md:max-w-2xl -translate-y-1/2"
