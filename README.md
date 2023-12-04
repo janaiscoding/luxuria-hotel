@@ -1,6 +1,6 @@
 # 🏨 Luxuria Hotel
 
-Full-stack hotel acommodation booking website with authentication
+Full-stack hotel acommodation website with authentication. Users can create and manage their bookings with ease.
 
 ## 🧰 Built with
 
@@ -14,8 +14,8 @@ Full-stack hotel acommodation booking website with authentication
 
 > Create a new user. Hashing the password before storing.
 
-| API Endpoint  | HTTP Method | Request Body JSON       |
-| :------------ | :---------: | :---------------------- |
+| API Endpoint  | HTTP Method |      Request Body       |
+| :------------ | :---------: | :---------------------: |
 | ` /api/users` |   `POST`    | `name, email, password` |
 
 Success Response
@@ -33,9 +33,9 @@ HTTP/1.1 201 Created
 
 > Fetch session user's bookings.
 
-| API Endpoint    | HTTP Method |  Params  | Protected |
-| :-------------- | :---------: | :------: | :-------: |
-| `/api/bookings` |    `GET`    | ?sort_by |    ✅     |
+| API Endpoint    | HTTP Method | Request Params | Protected |
+| :-------------- | :---------: | :------------: | :-------: |
+| `/api/bookings` |    `GET`    |    ?sort_by    |    ✅     |
 
 Success Response
 
@@ -59,8 +59,8 @@ HTTP/1.1 200 OK
 
 > Create a new booking
 
-| API Endpoint    | HTTP Method | Request Body JSON                          | Protected |
-| :-------------- | :---------- | :----------------------------------------- | :-------: |
+| API Endpoint    | HTTP Method |                Request Body                | Protected |
+| :-------------- | :---------- | :----------------------------------------: | :-------: |
 | `/api/bookings` | `POST`      | `guestsNumber, arrivalDate, departureDate` |    ✅     |
 
 ```js
@@ -75,8 +75,8 @@ HTTP/1.1 201 Created
 > Delete a booking
 
 | API Endpoint        | HTTP Method | Request Params | Protected |
-| :------------------ | :---------- | :------------- | :-------: |
-| `/api/bookings/:id` | `DELETE`    | `id`           |    ✅     |
+| :------------------ | :---------- | :------------: | :-------: |
+| `/api/bookings/:id` | `DELETE`    |      `id`      |    ✅     |
 
 ```js
 HTTP/1.1 202 Accepted
@@ -96,11 +96,12 @@ HTTP/1.1 202 Accepted
 Create a `.env.local` file at the root of the directory and complete it as per the following instructions:
 
 ```
-# Database setup - Follow this link https://vercel.com/docs/storage/vercel-postgres/quickstart
+# For database setup please follow the instructions in this link:
+# https://vercel.com/docs/storage/vercel-postgres/quickstart
 # You will need a Vercel account in order to create the project and the SQL storage
 
 # NextAuth.js Authentication setup will look like this
-NEXTAUTH_SECRET=yoursecret https://next-auth.js.org/configuration/options#nextauth_secret
+NEXTAUTH_SECRET=yoursecret (see more: https://next-auth.js.org/configuration/options#nextauth_secret)
 NEXTAUTH_URL=http://localhost:3000
 
 Reference for OAuth provider with GitHub setup: https://next-auth.js.org/providers/github if you want to use the GitHub button
@@ -138,9 +139,9 @@ NEXT_PUBLIC_DEMO_PASSWORD=yourpassword
   - [x] api/bookings/:id delete
   - [x] api/users post
   - [ ] api/bookings/:id put
-- [ ] add maybe sorting posibilities on each row column
-- [ ] fix responsive screen
-- [ ] pop-up for booking form on mobile maybe an ui element that opens up from bottom
+- [x] add maybe sorting posibilities on each row column
+- [ ] fix responsive screen (work in progress)
+- [x] pop-up for booking form on mobile maybe an ui element that opens up from bottom - for now it's just the same element but also visible on mobile
 - [ ] think about rooms structure, will i allow users to push to rooms db / will i make a db / do i create pages for each room etc.
 - [x] user page with history and room and possibility to update (?) the reservation
 
