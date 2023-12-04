@@ -16,8 +16,7 @@ const DashboardContent = () => {
   };
 
   const onDelete = (id: number) => {
-    deleteBooking(id);
-    fetchBookings();
+    deleteBooking(id, fetchBookings);
   };
 
   useEffect(() => {
@@ -37,13 +36,14 @@ const DashboardContent = () => {
           <p className="border border-slate-800 p-2 basis-full">Arriving</p>
           <p className="border border-slate-800 p-2 basis-full">Departure</p>
           <p className="border border-slate-800 p-2 basis-full">Guests</p>
-          <p className="border border-slate-800 p-2 basis-full">Delete</p>
+          <p className="border border-slate-800 p-2 basis-full">Cancel</p>
         </div>
         {isLoading && <p>Loading your bookings... Please wait...</p>}
-        {!isLoading && bookings.length === 0 && (
+        {session && !isLoading && bookings.length === 0 && (
           <p>You don't have any bookings yet!</p>
         )}
         {!isLoading &&
+          session &&
           bookings.length > 0 &&
           bookings.map((booking) => (
             <BookingItem

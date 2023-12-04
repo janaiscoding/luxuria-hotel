@@ -1,6 +1,6 @@
 import { toast } from "@/components/ui/use-toast";
 
-const deleteBooking = (id: number) => {
+const deleteBooking = (id: number, fetchBookings: () => void) => {
   fetch(`/api/bookings/${id}`, {
     method: "DELETE",
   })
@@ -12,6 +12,7 @@ const deleteBooking = (id: number) => {
           variant: "success",
           description: `Hopefully you will book with us in the future again!`,
         });
+        fetchBookings();
       }
     })
     .catch((err) => {

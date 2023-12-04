@@ -10,6 +10,7 @@ const createBooking = (
   },
   handleSuccess: () => void
 ) => {
+  console.log(bookingObj)
   // Call the api route from @app/api/bookings/route.ts with the specified method
   fetch(`/api/bookings`, {
     method: "POST",

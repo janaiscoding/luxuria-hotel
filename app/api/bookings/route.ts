@@ -41,7 +41,7 @@ export async function GET(req: Request) {
   const userID = rows[0].user_id;
   try {
     const { rows: bookings } =
-      await sql`SELECT arrival_date, booking_id, departure_date, guests_number FROM bookings WHERE user_id=${userID};`;
+      await sql`SELECT arrival_date, booking_id, departure_date, guests_number FROM bookings WHERE user_id=${userID} ORDER BY arrival_date;`;
 
     return NextResponse.json(
       { message: "Fetched the session user's bookings!", bookings },
@@ -109,6 +109,7 @@ export async function POST(req: Request) {
   // And we convert dates to correct data type for storing in db
   const arrival = new Date(arrivalDate);
   const departure = new Date(departureDate);
+  console.log(arrival, departure, guestsNumber, userID)
   try {
     //@ts-ignore
     await sql`INSERT INTO bookings (arrival_date, departure_date, guests_number, user_id) VALUES (${arrival}, ${departure}, ${guestsNumber}, ${userID});`;
