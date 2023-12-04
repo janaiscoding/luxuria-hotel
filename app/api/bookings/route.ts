@@ -39,17 +39,42 @@ export async function GET(req: Request) {
   const { rows } =
     await sql`SELECT user_id FROM users WHERE email=${session.user?.email}`;
   const userID = rows[0].user_id;
-  try {
-    const { rows: bookings } =
-      await sql`SELECT arrival_date, booking_id, departure_date, guests_number FROM bookings WHERE user_id=${userID} ORDER BY arrival_date;`;
 
-    return NextResponse.json(
-      { message: "Fetched the session user's bookings!", bookings },
-      { status: 200 }
-    );
-  } catch (error) {
-    return NextResponse.json({ error }, { status: 500 });
-  }
+  // Get sorting filter from searchparams
+  const { searchParams } = new URL(req.url);
+  const sortBy = searchParams.get("sort_by")!;
+  console.log(typeof sortBy, sortBy);
+
+  const sorterMap = {
+    "asc-arrival": "arrival_date",
+    "desc-arrival": "arrival_date DESC",
+    "asc-departure": "departure_date",
+    "desc-departure": "departure_date DESC",
+    "asc-guests-number": "guests_number",
+    "desc-guests-number": "guests_number DESC",
+  };
+
+  let sorterClause =
+    sorterMap[sortBy as keyof typeof sorterMap] || "arrival_date";
+  if (userID && sorterClause)
+    try {
+      const { rows: bookings } = await sql`SELECT 
+      arrival_date, booking_id, departure_date, guests_number 
+      FROM bookings 
+      WHERE user_id=${userID} 
+      ORDER BY ${sorterClause};`;
+      console.log(`SELECT 
+      arrival_date, booking_id, departure_date, guests_number 
+      FROM bookings 
+      WHERE user_id=${userID} 
+      ORDER BY ${sorterClause}`);
+      return NextResponse.json(
+        { message: "Fetched the session user's bookings!", bookings },
+        { status: 200 }
+      );
+    } catch (error) {
+      return NextResponse.json({ error }, { status: 500 });
+    }
 }
 
 /**
@@ -109,7 +134,7 @@ export async function POST(req: Request) {
   // And we convert dates to correct data type for storing in db
   const arrival = new Date(arrivalDate);
   const departure = new Date(departureDate);
-  console.log(arrival, departure, guestsNumber, userID)
+
   try {
     //@ts-ignore
     await sql`INSERT INTO bookings (arrival_date, departure_date, guests_number, user_id) VALUES (${arrival}, ${departure}, ${guestsNumber}, ${userID});`;
