@@ -21,22 +21,27 @@ const Header = () => {
     }
   };
   return (
-    <nav className="flex justify-between items-center py-2 sticky top-0 z-50 bg-slate-50 px-4 lg:px-20 shadow-md h-12">
-      <div
-        className="text-xl font-semibold hover:cursor-pointer"
-        onClick={handleLogoClick}
-      >
-        Luxuria
-      </div>
+    <nav className="py-2 sticky top-0 z-50 bg-slate-50 shadow-md h-12">
+      <div className="max-w-screen-2xl m-auto px-4 flex justify-between items-center">
+        <div
+          className="text-xl font-semibold hover:cursor-pointer"
+          onClick={handleLogoClick}
+        >
+          Luxuria
+        </div>
 
-      <ul className="md:flex gap-10 hidden">
-        {list.map((el, i) => (
-          <li key={i} className={`hover:cursor-pointer hover:text-orange-800`}>
-            <a href={`/#${el.link}`}>{el.name}</a>
-          </li>
-        ))}
-      </ul>
-      <UserSessionStatus />
+        <ul className="md:flex gap-10 hidden">
+          {list.map((el, i) => (
+            <li
+              key={i}
+              className={`hover:cursor-pointer hover:text-orange-800`}
+            >
+              <a href={`/#${el.link}`}>{el.name}</a>
+            </li>
+          ))}
+        </ul>
+        <UserSessionStatus />
+      </div>
     </nav>
   );
 };

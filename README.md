@@ -148,3 +148,6 @@ NEXT_PUBLIC_DEMO_PASSWORD=yourpassword
 - [x] user page with history and room and possibility to update (?) the reservation
 
 ### Useful links for this project
+
+I will be adopting Angular commit messages linting from now on because ofc they look nice 
+https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional#type-enum
