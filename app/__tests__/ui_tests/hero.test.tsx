@@ -4,7 +4,7 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import Hero from "../components/Hero";
+import Hero from "@/app/components/Hero";
 
 describe("Hero Component", () => {
   it("Renders the correct heading", () => {
@@ -19,10 +19,5 @@ describe("Hero Component", () => {
     const link = screen.getByRole("link");
     expect(link.textContent).toMatch(/rooms/i);
     expect(link).toHaveAttribute("href", "/#rooms");
-  });
-  it("Renders the booking form", () => {
-    render(<Hero />);
-    const form = screen.getByRole("form");
-    expect(form).toBeInTheDocument();
   });
 });

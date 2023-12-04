@@ -139,6 +139,8 @@ NEXT_PUBLIC_DEMO_PASSWORD=yourpassword
   - [x] api/bookings/:id delete
   - [x] api/users post
   - [ ] api/bookings/:id put
+- [ ] add pagination for excessive bookings sessions
+- [ ] write tests
 - [x] add maybe sorting posibilities on each row column
 - [ ] fix responsive screen (work in progress)
 - [x] pop-up for booking form on mobile maybe an ui element that opens up from bottom - for now it's just the same element but also visible on mobile

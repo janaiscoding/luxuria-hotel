@@ -4,7 +4,7 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import BookingForm from "../components/ui/booking-form";
+import BookingForm from "../../components/ui/booking-form";
 
 describe("Booking form component", () => {
   it("Renders the correct booking form", () => {

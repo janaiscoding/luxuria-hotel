@@ -4,7 +4,7 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import Motive from "../components/Motive";
+import Motive from "../../components/Motive";
 
 describe("Motive component", () => {
   it("Renders the heading for the motives", () => {
@@ -16,5 +16,10 @@ describe("Motive component", () => {
     render(<Motive />);
     const list = screen.getAllByRole("listitem").length;
     expect(list).toEqual(3);
+  });
+  it("Renders the booking form", () => {
+    render(<Motive />);
+    const form = screen.getByRole("form");
+    expect(form).toBeInTheDocument();
   });
 });

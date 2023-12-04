@@ -1,6 +1,6 @@
 import { screen, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import About from "../components/about_section/About";
+import About from "../../components/about_section/About";
 
 describe("About Component", () => {
   it("Renders the correct heading title", () => {

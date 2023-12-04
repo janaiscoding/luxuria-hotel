@@ -2,6 +2,7 @@
 import createUser from "@/app/api/createUser";
 import { Input } from "@/components/ui/input";
 import { SyntheticEvent, useState } from "react";
+import missingInfoPopup from "../popups/missingInfoPopup";
 
 const SignupForm = () => {
   const [name, setName] = useState("");
@@ -22,14 +23,28 @@ const SignupForm = () => {
     e.preventDefault();
     if (name && email && password && password === CFpassword) {
       createUser(name, email, password);
+    } else {
+      if (name.length < 0) {
+        setError("Please complete the name field.");
+      } else if (!validEmail) {
+        setError("Please complete the email field.");
+      } else if (password !== CFpassword) {
+        setError("Passwords do not match.");
+      } else {
+        setError("Please complete all required fields for signup.");
+      }
     }
   };
+
   return (
-    <form className="flex flex-col gap-2 text-sm" onSubmit={(e) => handleSubmit(e)}>
+    <form
+      className="flex flex-col gap-2 text-sm"
+      onSubmit={(e) => handleSubmit(e)}
+    >
       <legend className="text-xl">Create account</legend>
 
       <label htmlFor="name">
-       Your name{" "}
+        Your name{" "}
         {name.length === 25 && (
           <span className="text-xs text-red-800">
             *not longer than 25 chars
@@ -45,50 +60,74 @@ const SignupForm = () => {
 
       <label htmlFor="email">
         Email{" "}
-        {!validEmail && (
+        {validEmail !== null && !validEmail && (
           <span className="text-xs text-red-800">*must be valid email</span>
         )}
         <Input
           type="email"
           className={`${
-            validEmail ? "border-solid border-green-200" : "border-red-500"
+            validEmail !== null
+              ? validEmail
+                ? "border-solid border-green-200"
+                : "border-solid border-red-500"
+              : ""
           }`}
           onChange={(e) => {
+            if (!e.target.value) {
+              setEmailValid(null);
+            } else {
+              setEmailValid(emailPattern.test(e.target.value));
+            }
             setEmail(e.target.value);
-            setEmailValid(emailPattern.test(e.target.value));
           }}
         />
       </label>
 
       <label htmlFor="password">
         Password{" "}
-        {!validPW && (
+        {validPW !== null && !validPW && (
           <span className="text-xs text-red-800">*minimum 8 chars</span>
         )}
         <Input
           type="password"
           className={`${
-            validPW ? "border-solid border-green-200" : "border-red-500"
+            validPW !== null
+              ? validPW
+                ? "border-solid border-green-200"
+                : "border-red-500"
+              : ""
           }`}
           onChange={(e) => {
+            if (!e.target.value) {
+              setValidPW(null);
+            } else {
+              setValidPW(pwPattern.test(e.target.value));
+            }
             setPassword(e.target.value);
-            setValidPW(pwPattern.test(e.target.value));
           }}
         />
       </label>
       <label htmlFor="password">
         Confirm Password{" "}
-        {!validConf && (
+        {validConf !== null && !validConf && (
           <span className="text-xs text-red-800">*passwords must match</span>
         )}
         <Input
           type="password"
           className={`${
-            validConf ? "border-solid border-green-200" : "border-red-500"
+            validConf !== null
+              ? validConf
+                ? "border-solid border-green-200"
+                : "border-red-500"
+              : ""
           }`}
           onChange={(e) => {
+            if (!e.target.value) {
+              setValidConf(null);
+            } else {
+              setValidConf(password === e.target.value);
+            }
             setCFPassword(e.target.value);
-            setValidConf(password === e.target.value);
           }}
         />
       </label>

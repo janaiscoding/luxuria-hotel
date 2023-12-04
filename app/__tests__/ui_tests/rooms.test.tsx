@@ -2,8 +2,8 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 
-import Rooms from "../components/rooms_section/Rooms";
-import SelectorTab from "../components/rooms_section/SelectorTab";
+import Rooms from "../../components/rooms_section/Rooms";
+import SelectorTab from "../../components/rooms_section/SelectorTab";
 
 describe("Rooms component", () => {
   it("Renders rooms section title", () => {
