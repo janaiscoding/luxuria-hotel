@@ -1,5 +1,5 @@
 import roomURL from "@/public/gallery/vertical_room_2.jpg";
-
+import kingRoom from "@/public/gallery/vertical_room_1.jpg";
 export const motiveList = [
   {
     title: "Best Locations",
@@ -31,8 +31,8 @@ export const roomsData = [
     id: 1,
     name: "King Room",
     type: "king",
-    url: roomURL,
-    price: 170,
+    url: kingRoom,
+    price: 270,
   },
   {
     id: 2,

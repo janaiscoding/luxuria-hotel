@@ -7,19 +7,19 @@ const AuthProvidedMethods = () => {
   };
   return (
     <div className="flex justify-evenly w-full">
-      {/* <button
+      <button
         className="basis-full border border-solid h-9 py-1 px-3 bg-neutral-900 text-slate-50 hover:bg-neutral-800 shadow-sm rounded-md"
         onClick={handleGithub}
       >
-        GitHub*
-      </button> */}
-      <InfoPopup
+        GitHub
+      </button>
+      {/* <InfoPopup
         title="GitHub*"
         className={
           "basis-full border border-solid h-9 py-1 px-3 bg-neutral-900 text-slate-50 hover:bg-neutral-800 shadow-sm rounded-md hover:cursor-pointer text-center"
         }
         content="The project is still under development, so the GitHub OAuth app is linked with localhost. The correct callback link should be available soon. Meanwhile, please create a new account or use the Demo one 😊"
-      />
+      /> */}
 
       <button
         onClick={() =>

@@ -7,12 +7,12 @@ const ContactInfo = () => {
         City Name, <span className="text-zinc-400">Country</span>
       </p>
       <p className="text-zinc-500 mb-6">
-        Number Street, Luxuria Building, City ZIP, Country.
+        Street Number, Luxuria Building, City ZIP, Country.
       </p>
       <p className="text-zinc-950 text-lg font-bold tracking-wider mb-10">
         Email:{" "}
         <span className="font-normal text-zinc-500 hover:text-orange-400 hover:cursor-pointer">
-          info@luxuria.com
+          contact@notarealemail.com
         </span>
       </p>
       <p className="text-zinc-500 text-lg font-bold tracking-wider">

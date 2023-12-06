@@ -8,7 +8,7 @@ import ArrowRight from "../ui/arrow-right";
 import ArrowLeft from "../ui/arrow-left";
 
 // @carousel
-
+// Deprecated
 // First i want to have a wrapper that displays limit elements: hidden-left limit x (display) hidden-right
 const RoomsCarousel = ({ limit }: { limit: number }) => {
   const [startIx, setStartIx] = useState(limit);
