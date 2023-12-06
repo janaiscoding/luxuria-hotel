@@ -113,7 +113,12 @@ NEXT_PUBLIC_DEMO_EMAIL=youremail
 NEXT_PUBLIC_DEMO_PASSWORD=yourpassword
 ```
 
+<details>
+<summary>
+
 ## My ToDo list and notes while developing.
+
+</summary>
 
 - [x] add postgresql backend to nextjs
 - [x] create bookings table
@@ -142,10 +147,12 @@ NEXT_PUBLIC_DEMO_PASSWORD=yourpassword
 - [ ] add pagination for excessive bookings sessions
 - [ ] write tests
 - [x] add maybe sorting posibilities on each row column
-- [ ] fix responsive screen (work in progress)
+- [x] fix responsive screen 
 - [x] pop-up for booking form on mobile maybe an ui element that opens up from bottom - for now it's just the same element but also visible on mobile
 - [ ] think about rooms structure, will i allow users to push to rooms db / will i make a db / do i create pages for each room etc.
 - [x] user page with history and room and possibility to update (?) the reservation
+
+</details>
 
 ### Useful links for this project
 
