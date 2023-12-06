@@ -91,7 +91,7 @@ HTTP/1.1 202 Accepted
   }
 ```
 
-# Getting started and Installation
+# Installation
 
 `git clone git@github.com:janaiscoding/luxuria-hotel.git`
 
@@ -99,7 +99,9 @@ HTTP/1.1 202 Accepted
 
 `npm install`
 
-Create a `.env.local` file at the root of the directory and complete it as per the following instructions:
+`.env.local` placed at root of the directory. 
+
+Complete it as per the following instructions:
 
 ```
 # For database setup please follow the instructions in this link:
@@ -110,7 +112,8 @@ Create a `.env.local` file at the root of the directory and complete it as per t
 NEXTAUTH_SECRET=yoursecret (see more: https://next-auth.js.org/configuration/options#nextauth_secret)
 NEXTAUTH_URL=http://localhost:3000
 
-Reference for OAuth provider with GitHub setup: https://next-auth.js.org/providers/github if you want to use the GitHub button
+# Reference for OAuth provider with GitHub setup:
+# https://next-auth.js.org/providers/github if you want to use the GitHub button
 GITHUB_ID=yourgithubappid
 GITHUB_SECRET=yourgithubappsecret
 
