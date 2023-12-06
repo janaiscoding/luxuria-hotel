@@ -1,8 +1,8 @@
 # 🏨 Luxuria Hotel
 
-Full-stack hotel acommodation website with authentication. Users can create and manage their bookings with ease. [Live Demo](https://luxuria-hotel.vercel.app/). See app preview gif below 👀
+Full-stack hotel acommodation landing page/business website with authentication. Users can create and manage their bookings with ease. See how the website looks like and works below 👇. Or try the app yourself! 👀 [Live Demo](https://luxuria-hotel.vercel.app/). Feel free to send me feedback, ideas or just message me anything web/coding related [@in/jana-istrate](https://www.linkedin.com/in/jana-istrate/)
 
-[![Luxuria Hotel Preview](/public/luxuria-preview.gif)]
+![Luxuria Hotel Preview](/public/luxuria-preview.gif)
 
 ## 🧰 Built with
 
