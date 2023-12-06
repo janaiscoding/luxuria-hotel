@@ -1,6 +1,8 @@
 # 🏨 Luxuria Hotel
 
-Full-stack hotel acommodation website with authentication. Users can create and manage their bookings with ease.
+Full-stack hotel acommodation website with authentication. Users can create and manage their bookings with ease. [Live Demo](https://luxuria-hotel.vercel.app/). See app preview gif below 👀
+
+[![Luxuria Hotel Preview](/public/luxuria-preview.gif)]
 
 ## 🧰 Built with
 
@@ -147,7 +149,7 @@ NEXT_PUBLIC_DEMO_PASSWORD=yourpassword
 - [ ] add pagination for excessive bookings sessions
 - [ ] write tests
 - [x] add maybe sorting posibilities on each row column
-- [x] fix responsive screen 
+- [x] fix responsive screen
 - [x] pop-up for booking form on mobile maybe an ui element that opens up from bottom - for now it's just the same element but also visible on mobile
 - [ ] think about rooms structure, will i allow users to push to rooms db / will i make a db / do i create pages for each room etc.
 - [x] user page with history and room and possibility to update (?) the reservation
