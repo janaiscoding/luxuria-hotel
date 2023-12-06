@@ -1,5 +1,8 @@
-import roomURL from "@/public/gallery/vertical_room_2.jpg";
-import kingRoom from "@/public/gallery/vertical_room_1.jpg";
+import singleRoom from "@/public/gallery/horizontal_room_1.jpg";
+import kingRoom from "@/public/gallery/horizontal_room_2.jpg";
+import doubleRoom from "@/public/gallery/horizontal_room_3.jpg";
+import deluxeRoom from "@/public/gallery/horizontal_room_4.jpg";
+
 export const motiveList = [
   {
     title: "Best Locations",
@@ -24,7 +27,7 @@ export const roomsData = [
     id: 0,
     name: "Single Room",
     type: "single",
-    url: roomURL,
+    url: singleRoom,
     price: 170,
   },
   {
@@ -38,14 +41,14 @@ export const roomsData = [
     id: 2,
     name: "Double Room",
     type: "double",
-    url: roomURL,
+    url: doubleRoom,
     price: 170,
   },
   {
     id: 3,
     name: "Deluxe Room",
     type: "deluxe",
-    url: roomURL,
+    url: deluxeRoom,
     price: 170,
   },
 ];

@@ -21,9 +21,8 @@ const RoomCard = ({
       <Image
         src={image}
         alt="room"
-        width={350}
-        height={600}
-        className={`max-h-[500px] ${!showDetails && "grayscale-[50%]"}`}
+        width={720}
+        className={`h-full ${!showDetails && "grayscale-[50%]"}`}
       />
       {showDetails && (
         <div className="hidden md:block absolute bg-zinc-950/90 w-full bottom-0 py-10 px-4 text-zinc-50">
@@ -38,7 +37,7 @@ const RoomCard = ({
         </div>
       )}
 
-      <div className="md:hidden absolute bg-zinc-950/90 w-full bottom-0 py-10 px-4 text-zinc-50">
+      <div className="md:hidden absolute bg-zinc-950/90 w-full bottom-0 py-2 px-4 text-zinc-50">
         <div className="w-full flex justify-between">
           <h2 className="text-xl">{roomName}</h2>
           <h3 className="text-orange-300">${price}/Night</h3>

@@ -12,7 +12,7 @@ const SelectorTab = ({
   setActiveCategory: React.Dispatch<SetStateAction<string>>;
 }) => {
   return (
-    <ul className="flex gap-2 flex-wrap">
+    <ul className="flex gap-2 items-center flex-wrap">
       {roomTypes.map((type, index) => (
         <li key={index}>
           <button
