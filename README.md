@@ -1,6 +1,10 @@
 # 🏨 Luxuria Hotel
 
-Full-stack hotel acommodation landing page/business website with authentication. Users can create and manage their bookings with ease. See how the website looks like and works below 👇. Or try the app yourself! 👀 [Live Demo](https://luxuria-hotel.vercel.app/). Feel free to send me feedback, ideas or just message me anything web/coding related [@in/jana-istrate](https://www.linkedin.com/in/jana-istrate/)
+Full-stack hotel acommodation landing page/business website with authentication. Users can create and manage their bookings with ease. 
+
+See how the website looks like and works below 👇. 
+
+Or try the app yourself! 👀 [Live Demo](https://luxuria-hotel.vercel.app/). 
 
 ![Luxuria Hotel Preview](/public/luxuria-preview.gif)
 
@@ -160,3 +164,8 @@ NEXT_PUBLIC_DEMO_PASSWORD=yourpassword
 
 I will be adopting Angular commit messages linting from now on because ofc they look nice
 https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional#type-enum
+
+
+### Say hi 👋
+
+Feel free to send me feedback, ideas or just message me anything web/coding related [@in/jana-istrate](https://www.linkedin.com/in/jana-istrate/)
